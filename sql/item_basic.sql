@@ -6615,6 +6615,7 @@ INSERT INTO `item_basic` VALUES (9220,0,'spool_of_abdhaljs_thread','abdhaljs_thr
 INSERT INTO `item_basic` VALUES (9221,0,'pinch_of_abdhaljs_dust','abdhaljs_dust',99,28736,99,1,0);
 INSERT INTO `item_basic` VALUES (9223,0,'bottle_of_abdhaljs_sap','abdhaljs_sap',99,28736,99,1,0);
 
+
 INSERT INTO `item_basic` VALUES (10240,0,'hexed_haubert','hexed_haubert',1,2084,37,0,0);
 INSERT INTO `item_basic` VALUES (10241,0,'hexed_domaru','hexed_domaru',1,2080,37,0,0);
 INSERT INTO `item_basic` VALUES (10242,0,'hexed_jacket','hexed_jacket',1,2080,37,0,0);
