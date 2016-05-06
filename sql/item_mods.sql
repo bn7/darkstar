@@ -21068,7 +21068,7 @@ INSERT INTO `item_mods` VALUES (18652,507,300); -- Extra DMG X3
 INSERT INTO `item_mods` VALUES (18652,596,25); -- Mercy Stroke DMG +25%
 INSERT INTO `item_mods` VALUES (18653,23,35); -- Excalibur LV90 - ATT +35
 INSERT INTO `item_mods` VALUES (18653,355,43); -- Knights of the Round
-INSERT INTO `item_mods` VALUES (18653,431,1); -- Additional Effect - scripts\globals\items\excalibur.lua
+INSERT INTO `item_mods` VALUES (18653,431,1); -- Additional Effect
 INSERT INTO `item_mods` VALUES (18653,506,50); -- Extra DMG Chance 5%
 INSERT INTO `item_mods` VALUES (18653,507,300); -- Extra DMG X3
 INSERT INTO `item_mods` VALUES (18653,613,25); -- Knights of the Round DMG +25%
