@@ -22928,7 +22928,7 @@ INSERT INTO `item_mods` VALUES (21135,755,40); -- Gate of Tartarus DMG +40%
 INSERT INTO `item_mods` VALUES (21135,311,248); -- Magic DMG +248
 INSERT INTO `item_mods` VALUES (21136,25,40); -- Claustrum iLvL 119 AG - ACC +40
 INSERT INTO `item_mods` VALUES (21136,355,185); -- Gate of Tartarus
-INSERT INTO `item_mods` VALUES (21136,431,1); -- Additional Effect - scripts\globals\items\claustrum.lua
+INSERT INTO `item_mods` VALUES (21136,431,1); -- Additional Effect
 INSERT INTO `item_mods` VALUES (21136,506,130); -- Extra DMG Chance 13%
 INSERT INTO `item_mods` VALUES (21136,507,250); -- Extra DMG X2.5
 INSERT INTO `item_mods` VALUES (21136,755,40); -- Gate of Tartarus DMG +40%
