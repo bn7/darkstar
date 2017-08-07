@@ -11,12 +11,20 @@ require("scripts/globals/fieldsofvalor");
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)
-    checkRegime(ally,mob,143,2);
-    checkRegime(ally,mob,144,1);
+function onMobDeath(mob, player, isKiller)
+    checkRegime(player,mob,143,2);
+    checkRegime(player,mob,144,1);
 
     -- Get Groundskeeper ID and check if it is a PH of Despot
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
     local mobID = mob:getID();
+
 
     -- Check if Groundskeeper is within the Despot_PH table
     if (Despot_PH[mobID] ~= nil) then
@@ -25,7 +33,7 @@ function onMobDeath(mob,killer,ally)
         local Despot_ToD = GetServerVariable("[POP]Despot");
 
         -- Check if Despot window is open, and there is not an Despot popped already(ACTION_NONE = 0)
-        if (Despot_ToD <= os.time(t) and GetMobAction(Despot) == 0) then
+        if (Despot_ToD <= os.time() and GetMobAction(Despot) == 0) then
 
             -- printf("Despot window open");
             -- Give Groundskeeper 5 percent chance to pop Despot

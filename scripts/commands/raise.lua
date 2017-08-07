@@ -1,18 +1,18 @@
 -----------------------------------------------------------------------
--- func: @raise <power> <player>
+-- func: raise <power> <player>
 -- desc: Sends raise menu to GM or target player.
 -----------------------------------------------------------------------
 
 cmdprops =
 {
-    permission = 1,
+    permission = 0,
     parameters = "is"
 };
 
 function onTrigger(player,power,target)
-    if (power == nil or power >3) then
+    if (power == nil or power > 3) then
         power = 3;
-    elseif (power <1) then
+    elseif (power < 1) then
         power = 1;
     end
 

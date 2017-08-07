@@ -1,11 +1,11 @@
 ---------------------------------------------------------------------------------------------------
--- func: @takegil <amount> <player>
+-- func: takegil <amount> <player>
 -- desc: Removes the amount of gil from the given player.
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
 {
-    permission = 1,
+    permission = 2,
     parameters = "is"
 };
 

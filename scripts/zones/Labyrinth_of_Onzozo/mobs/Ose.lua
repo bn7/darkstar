@@ -7,10 +7,17 @@
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)
+function onMobDeath(mob, player, isKiller)
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
 
     -- Set Ose's Window Open Time
-    SetServerVariable("[POP]Ose", os.time(t) + 3600); -- 1 hour
+    SetServerVariable("[POP]Ose", os.time() + 3600); -- 1 hour
     DeterMob(mob:getID(), true);
 
     -- Set PH back to normal, then set to respawn spawn

@@ -16,12 +16,19 @@ end;
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob, killer, ally)
-    ally:addTitle(HELLSBANE);
+function onMobDeath(mob, player, isKiller)
+    player:addTitle(HELLSBANE);
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
 
     -- Set Baronet_Romwe's Window Open Time
     local wait = math.random(3600,28800);
-    SetServerVariable("[POP]Baronet_Romwe", os.time(t) + wait); -- 1-8 hours
+    SetServerVariable("[POP]Baronet_Romwe", os.time() + wait); -- 1-8 hours
     DeterMob(mob:getID(), true);
 
     -- Set PH back to normal, then set to respawn spawn

@@ -59,7 +59,7 @@ function onTrigger(player,npc)
             player:startEvent(50, itemid, FristKI, SecondKI);
 
         -- Nothing in progress and meet the starting requirements.
-        elseif (downwardHelix == QUEST_COMPLETED and mJob == JOB_SCH and mLvl >= AF2_QUEST_LEVEL) then
+        elseif (downwardHelix == QUEST_COMPLETED and mJob == JOBS.SCH and mLvl >= AF2_QUEST_LEVEL) then
 
              -- If a player has completed any of the paths, it will be a different cutscene.
             local counter = 0;
@@ -179,8 +179,8 @@ end;
 -----------------------------------
 
 function onEventFinish(player,csid,option)
--- printf("CSID: %u",csid);
--- printf("RESULT: %u",option);
+    -- printf("CSID: %u",csid);
+    -- printf("RESULT: %u",option);
 
     if (csid == 49 and option == 0) then
         player:setVar("AF_Loussaire", 1);

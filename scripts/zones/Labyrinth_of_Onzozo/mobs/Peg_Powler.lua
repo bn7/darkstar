@@ -7,13 +7,20 @@
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)
+function onMobDeath(mob, player, isKiller)
 
-    checkGoVregime(ally,mob,774,1);
+    checkGoVregime(player,mob,774,1);
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
 
     -- Set Peg Powler's Window Open Time
     local wait = math.random((7200),(57600));
-    SetServerVariable("[POP]Peg_Powler", os.time(t) + wait); -- 2-16 hours
+    SetServerVariable("[POP]Peg_Powler", os.time() + wait); -- 2-16 hours
     DeterMob(mob:getID(), true);
 
     -- Set PH back to normal, then set to respawn spawn

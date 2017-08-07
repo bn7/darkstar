@@ -7,11 +7,18 @@
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)
+function onMobDeath(mob, player, isKiller)
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
 
     -- Set Spiny_Spipi's Window Open Time
     local wait = math.random(2700,7200)
-    SetServerVariable("[POP]Spiny_Spipi", os.time(t) + wait); -- 45 - 120 minutes
+    SetServerVariable("[POP]Spiny_Spipi", os.time() + wait); -- 45 - 120 minutes
     DeterMob(mob:getID(), true);
 
     -- Set PH back to normal, then set to respawn spawn

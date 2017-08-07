@@ -15,7 +15,7 @@ end;
 -- OnMobDeath Action
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)
+function onMobDeath(mob, player, isKiller)
 end;
 
 -----------------------------------
@@ -23,5 +23,5 @@ end;
 -----------------------------------
 
 function onMobDespawn(mob)
-    GetNPCByID(16875890):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
+    GetNPCByID(16875894):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
 end;

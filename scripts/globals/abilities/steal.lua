@@ -43,11 +43,11 @@ end;
 -- onUseAbility
 -----------------------------------
 
-function onUseAbility(player,target,ability)
+function onUseAbility(player,target,ability,action)
     local thfLevel;
     local stolen = 0;
 
-    if (player:getMainJob() == JOB_THF) then
+    if (player:getMainJob() == JOBS.THF) then
         thfLevel = player:getMainLvl();
     else
         thfLevel = player:getSubLvl();
@@ -68,6 +68,7 @@ function onUseAbility(player,target,ability)
         ability:setMsg(125); -- Item stolen successfully
     else
         ability:setMsg(153); -- Failed to steal
+        action:animation(target:getID(), 182);
     end
 
     return stolen;

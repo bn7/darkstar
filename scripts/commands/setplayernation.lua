@@ -5,11 +5,14 @@
 
 cmdprops =
 {
-    permission = 1,
+    permission = 2,
     parameters = "si"
 };
 
 function onTrigger(player, target, nation)
+    
+    nation = tonumber(nation) or _G[nation];
+    
     if (target == nil) then
         target = player:getName();
     end

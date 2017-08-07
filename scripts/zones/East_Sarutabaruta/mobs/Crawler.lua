@@ -11,14 +11,22 @@ require("scripts/zones/East_Sarutabaruta/MobIDs");
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)
-    checkRegime(ally,mob,92,2);
-    checkRegime(ally,mob,93,2);
+function onMobDeath(mob, player, isKiller)
+    checkRegime(player,mob,92,2);
+    checkRegime(player,mob,93,2);
 
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
     local mobID = mob:getID();
+
     if (Spiny_Spipi_PH[mobID] ~= nil) then
         local ToD = GetServerVariable("[POP]Spiny_Spipi");
-        if (ToD <= os.time(t) and GetMobAction(Spiny_Spipi) == 0) then
+        if (ToD <= os.time() and GetMobAction(Spiny_Spipi) == 0) then
             if (math.random(1,15) == 5) then
                 UpdateNMSpawnPoint(Spiny_Spipi);
                 GetMobByID(Spiny_Spipi):setRespawnTime(GetMobRespawnTime(mobID));

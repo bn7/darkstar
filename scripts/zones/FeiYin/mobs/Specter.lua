@@ -10,10 +10,16 @@ require("scripts/globals/groundsofvalor");
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)
-    checkGoVregime(ally,mob,712,1);
+function onMobDeath(mob, player, isKiller)
+    checkGoVregime(player,mob,712,1);
 
-    -- Get Specter ID and check if it is a PH of any Shadow NM
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
     local mobID = mob:getID();
 
     -- Check if Specter is within the Northern_Shadow_PH table
@@ -22,7 +28,7 @@ function onMobDeath(mob,killer,ally)
         local Northern_Shadow_ToD = GetServerVariable("[POP]Northern_Shadow");
 
         -- Check if NM's window is open, and there is not an Northern Shadow popped already(ACTION_NONE = 0)
-        if (Northern_Shadow_ToD <= os.time(t) and GetMobAction(Northern_Shadow) == 0) then
+        if (Northern_Shadow_ToD <= os.time() and GetMobAction(Northern_Shadow) == 0) then
 
             -- Give Specter 5 percent chance to pop a NM
             if (math.random(1,20) == 5) then
@@ -40,7 +46,7 @@ function onMobDeath(mob,killer,ally)
         local Eastern_Shadow_ToD = GetServerVariable("[POP]Eastern_Shadow");
 
         -- Check if NM's window is open, and there is not an Eastern Shadow popped already(ACTION_NONE = 0)
-        if (Eastern_Shadow_ToD <= os.time(t) and GetMobAction(Eastern_Shadow) == 0) then
+        if (Eastern_Shadow_ToD <= os.time() and GetMobAction(Eastern_Shadow) == 0) then
 
             -- Give Specter 5 percent chance to pop a NM
             if (math.random(1,20) == 5) then
@@ -58,7 +64,7 @@ function onMobDeath(mob,killer,ally)
         local Southern_Shadow_ToD = GetServerVariable("[POP]Southern_Shadow");
 
         -- Check if NM's window is open, and there is not an Southern Shadow popped already(ACTION_NONE = 0)
-        if (Southern_Shadow_ToD <= os.time(t) and GetMobAction(Southern_Shadow) == 0) then
+        if (Southern_Shadow_ToD <= os.time() and GetMobAction(Southern_Shadow) == 0) then
 
             -- Give Specter 5 percent chance to pop a NM
             if (math.random(1,20) == 5) then
@@ -76,7 +82,7 @@ function onMobDeath(mob,killer,ally)
         local Western_Shadow_ToD = GetServerVariable("[POP]Western_Shadow");
 
         -- Check if NM's window is open, and there is not an Western Shadow popped already(ACTION_NONE = 0)
-        if (Western_Shadow_ToD <= os.time(t) and GetMobAction(Western_Shadow) == 0) then
+        if (Western_Shadow_ToD <= os.time() and GetMobAction(Western_Shadow) == 0) then
 
             -- Give Specter 5 percent chance to pop a NM
             if (math.random(1,20) == 5) then

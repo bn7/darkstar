@@ -4,22 +4,35 @@
 -----------------------------------
 
 -----------------------------------
+-- onMobSpawn
+-----------------------------------
+
+function onMobSpawn(mob)
+    if (math.random(1,100) <= 5) then -- Hardcoded "this or this item" drop rate until implemented.
+        SetDropRate(2238,14986,1000); -- Ochimusha Kote
+        SetDropRate(2238,16703,0);
+    else
+        SetDropRate(2238,14986,0);
+        SetDropRate(2238,16703,1000); -- Impact Knuckles
+    end
+end;
+
+-----------------------------------
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)
+function onMobDeath(mob, player, isKiller)
+end;
 
-    if (math.random(1,100) <= 5) then -- Hardcoded "this or this item" drop rate until implemented.
-        SetDropRate(1936,14986,1000); -- Ochimusha Kote
-        SetDropRate(1936,16703,0);
-    else
-        SetDropRate(1936,14986,0);
-        SetDropRate(1936,16703,1000); -- Impact Knuckles
-    end
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
 
     -- Set Mee_Deggi_the_Punisher's Window Open Time
     local wait = math.random(3600,10800);
-    SetServerVariable("[POP]Mee_Deggi_the_Punisher", os.time(t) + wait); -- 1-3 hours
+    SetServerVariable("[POP]Mee_Deggi_the_Punisher", os.time() + wait); -- 1-3 hours
     DeterMob(mob:getID(), true);
 
     -- Set PH back to normal, then set to respawn spawn

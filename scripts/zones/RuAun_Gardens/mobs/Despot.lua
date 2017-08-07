@@ -8,10 +8,17 @@ require("scripts/globals/fieldsofvalor");
 -----------------------------------
 -- onMobDeath
 -----------------------------------
-function onMobDeath(mob,killer,ally)
+
+function onMobDeath(mob, player, isKiller)
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+function onMobDespawn(mob)
 
     -- Set Despot ToD
-    SetServerVariable("[POP]Despot", os.time(t) + 7200); -- 2 hour
+    SetServerVariable("[POP]Despot", os.time() + 7200); -- 2 hour
     DeterMob(mob:getID(), true);
 
     -- Set PH back to normal, then set to respawn spawn

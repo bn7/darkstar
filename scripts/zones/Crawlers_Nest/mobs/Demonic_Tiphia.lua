@@ -7,13 +7,20 @@
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)    
+function onMobDeath(mob, player, isKiller)
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
 
     -- Set Demonic_Tiphia's Window Open Time
     local wait = math.random(7200,28800);
-    SetServerVariable("[POP]Demonic_Tiphia", os.time(t) + wait); -- 2-8 hours
+    SetServerVariable("[POP]Demonic_Tiphia", os.time() + wait); -- 2-8 hours
     DeterMob(mob:getID(), true);
-    
+
     -- Set PH back to normal, then set to respawn spawn
     local PH = GetServerVariable("[PH]Demonic_Tiphia");
     SetServerVariable("[PH]Demonic_Tiphia", 0);

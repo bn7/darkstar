@@ -1,11 +1,11 @@
 ---------------------------------------------------------------------------------------------------
--- func: @givegil <amount> <player>
+-- func: givegil <amount> <player>
 -- desc: Gives the specified amount of gil to GM or target player.
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
 {
-    permission = 1,
+    permission = 2,
     parameters = "is"
 };
 

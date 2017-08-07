@@ -8,11 +8,18 @@
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)
+function onMobDeath(mob, player, isKiller)
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
 
     -- Set Eldritch Edge's Window Open Time
     local wait = math.random(5400,7200);
-    SetServerVariable("[POP]Eldritch_Edge", os.time(t) + wait); -- 90 to 120 minutes
+    SetServerVariable("[POP]Eldritch_Edge", os.time() + wait); -- 90 to 120 minutes
     DeterMob(mob:getID(), true);
 
     -- Set PH back to normal, then set to respawn spawn

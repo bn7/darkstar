@@ -7,11 +7,18 @@
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)
+function onMobDeath(mob, player, isKiller)
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
 
     -- Set Wyvernpoacher Drachlox's Window Open Time
     local wait = math.random(720,28800);  -- 2-8 hours
-    SetServerVariable("[POP]Wyvernpoacher_Drachlox", os.time(t) + wait);
+    SetServerVariable("[POP]Wyvernpoacher_Drachlox", os.time() + wait);
     DeterMob(mob:getID(), true);
 
     -- Set PH back to normal, then set to respawn spawn

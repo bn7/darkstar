@@ -1,11 +1,11 @@
 ---------------------------------------------------------------------------------------------------
--- func: @givexp <amount> <player>
+-- func: givexp <amount> <player>
 -- desc: Gives the GM or target player experience points.
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
 {
-    permission = 1,
+    permission = 2,
     parameters = "is"
 };
 

@@ -108,7 +108,7 @@ void CParty::DisbandParty(bool playerInitiated)
 {
     if (m_PAlliance)
     {
-        m_PAlliance->delParty(this);
+        m_PAlliance->removeParty(this);
     }
     m_PSyncTarget = nullptr;
     SetQuarterMaster(nullptr);
@@ -377,6 +377,7 @@ void CParty::DelMember(CBattleEntity* PEntity)
             }
         }
     }
+    this->ReloadParty();
 }
 
 void CParty::PopMember(CBattleEntity* PEntity)
@@ -527,13 +528,19 @@ void CParty::AddMember(uint32 id)
     if (m_PartyType == PARTY_PCS)
     {
         uint32 allianceid = 0;
+        uint16 Flags = 0;
         if (m_PAlliance)
         {
             allianceid = m_PAlliance->m_AllianceID;
+            if (this->m_PartyNumber == 1)
+                Flags = PARTY_SECOND;
+            else if (this->m_PartyNumber == 2)
+                Flags = PARTY_THIRD;
         }
-        Sql_Query(SqlHandle, "INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", id, m_PartyID, allianceid, 0);
-        uint8 data[4] {};
+        Sql_Query(SqlHandle, "INSERT INTO accounts_parties (charid, partyid, allianceid, partyflag) VALUES (%u, %u, %u, %u);", id, m_PartyID, allianceid, Flags);
+        uint8 data[8] {};
         WBUFL(data, 0) = m_PartyID;
+        WBUFL(data, 4) = id;
         message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
 
         /*if (PChar->nameflags.flags & FLAG_INVITE)
@@ -933,8 +940,7 @@ void CParty::SetSyncTarget(int8* MemberName, uint16 message)
             {
                 for (uint8 i = 0; i < members.size(); ++i)
                 {
-                    if (members.at(i)->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_RESTRICTION) ||
-                        members.at(i)->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
+                    if (members.at(i)->StatusEffectContainer->HasStatusEffect({EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_SYNC}))
                     {
                         ((CCharEntity*)GetLeader())->pushPacket(new CMessageBasicPacket((CCharEntity*)GetLeader(), (CCharEntity*)GetLeader(), 0, 0, 543));
                         return;

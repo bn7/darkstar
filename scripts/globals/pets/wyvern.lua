@@ -7,29 +7,28 @@ WYVERN_OFFENSIVE = 1
 WYVERN_DEFENSIVE = 2
 WYVERN_MULTI = 3
 local wyvernTypes = {
-    [JOB_WAR] = WYVERN_OFFENSIVE,
-    [JOB_MNK] = WYVERN_OFFENSIVE,
-    [JOB_WHM] = WYVERN_DEFENSIVE,
-    [JOB_BLM] = WYVERN_DEFENSIVE,
-    [JOB_RDM] = WYVERN_DEFENSIVE,
-    [JOB_THF] = WYVERN_OFFENSIVE,
-    [JOB_PLD] = WYVERN_MULTI,
-    [JOB_DRK] = WYVERN_MULTI,
-    [JOB_BST] = WYVERN_OFFENSIVE,
-    [JOB_BRD] = WYVERN_MULTI,
-    [JOB_RNG] = WYVERN_OFFENSIVE,
-    [JOB_SAM] = WYVERN_OFFENSIVE,
-    [JOB_NIN] = WYVERN_MULTI,
-    [JOB_DRG] = WYVERN_OFFENSIVE,
-    [JOB_SMN] = WYVERN_DEFENSIVE,
-    [JOB_BLU] = WYVERN_DEFENSIVE,
-    [JOB_COR] = WYVERN_OFFENSIVE,
-    [JOB_PUP] = WYVERN_OFFENSIVE,
-    [JOB_DNC] = WYVERN_OFFENSIVE,
-    [JOB_SCH] = WYVERN_DEFENSIVE,
-    --These two might not be right (I'd guess GEO is multi)
-    [JOB_GEO] = WYVERN_OFFENSIVE,
-    [JOB_RUN] = WYVERN_OFFENSIVE
+    [JOBS.WAR] = WYVERN_OFFENSIVE,
+    [JOBS.MNK] = WYVERN_OFFENSIVE,
+    [JOBS.WHM] = WYVERN_DEFENSIVE,
+    [JOBS.BLM] = WYVERN_DEFENSIVE,
+    [JOBS.RDM] = WYVERN_DEFENSIVE,
+    [JOBS.THF] = WYVERN_OFFENSIVE,
+    [JOBS.PLD] = WYVERN_MULTI,
+    [JOBS.DRK] = WYVERN_MULTI,
+    [JOBS.BST] = WYVERN_OFFENSIVE,
+    [JOBS.BRD] = WYVERN_MULTI,
+    [JOBS.RNG] = WYVERN_OFFENSIVE,
+    [JOBS.SAM] = WYVERN_OFFENSIVE,
+    [JOBS.NIN] = WYVERN_MULTI,
+    [JOBS.DRG] = WYVERN_OFFENSIVE,
+    [JOBS.SMN] = WYVERN_DEFENSIVE,
+    [JOBS.BLU] = WYVERN_DEFENSIVE,
+    [JOBS.COR] = WYVERN_OFFENSIVE,
+    [JOBS.PUP] = WYVERN_OFFENSIVE,
+    [JOBS.DNC] = WYVERN_OFFENSIVE,
+    [JOBS.SCH] = WYVERN_DEFENSIVE,
+    [JOBS.GEO] = WYVERN_DEFENSIVE,
+    [JOBS.RUN] = WYVERN_MULTI
 }
 
 -----------------------------------
@@ -38,6 +37,7 @@ local wyvernTypes = {
 
 function onMobSpawn(mob)
     local master = mob:getMaster()
+    mob:addMod(MOD_DMG, -40);
     local wyvernType = wyvernTypes[master:getSubJob()]
     local healingbreath = 624
     if mob:getMainLvl() >= 80 then healingbreath = 623
@@ -65,7 +65,7 @@ function onMobSpawn(mob)
                 end
             end
         end);
-        if (master:getSubJob() ~= JOB_SMN) then
+        if (master:getSubJob() ~= JOBS.SMN) then
             master:addListener("MAGIC_USE", "PET_WYVERN_MAGIC", function(player, target, spell, action)
                 -- check master first!
                 local threshold = 33;
@@ -124,7 +124,12 @@ function onMobSpawn(mob)
         local pet = player:getPet()
         local prev_exp = pet:getLocalVar("wyvern_exp")
         if (prev_exp < 1000) then
-            local diff = math.floor((prev_exp + exp)/200) - math.floor(prev_exp/200)
+        -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
+            local currentExp = exp
+            if (prev_exp+exp > 1000) then
+                currentExp = 1000 - prev_exp
+            end
+            local diff = math.floor((prev_exp + currentExp)/200) - math.floor(prev_exp/200)
             if diff ~= 0 then
                 -- wyvern levelled up (diff is the number of level ups)
                 pet:addMod(MOD_ACC,2*diff)

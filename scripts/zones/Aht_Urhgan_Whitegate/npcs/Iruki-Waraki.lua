@@ -3,7 +3,7 @@
 --  NPC:  Iruki-Waraki
 --  Type: Standard NPC
 --  Involved in quest: No Strings Attached
---  @pos 101.329 -6.999 -29.042 50
+-- @pos 101.329 -6.999 -29.042 50
 -----------------------------------
 package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
 -----------------------------------
@@ -29,18 +29,23 @@ function onTrigger(player,npc)
 local NoStringsAttached = player:getQuestStatus(AHT_URHGAN,NO_STRINGS_ATTACHED);
 local NoStringsAttachedProgress = player:getVar("NoStringsAttachedProgress");
     if (NoStringsAttached == 1 and NoStringsAttachedProgress == 1) then
-        player:startEvent(0x0104); -- he tells u to get him an automaton
+        --player:startEvent(0x0104); -- he tells u to get him an automaton
+        player:PrintToPlayer("I told you no pup. read the damn forums. Or login msg..")
     elseif (NoStringsAttached == 1 and NoStringsAttachedProgress == 2) then
-        player:startEvent(0x0105); -- reminder to get an automaton
+        --player:startEvent(0x0105); -- reminder to get an automaton
+        player:PrintToPlayer("I told you no pup. read the damn forums. Or login msg..")
     elseif (NoStringsAttached == 1 and NoStringsAttachedProgress == 6) then
-        player:startEvent(0x010a); -- you bring him the automaton
+        --player:startEvent(0x010a); -- you bring him the automaton
+        player:PrintToPlayer("I told you no pup. read the damn forums. Or login msg..")
     elseif (NoStringsAttached == 2) then
-        player:startEvent(0x010b); -- asking you how are you doing with your automaton
+        --player:startEvent(0x010b); 
+        player:PrintToPlayer("I told you no pup. read the damn forums. Or login msg..")-- asking you how are you doing with your automaton
         -- In case a player completed the quest before unlocking attachments was implemented (no harm in doing this repeatedly)
-        player:unlockAttachment(8224); --Harlequin Frame
-        player:unlockAttachment(8193); --Harlequin Head
+        --player:unlockAttachment(8224); --Harlequin Frame
+        --player:unlockAttachment(8193); --Harlequin Head
     else
-        player:startEvent(0x0103); -- Leave him alone
+        --player:startEvent(0x0103); -- Leave him alone
+        player:PrintToPlayer("I told you no pup. read the damn forums. Or login msg..")
     end;
 end;
 
@@ -49,8 +54,8 @@ end;
 -----------------------------------
 
 function onEventUpdate(player,csid,option)
--- printf("CSID: %u",csid);
--- printf("RESULT: %u",option);
+    -- printf("CSID: %u",csid);
+    -- printf("RESULT: %u",option);
 end;
 
 -----------------------------------

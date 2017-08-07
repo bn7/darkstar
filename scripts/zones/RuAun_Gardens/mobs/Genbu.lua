@@ -44,8 +44,8 @@ end;
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob, killer, ally)
-    ally:showText(mob,SKY_GOD_OFFSET + 6);
+function onMobDeath(mob, player, isKiller)
+    player:showText(mob,SKY_GOD_OFFSET + 6);
 end;
 
 -----------------------------------
@@ -53,5 +53,5 @@ end;
 -----------------------------------
 
 function onMobDespawn(mob)
-    GetNPCByID(17310099):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
+    GetNPCByID(17310103):updateNPCHideTime(FORCE_SPAWN_QM_RESET_TIME);
 end;

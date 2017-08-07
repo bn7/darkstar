@@ -1,11 +1,11 @@
 ---------------------------------------------------------------------------------------------------
--- func: @addcurrency <currency type> <amount> <target player>
+-- func: addcurrency <currency type> <amount> <target player>
 -- desc: Adds the specified currency to the player
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
 {
-    permission = 1,
+    permission = 2,
     parameters = "sis"
 };
 

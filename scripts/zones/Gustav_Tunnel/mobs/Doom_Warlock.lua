@@ -11,16 +11,24 @@ require("scripts/zones/Gustav_Tunnel/MobIDs");
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)
+function onMobDeath(mob, player, isKiller)
 
-    checkGoVregime(ally,mob,765,2);
-    checkGoVregime(ally,mob,766,1);
-    checkGoVregime(ally,mob,769,1);
+    checkGoVregime(player,mob,765,2);
+    checkGoVregime(player,mob,766,1);
+    checkGoVregime(player,mob,769,1);
 
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
     local mobID = mob:getID();
+
     if (Taxim_PH[mobID] ~= nil) then
         local ToD = GetServerVariable("[POP]Taxim");
-        if (ToD <= os.time(t) and GetMobAction(Taxim) == 0) then
+        if (ToD <= os.time() and GetMobAction(Taxim) == 0) then
             if (math.random(1,20) == 5) then
                 UpdateNMSpawnPoint(Taxim);
                 GetMobByID(Taxim):setRespawnTime(GetMobRespawnTime(mobID));

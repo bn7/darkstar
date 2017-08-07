@@ -5,6 +5,7 @@
 
 require("scripts/globals/status");
 require("scripts/globals/magic");
+require("scripts/globals/limbus");
 
 -----------------------------------
 -- onMobSpawn Action
@@ -66,7 +67,7 @@ end;
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob, killer, ally)
+function onMobDeath(mob, player, isKiller)
     -- Despawn the pets if alive
     DespawnMob(Kf_Ghrah_WHM);
     DespawnMob(Kf_Ghrah_BLM);

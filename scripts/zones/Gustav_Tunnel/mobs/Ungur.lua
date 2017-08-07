@@ -7,10 +7,17 @@
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob,killer,ally)
+function onMobDeath(mob, player, isKiller)
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
 
     -- Set Ungur's Window Open Time
-    SetServerVariable("[POP]Ungur", os.time(t) + 7200); -- 2 hours
+    SetServerVariable("[POP]Ungur", os.time() + 7200); -- 2 hours
     DeterMob(mob:getID(), true);
 
     -- Set PH back to normal, then set to respawn spawn

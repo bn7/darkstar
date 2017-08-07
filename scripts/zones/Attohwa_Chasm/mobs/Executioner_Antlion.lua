@@ -4,7 +4,7 @@
 -----------------------------------
 
 require("scripts/globals/status");
-mixins = {require("scripts/mixins/families/antlion_ambush")}
+mixins = {require("scripts/mixins/families/antlion_ambush_noaggro")}
 
 -----------------------------------
 -- onMobInitialize Action
@@ -25,12 +25,12 @@ end;
 -- onMobEngaged
 -----------------------------------
 
-function onMobEngaged(mob, killer)
+function onMobEngaged(mob, target)
 end;
 
 -----------------------------------
 -- onMobDeath
 -----------------------------------
 
-function onMobDeath(mob, killer, ally)
+function onMobDeath(mob, player, isKiller)
 end;

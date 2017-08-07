@@ -1,11 +1,11 @@
 ---------------------------------------------------------------------------------------------------
--- func: @setplayermodel <modelid> <slot> <player>
+-- func: setplayermodel <modelid> <slot> <player>
 -- desc: Sets the look of the user or target player based on model id offset and slot (for testing).
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
 {
-    permission = 1,
+    permission = 2,
     parameters = "iis"
 };
 

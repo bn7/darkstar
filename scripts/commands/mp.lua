@@ -1,11 +1,11 @@
 ---------------------------------------------------------------------------------------------------
--- func: @mp <amount> <player>
+-- func: mp <amount> <player>
 -- desc: Sets the GM or target players mana.
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
 {
-    permission = 1,
+    permission = 2,
     parameters = "is"
 };
 

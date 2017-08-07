@@ -177,14 +177,14 @@ end;
  function getCurePower(caster,isBlueMagic)
     local MND = caster:getStat(MOD_MND);
     local VIT = caster:getStat(MOD_VIT);
-    local skill = caster:getSkillLevel(HEALING_MAGIC_SKILL) + caster:getMod(MOD_HEALING);
+    local skill = caster:getSkillLevel(HEALING_MAGIC_SKILL);
     local power = math.floor(MND/2) + math.floor(VIT/4) + skill;
     return power;
 end;
 function getCurePowerOld(caster)
     local MND = caster:getStat(MOD_MND);
     local VIT = caster:getStat(MOD_VIT);
-    local skill = caster:getSkillLevel(HEALING_MAGIC_SKILL) + caster:getMod(MOD_HEALING);--it's healing magic skill for the BLU cures as well
+    local skill = caster:getSkillLevel(HEALING_MAGIC_SKILL);--it's healing magic skill for the BLU cures as well
     local power = ((3 * MND) + VIT + (3 * math.floor(skill/5)));
     return power;
 end;
@@ -377,11 +377,11 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
         bonusAcc = 0;
     end
 
-    -- Get the base acc (just skill + skill mod (79 + skillID = ModID) + magic acc mod)
     local magicacc = caster:getMod(MOD_MACC) + caster:getILvlMacc();
 
+    -- Get the base acc (just skill + skill mod (79 + skillID = ModID) + magic acc mod)
     if (skillType ~= 0) then
-        magicacc = magicacc + caster:getSkillLevel(skillType) + caster:getMod(79 + skillType);
+        magicacc = magicacc + caster:getSkillLevel(skillType);
     else
         -- for mob skills / additional effects which don't have a skill
         magicacc = magicacc + utils.getSkillLvl(1, caster:getMainLvl());
@@ -403,6 +403,10 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
 
     magicacc = magicacc + bonusAcc;
 
+    -- Add macc% from food
+    local maccFood = magicacc * (caster:getMod(MOD_FOOD_MACCP)/100);
+    magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(MOD_FOOD_MACC_CAP));
+
     return calculateMagicHitRate(magicacc, magiceva, percentBonus, caster:getMainLvl(), target:getMainLvl());
 end
 
@@ -412,8 +416,6 @@ function calculateMagicHitRate(magicacc, magiceva, percentBonus, casterLvl, targ
     local levelDiff = utils.clamp(casterLvl - targetLvl, -5, 5);
 
     p = 70 - 0.5 * (magiceva - magicacc) + levelDiff * 3 + percentBonus;
-
-    -- printf("P: %f, macc: %f, meva: %f, bonus: %d%%, leveldiff: %d", p, magicacc, magiceva, percentBonus, levelDiff);
 
     return utils.clamp(p, 5, 95);
 end
@@ -467,7 +469,7 @@ function getEffectResistance(target, effect)
         effectres = MOD_LULLABYRES;
     elseif (effect == EFFECT_POISON) then
         effectres = MOD_POISONRES;
-    elseif (effect == EFFECT_PARALYZE) then
+    elseif (effect == EFFECT_PARALYSIS) then
         effectres = MOD_PARALYZERES;
     elseif (effect == EFFECT_BLINDNESS) then
         effectres = MOD_BLINDRES
@@ -1130,6 +1132,12 @@ function doDivineNuke(V,M,caster,spell,target,hasMultipleTargetReduction,resistB
 end
 
 function doNinjutsuNuke(V,M,caster,spell,target,hasMultipleTargetReduction,resistBonus,mabBonus)
+    mabBonus = mabBonus or 0;
+
+    mabBonus = mabBonus + caster:getMod(MOD_NIN_NUKE_BONUS); -- "enhances ninjutsu damage" bonus
+    if (caster:hasStatusEffect(EFFECT_INNIN) and caster:isBehind(target, 23)) then -- Innin mag atk bonus from behind, guesstimating angle at 23 degrees
+        mabBonus = mabBonus + caster:getStatusEffect(EFFECT_INNIN):getPower();
+    end
     return doNuke(V,M,caster,spell,target,hasMultipleTargetReduction,resistBonus,NINJUTSU_SKILL,MOD_INT,mabBonus);
 end
 
@@ -1141,7 +1149,7 @@ function doNuke(V,M,caster,spell,target,hasMultipleTargetReduction,resistBonus,s
     --get the resisted damage
     dmg = dmg*resist;
     if (skill == NINJUTSU_SKILL) then
-        if (caster:getMainJob() == JOB_NIN) then -- NIN main gets a bonus to their ninjutsu nukes
+        if (caster:getMainJob() == JOBS.NIN) then -- NIN main gets a bonus to their ninjutsu nukes
             local ninSkillBonus = 100;
             if (spell:getID() % 3 == 2) then -- ichi nuke spell ids are 320, 323, 326, 329, 332, and 335
                 ninSkillBonus = 100 + math.floor((caster:getSkillLevel(SKILL_NIN) - 50)/2); -- getSkillLevel includes bonuses from merits and modifiers (ie. gear)
