@@ -10,10 +10,12 @@ cmdprops =
 function onTrigger(player)
     player:PrintToPlayer("Welcome to BNET.cc's shop of Abys wares to aid you on your adventure!", 0xF);
 stock = {
+        11363, 10000000, -- Twilight Cloak 
         11798, 10000000, -- Twilight Helm
         11362, 10000000, -- Twilight Mail
         19132, 10000000, -- Twilight Dagger
         15959, 10000000, -- Twilight Belt
+        11625, 10000000, -- Twilight Torque
         11729, 10000000, -- Goading Belt
         11651, 7000000, -- Epona's Ring
         19129, 15000000, -- Rapidus Sax
