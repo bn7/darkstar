@@ -1,7 +1,5 @@
 ---------------------------------------------------------------------------------------------------
--- func: ah/auction
--- auth: <Unknown> :: Modded by Tagban + Ninjistix
--- desc: Sets the players position to specific location (can be added to later).
+-- func: Relic Shop
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
