@@ -68,12 +68,18 @@ function onTrigger(player)
 			11104,325000, -- Ravager's Mufflers+2
 			11124,325000, -- Ravager's Cuisses+2
 			11144,325000, -- Ravager's Calligae+2
+            -- Reforged Empyrean Armor +1
+            26741,10000000,
+            26899,10000000,
+            27053,10000000,
+            27238,10000000,
+            27412,10000000,          
             -- AF3            
-            -- 23375,10000000, --  Pummeler's Mask +3
-            -- 23442,10000000, --  Pumm. Lorica +3 
-            -- 23509,10000000, --  Pumm. Mufflers +3
-            -- 23576,10000000, --  Pumm. Cuisses +3
-            -- 23643,10000000, --  Pumm. Calligae +3
+            23375,99999999, --  Pummeler's Mask +3
+            23442,99999999, --  Pumm. Lorica +3 
+            23509,99999999, --  Pumm. Mufflers +3
+            23576,99999999, --  Pumm. Cuisses +3
+            23643,99999999, --  Pumm. Calligae +3
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 2) then -- MNK
@@ -133,12 +139,18 @@ function onTrigger(player)
 			11105,325000, -- Tantra Gloves+2
 			11125,325000, -- Tantra Hose+2
 			11145,325000, -- Tantra Gaiters+2
+            -- Reforged Empyrean Armor +1
+            26743,10000000,
+            26901,10000000,
+            27055,10000000,
+            27240,10000000,
+            27414,10000000,
             -- AF3
-            -- 23376,10000000, -- Anch. Crown +3
-            -- 23443,10000000, -- Anch. Cyclas +3
-            -- 23510,10000000, -- Anchor. Gloves +3
-            -- 23577,10000000, -- Anch. Hose +3 
-            -- 23644,10000000, -- Anch. Gaiters +3                     
+            23376,99999999, -- Anch. Crown +3
+            23443,99999999, -- Anch. Cyclas +3
+            23510,99999999, -- Anchor. Gloves +3
+            23577,99999999, -- Anch. Hose +3 
+            23644,99999999, -- Anch. Gaiters +3                     
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 3) then -- WHM
@@ -198,12 +210,18 @@ function onTrigger(player)
 			11106,325000, -- Orison Mitts+2
 			11126,325000, -- Orison Pantaloons+2
 			11146,325000, -- Orison Duckbills+2
+            -- Reforged Empyrean Armor +1
+            26745,10000000,
+            26903,10000000,
+            27057,10000000,
+            27242,10000000,
+            27416,10000000,
                         -- AF3
-            -- 23377,10000000, -- Theophany Cap +3
-            -- 23444,10000000, -- Theo. Briault +3
-            -- 23511,10000000, -- Theophany Mitts +3
-            -- 23578,10000000, -- Th. Pant. +3
-            -- 23645,10000000, -- Theo. Duckbills +3
+            23377,99999999, -- Theophany Cap +3
+            23444,99999999, -- Theo. Briault +3
+            23511,99999999, -- Theophany Mitts +3
+            23578,99999999, -- Th. Pant. +3
+            23645,99999999, -- Theo. Duckbills +3
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 4) then -- BLM
@@ -263,12 +281,18 @@ function onTrigger(player)
 			11107,325000, -- Goetia Gloves+2
 			11127,325000, -- Goetia Tonban+2
 			11147,325000, -- Goetia Sabots+2
+            -- Reforged Empyrean Armor +1
+            26747,10000000,
+            26905,10000000,
+            27059,10000000,
+            27244,10000000,
+            27418,10000000,            
             -- AF3
-            -- 23378,10000000, -- Spae. Petasos +3
-            -- 23445,10000000, -- Spaekona's Coat +3
-            -- 23512,10000000, -- Spae. Gloves +3
-            -- 23579,10000000, -- Spae. Tonban +3
-            -- 23646,10000000, -- Spae. Sabots +3         
+            23378,99999999, -- Spae. Petasos +3
+            23445,99999999, -- Spaekona's Coat +3
+            23512,99999999, -- Spae. Gloves +3
+            23579,99999999, -- Spae. Tonban +3
+            23646,99999999, -- Spae. Sabots +3         
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 5) then -- RDM
@@ -328,12 +352,18 @@ function onTrigger(player)
 			11108,325000, -- Estoqueur's Gantherots+2
 			11128,325000, -- Estoqueur's Fuseau+2
 			11148,325000, -- Estoqueur's Houseaux+2
+            -- Reforged Empyrean Armor +1
+            26749,10000000,
+            26907,10000000,
+            27061,10000000,
+            27246,10000000,
+            27420,10000000,
             -- AF3
-            -- 23379,10000000, -- Atrophy Chapeau +3
-            -- 23446,10000000, -- Atrophy Tabard +3
-            -- 23513,10000000, -- Atrophy Gloves +3
-            -- 23580,10000000, -- Atrophy Tights +3
-            -- 23647,10000000, -- Atrophy Boots +3
+            23379,99999999, -- Atrophy Chapeau +3
+            23446,99999999, -- Atrophy Tabard +3
+            23513,99999999, -- Atrophy Gloves +3
+            23580,99999999, -- Atrophy Tights +3
+            23647,99999999, -- Atrophy Boots +3
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 6) then -- THF
@@ -393,12 +423,18 @@ function onTrigger(player)
 			11109,325000, -- Raider's Armlets+2
 			11129,325000, -- Raider's Culottes+2
 			11149,325000, -- Raider's Poulaines+2
+             -- Reforged Empyrean Armor +1
+            26751,10000000,
+            26909,10000000,
+            27063,10000000,
+            27248,10000000,
+            27422,10000000,
             -- AF3           
-            -- 23380,10000000, -- 
-            -- 23447,10000000, -- 
-            -- 23514,10000000, -- 
-            -- 23581,10000000, -- 
-            -- 23648,10000000, --         
+            23380,99999999, -- 
+            23447,99999999, -- 
+            23514,99999999, -- 
+            23581,99999999, -- 
+            23648,99999999, --         
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 7) then -- PLD
@@ -458,12 +494,18 @@ function onTrigger(player)
 			11110,325000, -- Creed Gauntlets+2
 			11130,325000, -- Creed Cuisses+2
 			11150,325000, -- Creed Sabatons+2
+            -- Reforged Empyrean Armor +1
+            26753,10000000,
+            26911,10000000,
+            27065,10000000,
+            27250,10000000,
+            27424,10000000,
             -- AF3           
-            -- 23381,10000000, -- 
-            -- 23448,10000000, -- 
-            -- 23515,10000000, -- 
-            -- 23582,10000000, -- 
-            -- 23649,10000000, --           
+            23381,99999999, -- 
+            23448,99999999, -- 
+            23515,99999999, -- 
+            23582,99999999, -- 
+            23649,99999999, --           
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 8) then -- DRK
@@ -523,12 +565,18 @@ function onTrigger(player)
 			11111,325000, -- Bale Gauntlets+2
 			11131,325000, -- Bale Flanchard+2
 			11151,325000, -- Bale Sollerets+2
+            -- Reforged Empyrean Armor +1
+            26755,10000000,
+            26913,10000000,
+            27067,10000000,
+            27252,10000000,
+            27426,10000000,
             -- AF3           
-            -- 23382,10000000, -- 
-            -- 23449,10000000, -- 
-            -- 23516,10000000, -- 
-            -- 23583,10000000, -- 
-            -- 23650,10000000, -- 
+            23382,99999999, -- 
+            23449,99999999, -- 
+            23516,99999999, -- 
+            23583,99999999, -- 
+            23650,99999999, -- 
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 9) then -- BST
@@ -588,12 +636,18 @@ function onTrigger(player)
 			11112,325000, -- Ferine Manoplas+2
 			11132,325000, -- Ferine Quijotes+2
 			11152,325000, -- Ferine Ocreae+2
+            -- Reforged Empyrean Armor +1
+            26757,10000000,
+            26915,10000000,
+            27069,10000000,
+            27254,10000000,
+            27428,10000000,
             -- AF3           
-            -- 23383,10000000, -- 
-            -- 23450,10000000, -- 
-            -- 23517,10000000, -- 
-            -- 23584,10000000, -- 
-            -- 23651,10000000, -- 
+            23383,99999999, -- 
+            23450,99999999, -- 
+            23517,99999999, -- 
+            23584,99999999, -- 
+            23651,99999999, -- 
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 10) then -- BRD
@@ -640,9 +694,11 @@ function onTrigger(player)
 			12037,185000, -- Aoidos' Hongreline
 			12057,185000, -- Aoidos' Manchettes
 			12077,185000, -- Aoidos' Rhingrave
-			12097,185000, -- Aoidos' Cothurnes
-			-- Empyrean +1
-			11173,235000, -- Aoidos' Calot+1
+			12097,1 000 000,,185000, -- Aoidos' Cothurnes
+			-- Empy1 000 000rean +1,
+			11173,235000, -,- Aoidos' Ca27071
+            27256,
+            27430l,ot+1
 			11193,235000, -- Aoidos' Hongreline+1
 			11213,235000, -- Aoidos' Manchettes+1
 			11233,235000, -- Aoidos' Rhingrave+1
@@ -653,12 +709,18 @@ function onTrigger(player)
 			11113,325000, -- Aoidos' Manchettes+2
 			11133,325000, -- Aoidos' Rhingrave+2
 			11153,325000, -- Aoidos' Cothurnes+2
+            -- Reforged Empyrean Armor +1
+            26759,10000000,
+            26917,10000000,
+            27071,10000000,
+            27256,10000000,
+            27430,10000000,
             -- AF3           
-            -- 23384,10000000, -- 
-            -- 23451,10000000, -- 
-            -- 23518,10000000, -- 
-            -- 23585,10000000, -- 
-            -- 23652,10000000, --
+            23384,99999999, -- 
+            23451,99999999, -- 
+            23518,99999999, -- 
+            23585,99999999, -- 
+            23652,99999999, --
         }
 		showShop(player, STATIC, stock);
 		elseif(player:getMainJob() == 11) then -- RNG
@@ -718,12 +780,18 @@ function onTrigger(player)
 			11114,325000, -- Sylvan Glovelettes+2
 			11134,325000, -- Sylvan Bragues+2
 			11154,325000, -- Sylvan Bottillons+2
+            -- Reforged Empyrean Armor +1
+            26761,10000000,
+            26919,10000000,
+            27073,10000000,
+            27258,10000000,
+            27432,10000000,
                         -- AF3           
-            -- 23385,10000000, -- 
-            -- 23452,10000000, -- 
-            -- 23519,10000000, -- 
-            -- 23586,10000000, -- 
-            -- 23653,10000000, --
+            23385,99999999, -- 
+            23452,99999999, -- 
+            23519,99999999, -- 
+            23586,99999999, -- 
+            23653,99999999, --
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 12) then -- SAM
@@ -782,12 +850,18 @@ function onTrigger(player)
 			11115,325000, -- Unkai Kote+2
 			11135,325000, -- Unkai Haidate+2
 			11155,325000, -- Unkai Sune-Ate+2
+            -- Reforged Empyrean Armor +1
+            26763,10000000,
+            26921,10000000,
+            27075,10000000,
+            27260,10000000,
+            27434,10000000,
             -- AF3           
-            -- 23386,10000000, -- 
-            -- 23453,10000000, -- 
-            -- 23520,10000000, -- 
-            -- 23587,10000000, -- 
-            -- 23654,10000000, --
+            23386,99999999, -- 
+            23453,99999999, -- 
+            23520,99999999, -- 
+            23587,99999999, -- 
+            23654,99999999, --
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 13) then -- NIN
@@ -848,12 +922,18 @@ function onTrigger(player)
 			11116,325000, -- Iga Tekko+2
 			11136,325000, -- Iga Hakama+2
 			11156,325000, -- Iga Kyahan+2
+            -- Reforged Empyrean Armor +1
+            26765,10000000,
+            26923,10000000,
+            27077,10000000,
+            27262,10000000,
+            27436,10000000,
             -- AF3           
-            -- 23387,10000000, -- 
-            -- 23454,10000000, -- 
-            -- 23521,10000000, -- 
-            -- 23588,10000000, -- 
-            -- 23655,10000000, --
+            23387,99999999, -- 
+            23454,99999999, -- 
+            23521,99999999, -- 
+            23588,99999999, -- 
+            23655,99999999, --
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 14) then -- DRG
@@ -913,12 +993,18 @@ function onTrigger(player)
 			11117,325000, -- Lancer's Vambraces+2
 			11137,325000, -- Lancer's Cuissots+2
 			11157,325000, -- Lancer's Schynbalds+2
+            -- Reforged Empyrean Armor +1
+            26767,10000000,
+            26925,10000000,
+            27079,10000000,
+            27264,10000000,
+            27438,10000000,
             -- AF3           
-            -- 23388,10000000, -- 
-            -- 23455,10000000, -- 
-            -- 23522,10000000, -- 
-            -- 23589,10000000, -- 
-            -- 23656,10000000, --         
+            23388,99999999, -- 
+            23455,99999999, -- 
+            23522,99999999, -- 
+            23589,99999999, -- 
+            23656,99999999, --         
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 15) then -- SMN
@@ -978,12 +1064,18 @@ function onTrigger(player)
 			11118,325000, -- Caller's Bracers+2
 			11138,325000, -- Caller's Spats+2
 			11158,325000, -- Caller's Pigaches+2
+            -- Reforged Empyrean Armor +1
+            26769,10000000,
+            26927,10000000,
+            27081,10000000,
+            27266,10000000,
+            27440,10000000,
             -- AF3           
-            -- 23389,10000000, -- 
-            -- 23456,10000000, -- 
-            -- 23523,10000000, -- 
-            -- 23590,10000000, -- 
-            -- 23657,10000000, --            
+            23389,99999999, -- 
+            23456,99999999, -- 
+            23523,99999999, -- 
+            23590,99999999, -- 
+            23657,99999999, --            
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 16) then -- BLU
@@ -1043,12 +1135,18 @@ function onTrigger(player)
 			11119,325000, -- Mavi Bazubands+2
 			11139,325000, -- Mavi Tayt+2
 			11159,325000, -- Mavi Basmak+2
+            -- Reforged Empyrean Armor +1
+            26771,10000000,
+            26929,10000000,
+            27083,10000000,
+            27268,10000000,
+            27442,10000000,
             -- AF3           
-            -- 23390,10000000, -- 
-            -- 23457,10000000, -- 
-            -- 23524,10000000, -- 
-            -- 23591,10000000, -- 
-            -- 23658,10000000, --
+            23390,99999999, -- 
+            23457,99999999, -- 
+            23524,99999999, -- 
+            23591,99999999, -- 
+            23658,99999999, --
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 17) then -- COR
@@ -1139,12 +1237,18 @@ function onTrigger(player)
 			11120,325000, -- Navarch's Gants+2
 			11140,325000, -- Navarch's Culottes+2
 			11160,325000, -- Navarch's Bottes+2
+            -- Reforged Empyrean Armor +1
+            26773,10000000,
+            26931,10000000,
+            27085,10000000,
+            27270,10000000,
+            27444,10000000,
             -- AF3           
-            -- 23391,10000000, -- 
-            -- 23458,10000000, -- 
-            -- 23525,10000000, -- 
-            -- 23592,10000000, -- 
-            -- 23659,10000000, --
+            23391,99999999, -- 
+            23458,99999999, -- 
+            23525,99999999, -- 
+            23592,99999999, -- 
+            23659,99999999, --
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 18) then -- PUP
@@ -1276,12 +1380,18 @@ function onTrigger(player)
 		11122,325000, -- Charis Bangles+2
 		11142,325000, -- Charis Tights+2
 		11162,325000, -- Charis Shoes+2	
+        -- Reforged Empyrean Armor +1
+        26777,10000000,
+        26935,10000000,
+        27089,10000000,
+        27274,10000000,
+        27274,10000000,
         -- AF3           
-        -- 23393,10000000, -- 
-        -- 23460,10000000, -- 
-        -- 23527,10000000, -- 
-        -- 23594,10000000, -- 
-        -- 23661,10000000, --
+        23393,99999999, -- 
+        23460,99999999, -- 
+        23527,99999999, -- 
+        23594,99999999, -- 
+        23661,99999999, --
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 20) then -- SCH
@@ -1341,12 +1451,18 @@ function onTrigger(player)
 		11123,325000, -- Savant's Bracers+2
 		11143,325000, -- Savant's Pants+2
 		11163,325000, -- Savant's Loafers+2
+        -- Reforged Empyrean Armor +1
+        26779,10000000,
+        26937,10000000,
+        27091,10000000,
+        27276,10000000,
+        27450,10000000,
         -- AF3           
-        -- 23394,10000000, -- 
-        -- 23461,10000000, -- 
-        -- 23528,10000000, -- 
-        -- 23595,10000000, -- 
-        -- 23662,10000000, --
+        23394,99999999, -- 
+        23461,99999999, -- 
+        23528,99999999, -- 
+        23595,99999999, -- 
+        23662,99999999, --
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 21) then -- GEO
