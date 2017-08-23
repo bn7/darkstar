@@ -19,15 +19,15 @@
 -- Table structure for table `job_points`
 --
 
-DROP TABLE IF EXISTS `job_points`;
+DROP TABLE IF EXISTS `merits`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `job_points` (
-  `job_pointid` smallint(10) unsigned NOT NULL,
+  `meritid` smallint(10) unsigned NOT NULL,
   `name` varchar(40) NOT NULL,
   `upgrade` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `jobs` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`job_pointid`)
+  PRIMARY KEY (`meritid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
