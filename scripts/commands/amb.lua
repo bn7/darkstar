@@ -8,7 +8,7 @@ cmdprops =
     parameters = "iiii"
 };
 function onTrigger(player)
-    player:PrintToPlayer("Welcome to BNET.cc's shop of Salvageii  wares to aid you on your adventure!", 0xF);
+    player:PrintToPlayer("Welcome to BNET.cc's shop of Ambuscade wares to aid you on your adventure!", 0xF);
 stock = {
 -- NO STATs Salvage and Nyzul +2
 -- https://www.bg-wiki.com/bg/Category:Ambuscade_Rewards#Armor
