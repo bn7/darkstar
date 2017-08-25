@@ -25,9 +25,9 @@ CREATE TABLE `merits` (
 --
 -- ORDER BY:  `meritid`
 
-INSERT INTO `merits` VALUES (64,'max_hp',25,10,1048575,0,0);
+INSERT INTO `merits` VALUES (64,'max_hp',15,10,1048575,0,0);
 INSERT INTO `merits` VALUES (66,'max_mp',15,10,1048575,0,0);
-INSERT INTO `merits` VALUES (68,'max_merits',15,10,1048575,9,0);
+INSERT INTO `merits` VALUES (68,'max_merits',25,10,1048575,9,0);
 INSERT INTO `merits` VALUES (128,'str',15,1,1048575,1,1);
 INSERT INTO `merits` VALUES (130,'dex',15,1,1048575,1,1);
 INSERT INTO `merits` VALUES (132,'vit',15,1,1048575,1,1);
