@@ -22,7 +22,7 @@ function onSpellCast(caster, target, spell)
     spellParams.V50 = 1100;
     spellParams.V100 = 1590;
     spellParams.V200 = 2100;
-    spellParams.M0 = 435;
+    spellParams.M0 = 4.35;
     spellParams.M50 = 4.74;
     spellParams.M100 = 4.75;
     spellParams.M200 = 4;
