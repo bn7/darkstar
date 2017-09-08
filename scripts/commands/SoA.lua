@@ -11,17 +11,29 @@ function onTrigger(player)
     player:PrintToPlayer("Welcome to BNET.cc's shop of SoA wares to aid you on your adventure!", 0xF);
 stock = {
 		27580, 7000000, -- Adoulin ring
+        26192, 10000000, -- Adoulin ring +1
 		27582, 7000000, -- Weatherspoon Ring
+        26194, 10000000, -- Weatherspoon Ring +1
 		27584, 7000000, -- Renaye Ring
+        26196, 10000000, -- Renaye Ring +1
 		27586, 7000000, -- Haverton Ring
+        26198, 10000000, -- Haverton Ring +1
 		27588, 7000000, -- Vocane Ring
+        26200, 10000000, -- Vocane Ring +1
 		27590, 7000000, -- Shneddick Ring
+        26202, 10000000, -- Shneddick Ring +1
 		27581, 7000000, -- Woltaris Ring
+        26193, 10000000, -- Woltaris Ring +1
 		27583, 7000000, -- Janniston Ring
+        26195, 10000000, -- Janniston Ring +1
 		27585, 7000000, -- Gorney Ring
+        26197, 10000000, -- Gorney Ring +1
 		27587, 7000000, -- Karieyh Ring
+        26199, 10000000, -- Karieyh Ring +1
 		27589, 7000000, -- Thurandaut Ring
+        26201, 10000000, -- Thurandaut Ring +1
 		27591, 7000000, -- Orvail Ring
+        26203, 10000000, -- Orvail Ring +1
 		-- 21015, 15000000, -- Amanomurakumo
 		-- 21260, 15000000, -- Annihilator
 		-- 20880, 15000000, -- Apocalypse
