@@ -807,8 +807,7 @@ function onTrigger(player)
         -- 20511, 99999999, -- 119III
         }
 		showShop(player, STATIC, stock);
-	player:PrintToPlayer("PUP is Broken, don't get banned!!!");
-    elseif(player:getMainJob() == 19) then -- DNC
+	elseif(player:getMainJob() == 19) then -- DNC
         local stock =
         {
             --  Twashtar
@@ -870,3 +869,4 @@ function onTrigger(player)
         player:PrintToPlayer("RUN is Broken, don't get banned!!!");		
     end
 end	
+.
