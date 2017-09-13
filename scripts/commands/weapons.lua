@@ -868,5 +868,4 @@ function onTrigger(player)
     elseif(player:getMainJob() == 22) then -- RUN
         player:PrintToPlayer("RUN is Broken, don't get banned!!!");		
     end
-end	
-.
+end
