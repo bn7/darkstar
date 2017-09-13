@@ -222,7 +222,7 @@ function onTrigger(player)
             20645, 30000000, -- 119
             20646, 60000000, -- 119II
             20685, 99999999, -- 119III
-                    --  Murgleis
+            --  Murgleis
             18995, 6000000, -- 75
             19064, 6500000, -- 80
             19084, 7000000, -- 85
@@ -289,7 +289,7 @@ function onTrigger(player)
 	elseif(player:getMainJob() == 7) then -- PLD
         local stock =
         {
-	         -- Ragnarok
+	        -- Ragnarok
             18282, 6000000, -- 75
             18283, 6500000, -- 80
             18640, 7000000, -- 85
@@ -365,7 +365,7 @@ function onTrigger(player)
     elseif(player:getMainJob() == 8) then -- DRK
         local stock =
         {
-		     -- Ragnarok
+		    -- Ragnarok
             18282, 6000000, -- 75
             18283, 6500000, -- 80
             18640, 7000000, -- 85
@@ -804,7 +804,7 @@ function onTrigger(player)
         19965, 9990000, -- 99II
         20484, 30000000, -- 119
         20485, 60000000, -- 119II
-        20511, 99999999, -- 119III
+        -- 20511, 99999999, -- 119III
         }
 		showShop(player, STATIC, stock);
 	player:PrintToPlayer("PUP is Broken, don't get banned!!!");
