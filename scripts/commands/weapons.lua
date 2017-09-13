@@ -806,8 +806,8 @@ function onTrigger(player)
         -- 20484, 30000000, -- 119
         -- 20485, 60000000, -- 119II
         -- 20511, 99999999, -- 119III
-        -- }
-		-- showShop(player, STATIC, stock);
+        }
+		showShop(player, STATIC, stock);
 	player:PrintToPlayer("PUP is Broken, don't get banned!!!");
     elseif(player:getMainJob() == 19) then -- DNC
         local stock =
