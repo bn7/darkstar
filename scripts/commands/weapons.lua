@@ -244,8 +244,7 @@ function onTrigger(player)
             20654, 60000000, -- 119II
             -- 20689, 99999999, -- 119III
             -- Aeonic
-            20695, 99999999,  -- Sequence 
-            
+            20695, 99999999,  -- Sequence            
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 6) then -- THF
