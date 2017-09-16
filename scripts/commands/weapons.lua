@@ -5,7 +5,7 @@
 cmdprops =
 {
     permission = 0,
-    parameters = ""
+    parameters = "iiii"
 };
 function onTrigger(player)
     player:PrintToPlayer("Welcome to BNET.cc's Ultimate Weapon Shop...", 0xF);
