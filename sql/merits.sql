@@ -283,5 +283,13 @@ INSERT INTO `merits` VALUES (3268,'tranquility',5,10,524288,7,50);
 INSERT INTO `merits` VALUES (3270,'enquanimity',5,10,524288,7,50);
 INSERT INTO `merits` VALUES (3272,'enlightenment',5,5,524288,7,50);
 INSERT INTO `merits` VALUES (3274,'stormsurge',5,1,524288,7,50);
+INSERT INTO `merits` VALUES (3392,'mending_halation',0,0,0,0,0);
+INSERT INTO `merits` VALUES (3394,'radial_arcana',0,0,0,0,0);
+INSERT INTO `merits` VALUES (3396,'curative_recantation',0,0,0,0,0);
+INSERT INTO `merits` VALUES (3398,'primeval_zeal',0,0,0,0,0);
+INSERT INTO `merits` VALUES (3456,'battuta',0,0,0,0,0);
+INSERT INTO `merits` VALUES (3458,'rayke',0,0,0,0,0);
+INSERT INTO `merits` VALUES (3460,'inspiration',0,0,0,0,0);
+INSERT INTO `merits` VALUES (3462,'sleight_of_sword',0,0,0,0,0);
 
 -- Dump completed on 2017-01-31 10:58:26
