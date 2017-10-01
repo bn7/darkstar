@@ -12,7 +12,7 @@ function onTrigger(player)
     if(player:getMainJob() == 1) then -- WAR
         local stock =
         {
-			-- Ragnarok
+			-- Ragnarok .
             18282, 6000000, -- 75
             18283, 6500000, -- 80
             18640, 7000000, -- 85
