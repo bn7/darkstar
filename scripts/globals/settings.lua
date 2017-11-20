@@ -93,7 +93,7 @@ LandKingSystem_NQ = 2;
 LandKingSystem_HQ = 2;
 
 -- DYNAMIS SETTINGS
-    BETWEEN_2DYNA_WAIT_TIME = 1;        -- wait time between 2 Dynamis (in real day) min: 1 day
+    BETWEEN_2DYNA_WAIT_TIME = 0;        -- wait time between 2 Dynamis (in real day) min: 1 day
         DYNA_MIDNIGHT_RESET = true;     -- if true, makes the wait time count by number of server midnights instead of full 24 hour intervals
              DYNA_LEVEL_MIN = 65;       -- level min for entering in Dynamis
     TIMELESS_HOURGLASS_COST = 5000;   -- cost of the timeless hourglass for Dynamis.
@@ -163,6 +163,8 @@ NUMBER_OF_DM_EARRINGS = 2; -- Number of earrings players can simultaneously own 
 HOMEPOINT_TELEPORT = 0; -- Enables the homepoint teleport system
 DIG_ABUNDANCE_BONUS = 0; -- Increase chance of digging up an item (450  = item digup chance +45)
 DIG_FATIGUE = 1; -- Set to 0 to disable Dig Fatigue
+DIG_GRANT_BURROW = 0; -- Set to 1 to grant burrow ability
+DIG_GRANT_BORE = 0; -- Set to 1 to grant bore ability
 ENM_COOLDOWN = 120;  -- Number of hours before a player can obtain same KI for ENMs (default: 5 days)
 FORCE_SPAWN_QM_RESET_TIME = 300; -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
 

@@ -104,7 +104,7 @@ namespace message
                 else
                 {
                     CBasicPacket* newPacket = new CBasicPacket();
-                    memcpy(*newPacket, packet->data(), dsp_min(packet->size(), PACKET_SIZE));
+                    memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
                     PChar->pushPacket(newPacket);
                 }
             }
@@ -126,14 +126,14 @@ namespace message
                         for (uint8 i = 0; i < PChar->PParty->m_PAlliance->partyList.size(); ++i)
                         {
                             CBasicPacket* newPacket = new CBasicPacket();
-                            memcpy(*newPacket, packet->data(), dsp_min(packet->size(), PACKET_SIZE));
+                            memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
                             ((CParty*)PChar->PParty->m_PAlliance->partyList.at(i))->PushPacket(RBUFL(extra->data(), 4), 0, newPacket);
                         }
                     }
                     else
                     {
                         CBasicPacket* newPacket = new CBasicPacket();
-                        memcpy(*newPacket, packet->data(), dsp_min(packet->size(), PACKET_SIZE));
+                        memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
                         PChar->PParty->PushPacket(RBUFL(extra->data(), 4), 0, newPacket);
                     }
                 }
@@ -147,7 +147,7 @@ namespace message
             if (PLinkshell)
             {
                 CBasicPacket* newPacket = new CBasicPacket();
-                memcpy(*newPacket, packet->data(), dsp_min(packet->size(), PACKET_SIZE));
+                memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
                 PLinkshell->PushPacket(RBUFL(extra->data(), 4), newPacket);
             }
             break;
@@ -164,7 +164,7 @@ namespace message
                         if (PChar->id != RBUFL(extra->data(), 0))
                         {
                             CBasicPacket* newPacket = new CBasicPacket();
-                            memcpy(*newPacket, packet->data(), dsp_min(packet->size(), PACKET_SIZE));
+                            memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
 
                             PChar->pushPacket(newPacket);
                         }
@@ -200,7 +200,7 @@ namespace message
                 PZone->ForEachChar([&packet](CCharEntity* PChar)
                 {
                     CBasicPacket* newPacket = new CBasicPacket();
-                    memcpy(*newPacket, packet->data(), dsp_min(packet->size(), PACKET_SIZE));
+                    memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
                     PChar->pushPacket(newPacket);
                 });
             });
@@ -209,7 +209,7 @@ namespace message
         case MSG_PT_INVITE:
         {
             uint32 id = RBUFL(extra->data(), 0);
-            uint16 targid = RBUFW(extra->data(), 4);
+            // uint16 targid = RBUFW(extra->data(), 4);
             uint8 inviteType = RBUFB(packet->data(), 0x0B);
             CCharEntity* PInvitee = zoneutils::GetChar(id);
 
@@ -245,7 +245,7 @@ namespace message
                 PInvitee->InvitePending.id = RBUFL(extra->data(), 6);
                 PInvitee->InvitePending.targid = RBUFW(extra->data(), 10);
                 CBasicPacket* newPacket = new CBasicPacket();
-                memcpy(*newPacket, packet->data(), dsp_min(packet->size(), PACKET_SIZE));
+                memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
                 PInvitee->pushPacket(newPacket);
             }
             break;
@@ -253,9 +253,9 @@ namespace message
         case MSG_PT_INV_RES:
         {
             uint32 inviterId = RBUFL(extra->data(), 0);
-            uint16 inviterTargid = RBUFW(extra->data(), 4);
+            // uint16 inviterTargid = RBUFW(extra->data(), 4);
             uint32 inviteeId = RBUFL(extra->data(), 6);
-            uint16 inviteeTargid = RBUFW(extra->data(), 10);
+            // uint16 inviteeTargid = RBUFW(extra->data(), 10);
             uint8 inviteAnswer = RBUFB(extra->data(), 12);
             CCharEntity* PInviter = zoneutils::GetChar(inviterId);
 
@@ -298,9 +298,9 @@ namespace message
                     {
                         if (PInviter->PParty == nullptr)
                         {
-                            CParty* PParty = new CParty(PInviter);
+                            // PInviter->PParty = new CParty(PInviter);
                         }
-                        if (PInviter->PParty->GetLeader() == PInviter)
+                        if (PInviter->PParty && PInviter->PParty->GetLeader() == PInviter)
                         {
                             ret = Sql_Query(SqlHandle, "SELECT * FROM accounts_parties WHERE partyid <> 0 AND \
                                                        															charid = %u;", inviteeId);
@@ -365,7 +365,7 @@ namespace message
             if (PChar)
             {
                 CBasicPacket* newPacket = new CBasicPacket();
-                memcpy(*newPacket, packet->data(), dsp_min(packet->size(), PACKET_SIZE));
+                memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
                 PChar->pushPacket(newPacket);
             }
             break;
