@@ -184,7 +184,7 @@ namespace message
                         if (PChar->id != RBUFL(extra->data(), 0))
                         {
                             CBasicPacket* newPacket = new CBasicPacket();
-                            memcpy(*newPacket, packet->data(), dsp_min(packet->size(), PACKET_SIZE));
+                            memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
 
                             PChar->pushPacket(newPacket);
                         }
