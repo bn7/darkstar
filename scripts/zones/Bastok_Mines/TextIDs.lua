@@ -8,6 +8,7 @@
            NOT_HAVE_ENOUGH_GIL =  6392; -- You do not have enough gil.
               KEYITEM_OBTAINED =  6390; -- Obtained key item: <<<Unknown Parameter (Type: 80) 1>>>
                  HOMEPOINT_SET =  6478; -- Home point set!
+         MOG_LOCKER_OFFSET = 6847; -- Your Mog Locker lease is valid until <timestamp>, kupo.
                ALCHEMY_SUPPORT =  7052; -- Your Multiple Choice (Parameter 1)[fishing/woodworking/smithing/goldsmithing/clothcraft/leatherworking/bonecraft/alchemy/cooking] skills went up
       GUILD_TERMINATE_CONTRACT =  7066; -- You have terminated your trading contract with the Multiple Choice (Parameter 1)[Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild and formed a new one with the Multiple Choice (Parameter 0)[Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild
             GUILD_NEW_CONTRACT =  7074; -- You have formed a new trading contract with the Multiple Choice (Parameter 0)[Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild
@@ -18,6 +19,9 @@
 
 -- Conquest System
 CONQUEST = 11110; --You've earned conquest points!
+
+-- Quest Dialogs
+TAMI_MY_HUSBAND = 10784; -- My husband's name is Zelman. You'll find him in the Zeruhn Mines. He's a miner. All right, then, off you go!
 
 -- Mission Dialogs
       YOU_ACCEPT_THE_MISSION =  6507; -- You have accepted the mission.
