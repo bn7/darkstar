@@ -66,7 +66,7 @@ function onTrigger(player)
             20840, 60000000, -- 119II
             -- 21758, 99999999, -- 119III
             -- Aeonic
-            20843, 99999999,  --  Chango 
+            20843, 999999999,  --  Chango 
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 2) then -- MNK
@@ -105,7 +105,7 @@ function onTrigger(player)
             20487, 60000000, -- 119II
             -- 20512, 99999999, -- 119III
             -- Aeonic
-            20515, 99999999, -- Godhands
+            20515, 999999999, -- Godhands
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 3) then -- WHM
@@ -144,7 +144,7 @@ function onTrigger(player)
             21065, 60000000, -- 119II
             -- 21079, 99999999, -- 119III
             -- Aeonic
-            21082, 99999999,  --   Tishtrya 
+            21082, 999999999,  --   Tishtrya 
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 4) then -- BLM
@@ -194,7 +194,7 @@ function onTrigger(player)
             21144, 60000000, -- 119II
             -- 22064, 99999999, -- 119III
             -- Aeonic
-            21147, 99999999,  --  Khatvanga 
+            21147, 999999999,  --  Khatvanga 
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 5) then -- RDM
@@ -244,7 +244,7 @@ function onTrigger(player)
             20654, 60000000, -- 119II
             -- 20689, 99999999, -- 119III
             -- Aeonic
-            20695, 99999999,  -- Sequence            
+            20695, 999999999,  -- Sequence            
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 6) then -- THF
@@ -283,7 +283,7 @@ function onTrigger(player)
             20564, 60000000, -- 119II
             -- 20587, 99999999, -- 119III
             -- Aeonic
-            20594, 99999999,  -- Aeneas 
+            20594, 999999999,  -- Aeneas 
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 7) then -- PLD
@@ -358,8 +358,8 @@ function onTrigger(player)
             11926, 8500000, -- 99
             -- 16199, 9990000, -- 99II
             -- Aeonic
-            20695, 99999999,  -- Sequence
-            26403, 99999999,  -- Srivatsa 
+            20695, 999999999,  -- Sequence
+            26403, 999999999,  -- Srivatsa 
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 8) then -- DRK
@@ -419,7 +419,7 @@ function onTrigger(player)
             20885, 60000000, -- 119II
             -- 21810, 99999999, -- 119III
             -- Aeonic
-            20890, 99999999,  --  Anguta
+            20890, 999999999,  --  Anguta
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 9) then -- BST
@@ -458,7 +458,7 @@ function onTrigger(player)
             20795, 60000000, -- 119II
             -- 21752, 99999999, -- 119III
             -- Aeonic
-            21753, 99999999,  --  Tri-edge
+            21753, 999999999,  --  Tri-edge
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 10) then -- BRD
@@ -511,9 +511,8 @@ function onTrigger(player)
             18571, 8500000, -- 99
             -- 18839, 9990000, -- 99II
             -- Aeonic
-            20594, 99999999,  -- Aeneas
-            -- Aeonic
-            21398, 99999999,  -- Marsyas
+            20594, 999999999,  -- Aeneas
+            21398, 999999999,  -- Marsyas
         }
 		showShop(player, STATIC, stock);
 		elseif(player:getMainJob() == 11) then -- RNG
@@ -573,9 +572,8 @@ function onTrigger(player)
             21265, 60000000, -- 119II
             -- 21269, 99999999, -- 119III
             -- Aeonic
-            22117, 99999999,  --  Fail-Not
-            -- Aeonic
-            21485, 99999999,  --  Fomalhaut            
+            22117, 999999999,  --  Fail-Not
+            21485, 999999999,  --  Fomalhaut            
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 12) then -- SAM
@@ -625,7 +623,7 @@ function onTrigger(player)
             21020, 60000000, -- 119II
             -- 21956, 99999999, -- 119III
             -- Aeonic
-            21025, 99999999,  --   Dojikiri Yasutsuna
+            21025, 999999999,  --   Dojikiri Yasutsuna
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 13) then -- NIN
@@ -664,7 +662,7 @@ function onTrigger(player)
             20975, 60000000, -- 119II
             -- 21908, 99999999, -- 119III
             -- Aeonic
-            20977, 99999999,  --  Heishi Shorinken                   
+            20977, 999999999,  --  Heishi Shorinken                   
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 14) then -- DRG
@@ -703,7 +701,7 @@ function onTrigger(player)
             20930, 60000000, -- 119II
             -- 21859, 99999999, -- 119III
             -- Aeonic
-            20935, 99999999,  --  Trishula
+            20935, 999999999,  --  Trishula
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 15) then -- SMN
@@ -742,7 +740,7 @@ function onTrigger(player)
             21144, 60000000, -- 119II
             -- 22064, 99999999, -- 119III
             -- Aeonic
-            21147, 99999999,  --  Khatvanga
+            21147, 999999999,  --  Khatvanga
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 16) then -- BLU
@@ -760,7 +758,7 @@ function onTrigger(player)
             20652, 60000000, -- 119II
             -- 20688, 99999999, -- 119III
             -- Aeonic
-            20695, 99999999,  -- Sequence
+            20695, 999999999,  -- Sequence
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 17) then -- COR
@@ -788,7 +786,7 @@ function onTrigger(player)
             21265, 60000000, -- 119II
             -- 21269, 99999999, -- 119III
             -- Aeonic
-            21485, 99999999,  --  Fomalhaut
+            21485, 999999999,  --  Fomalhaut
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 18) then -- PUP
@@ -821,7 +819,7 @@ function onTrigger(player)
             20564, 60000000, -- 119II
             -- 20587, 99999999, -- 119III
             -- Aeonic
-            20594, 99999999,  -- Aeneas
+            20594, 999999999,  -- Aeneas
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 20) then -- SCH
@@ -860,7 +858,7 @@ function onTrigger(player)
             21144, 60000000, -- 119II
             -- 22064, 99999999, -- 119III
             -- Aeonic
-            21147, 99999999,  --  Khatvanga
+            21147, 999999999,  --  Khatvanga
         }
 		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 21) then -- GEO
