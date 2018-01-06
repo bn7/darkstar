@@ -178,11 +178,10 @@ namespace message
         {
             zoneutils::ForEachZone([&packet, &extra](CZone* PZone)
             {
-                {
                     PZone->ForEachChar([&packet, &extra](CCharEntity* PChar)
                     {
                         // don't push to sender
-                        if (PChar->id != RBUFL(extra->data(), 0))
+                        if (PChar->id != ref<uint32>((uint8*)extra->data(), 0))
                         {
                             CBasicPacket* newPacket = new CBasicPacket();
                             memcpy(*newPacket, packet->data(), std::min<size_t>(packet->size(), PACKET_SIZE));
@@ -190,7 +189,6 @@ namespace message
                             PChar->pushPacket(newPacket);
                         }
                     });
-                }
             });
             break;
         }
