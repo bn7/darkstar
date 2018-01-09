@@ -162,3 +162,4 @@ log/DSP.leaks
 /*.iobj
 /*.ipdb
 /scripts/commands/jinx.lua
+/scripts/commands/keyfix623.lua

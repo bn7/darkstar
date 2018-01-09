@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------------
--- func: special.lua
+-- func: special
 -- auth: Tagban/Ninji
 -- desc: Individual shops for players
 ---------------------------------------------------------------------------------------------------
@@ -29,12 +29,6 @@ function onTrigger(player)
            20881, 1, -- Apoc
         }
     	showShop(player, STATIC, stock);
-	-- elseif(player:getName() == "") then -- chidowan
-        -- local stock =
-        -- {
-           -- 20881, 1, -- Apoc
-        -- }
-    	-- showShop(player, STATIC, stock);
 	elseif(player:getName() == "Guiness") then -- Guiness
         local stock =
         {
@@ -51,6 +45,12 @@ function onTrigger(player)
         local stock =
         {
            20646, 1, -- Excalibur
+        }
+    	showShop(player, STATIC, stock);
+    elseif(player:getName() == "Lilcrazys") then -- Lilcrazy
+        local stock =
+        {
+           1553, 1, -- Themis Orb
         }
     	showShop(player, STATIC, stock);
     else

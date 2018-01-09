@@ -23,29 +23,25 @@ function onGameIn(player, firstlogin, zoning)
             CharCreate(player);
         end
 	player:PrintToServer(string.format("The character %s has logged in...", player:getName()), 0x1C);
-		if (player:getMainLvl() >= 98) then
-		end
-		if (player:getMainLvl() <= 98) or (player:getGMLevel() >= 1) then
-			player:addStatusEffect(EFFECT_REFRESH,25,0,0);
-			player:addStatusEffect(EFFECT_REGEN,28,0,0);
-			player:addStatusEffect(EFFECT_REGAIN,15,1,0);
-			player:addStatusEffect(EFFECT_HASTE,60,1,0);
-			player:capAllSkills();
-		end
+		    player:addStatusEffect(EFFECT_REFRESH,25,0,0);
+            player:addStatusEffect(EFFECT_HASTE,60,1,0);
+            player:capAllSkills();
+        if (player:getMainLvl() <= 98) or (player:getGMLevel() >= 1) then
+            player:addStatusEffect(EFFECT_REGEN,28,0,0);
+            player:addStatusEffect(EFFECT_REGAIN,15,1,0);
+        end
     end
 
 
     if (zoning) then -- Things checked ONLY during zone in go here.
         -- Nothing here yet :P
-		if (player:getMainLvl() >= 98) then
-		end
-		if (player:getMainLvl() <= 98) or (player:getGMLevel() >= 1) then
-			player:addStatusEffect(EFFECT_REFRESH,25,0,0);
-			player:addStatusEffect(EFFECT_REGEN,28,0,0);
-			player:addStatusEffect(EFFECT_REGAIN,15,1,0);
-			player:addStatusEffect(EFFECT_HASTE,60,1,0);
-			player:capAllSkills();
-		end
+            player:addStatusEffect(EFFECT_HASTE,60,1,0);
+            player:addStatusEffect(EFFECT_REFRESH,25,0,0);
+            player:capAllSkills();
+        if (player:getMainLvl() <= 98) or (player:getGMLevel() >= 1) then
+            player:addStatusEffect(EFFECT_REGEN,28,0,0);
+            player:addStatusEffect(EFFECT_REGAIN,15,1,0);
+        end
     end
 
     -- Things checked BOTH during logon AND zone in below this line.
@@ -282,7 +278,7 @@ function CharCreate(player)
         default = function (x) end,
     }
 
-   ----- settings.lua Perks -----  -- SET JOB To 6,20 instead of 6,22 to avoid GEO AND RUN -- 
+   ----- settings.lua Perks -----  -- SET JOB To 6,20 instead of 6,22 to avoid GEO AND RUN --
     if (ADVANCED_JOB_LEVEL == 0) then
        for i = 6,20 do
           player:unlockJob(i);
@@ -351,9 +347,9 @@ function CharCreate(player)
 end;
 
 function onPlayerLevelUp(player)
-	player:capAllSkills();
+    player:capAllSkills();
 end
 
 function onPlayerLevelDown(player)
-	player:capAllSkills();
+    player:capAllSkills();
 end

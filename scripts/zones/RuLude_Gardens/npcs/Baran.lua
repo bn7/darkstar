@@ -157,7 +157,7 @@ end;
 
 function onTrigger(player,npc)
 --    player:startEvent(0x0096);
- player:PrintToPlayer("Baran : Trade me your Weapons if you dare!", 0xD); 
+ player:PrintToPlayer("Baran : Trade me your Weapons if you dare!", 0xD);
  end;
 
 -----------------------------------

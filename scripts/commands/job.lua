@@ -718,7 +718,7 @@ function onTrigger(player)
 			11114,325000, -- Sylvan Glovelettes+2
 			11134,325000, -- Sylvan Bragues+2
 			11154,325000, -- Sylvan Bottillons+2
-                        -- AF3           
+            -- AF3           
             -- 23385,10000000, -- 
             -- 23452,10000000, -- 
             -- 23519,10000000, -- 
@@ -1148,65 +1148,64 @@ function onTrigger(player)
         }
 		showShop(player, STATIC, stock);
 	elseif(player:getMainJob() == 18) then -- PUP
-        -- local stock =
-        -- {
-			-- AF1
-		-- 12005,35000, -- Puppetry Torque
-		-- 17858,35000, -- Turbo Animator
-		-- 15267,45000, -- Puppetry Taj
-		-- 14523,45000, -- Puppetry Tobe
-		-- 14930,45000, -- Puppetry Dastanas
-		-- 15602,45000, -- Puppetry Churidars
-		-- 15686,45000, -- Puppetry Babouches
+        local stock =
+        {
+		-- AF1
+		12005,35000, -- Puppetry Torque
+		17858,35000, -- Turbo Animator
+		15267,45000, -- Puppetry Taj
+		14523,45000, -- Puppetry Tobe
+		14930,45000, -- Puppetry Dastanas
+		15602,45000, -- Puppetry Churidars
+		15686,45000, -- Puppetry Babouches
 		-- AF+1
-		-- 11470,75000, -- Puppetry Taj+1
-		-- 11297,75000, -- Puppetry Tobe+1
-		-- 15030,75000, -- Puppetry Dastanas+1
-		-- 16351,75000, -- Puppetry Churidars+1
-		-- 11387,75000, -- Puppetry Babouches+1
+		11470,75000, -- Puppetry Taj+1
+		11297,75000, -- Puppetry Tobe+1
+		15030,75000, -- Puppetry Dastanas+1
+		16351,75000, -- Puppetry Churidars+1
+		11387,75000, -- Puppetry Babouches+1
 		-- Relic
-		-- 16245,85000, -- Pantin Cape
-		-- 11471,125000, -- Pantin Taj
-		-- 11298,125000, -- Pantin Tobe
-		-- 15031,125000, -- Pantin Dastanas
-		-- 16352,125000, -- Pantin Churidars
-		-- 11388,125000, -- Pantin Babouches
+		16245,85000, -- Pantin Cape
+		11471,125000, -- Pantin Taj
+		11298,125000, -- Pantin Tobe
+		15031,125000, -- Pantin Dastanas
+		16352,125000, -- Pantin Churidars
+		11388,125000, -- Pantin Babouches
 		-- Relic +1
-		-- 11472,185000, -- Pantin Taj+1
-		-- 11299,185000, -- Pantin Tobe+1
-		-- 15032,185000, -- Pantin Dastanas+1
-		-- 16353,185000, -- Pantin Churidars+1
-		-- 11389,185000, -- Pantin Babouches+1
+		11472,185000, -- Pantin Taj+1
+		11299,185000, -- Pantin Tobe+1
+		15032,185000, -- Pantin Dastanas+1
+		16353,185000, -- Pantin Churidars+1
+		11389,185000, -- Pantin Babouches+1
 		-- Relic +2
-		-- 10667,235000, -- Pantin Taj+2
-		-- 10687,235000, -- Pantin Tobe+2
-		-- 10707,235000, -- Pantin Dastanas+2
-		-- 10727,235000, -- Pantin Churidars+2
-		-- 10747,235000, -- Pantin Babouches+2
+		10667,235000, -- Pantin Taj+2
+		10687,235000, -- Pantin Tobe+2
+		10707,235000, -- Pantin Dastanas+2
+		10727,235000, -- Pantin Churidars+2
+		10747,235000, -- Pantin Babouches+2
 		-- Empyrean
-		-- 11602,125000, -- Cirque Necklace
-		-- 11751,125000, -- Cirque Sash
-		-- 11720,125000, -- Cirque Earring
-		-- 12025,185000, -- Cirque Cappello
-		-- 12045,185000, -- Cirque Farsetto
-		-- 12065,185000, -- Cirque Guanti
-		-- 12085,185000, -- Cirque Pantaloni
-		-- 12105,185000, -- Cirque Scarpe
+		11602,125000, -- Cirque Necklace
+		11751,125000, -- Cirque Sash
+		11720,125000, -- Cirque Earring
+		12025,185000, -- Cirque Cappello
+		12045,185000, -- Cirque Farsetto
+		12065,185000, -- Cirque Guanti
+		12085,185000, -- Cirque Pantaloni
+		12105,185000, -- Cirque Scarpe
 		-- Empyrean +1
-		-- 11181,235000, -- Cirque Cappello+1
-		-- 11201,235000, -- Cirque Farsetto+1
-		-- 11221,235000, -- Cirque Guanti+1
-		-- 11241,235000, -- Cirque Pantaloni+1
-		-- 11261,235000, -- Cirque Scarpe+1
+		11181,235000, -- Cirque Cappello+1
+		11201,235000, -- Cirque Farsetto+1
+		11221,235000, -- Cirque Guanti+1
+		11241,235000, -- Cirque Pantaloni+1
+		11261,235000, -- Cirque Scarpe+1
 		-- Empyrean +2
-		-- 11081,325000, -- Cirque Cappello+2
-		-- 11101,325000, -- Cirque Farsetto+2
-		-- 11121,325000, -- Cirque Guanti+2
-		-- 11141,325000, -- Cirque Pantaloni+2
-		-- 11161,325000, -- Cirque Scarpe+2	
-        -- }
-		-- showShop(player, STATIC, stock);
-	player:PrintToPlayer("PUP is Broken, don't get banned!!!");
+		11081,325000, -- Cirque Cappello+2
+		11101,325000, -- Cirque Farsetto+2
+		11121,325000, -- Cirque Guanti+2
+		11141,325000, -- Cirque Pantaloni+2
+		11161,325000, -- Cirque Scarpe+2
+        }
+		showShop(player, STATIC, stock);
     elseif(player:getMainJob() == 19) then -- DNC
         local stock =
         {

@@ -6,11 +6,11 @@ Welcome to BNETcc a Darkstar Project emulated FFXI Private Server.
 
 Contact BNETcc
 ========
-SLACK and the FORUMS are the best ways to get ahold of staff or get fast help.
+Discord and the FORUMS are the best ways to get a hold of staff or get fast help.
 
 **Forums:** http://bnet.cc/
 
-**Slack:** http://www.bnet.cc/slack.php
+**Discord:** https://discord.gg/0xMpv9juTQeT56sy
 
 Contact Darkstar
 ========
@@ -18,8 +18,7 @@ Contact Darkstar
 
 **Forums:** https://forums.dspt.info/index.php
 
-**Discord:**
-https://discord.gg/4dgAzfC
+**Discord:** https://discord.gg/4dgAzfC
 
 Bug Reports
 ========
