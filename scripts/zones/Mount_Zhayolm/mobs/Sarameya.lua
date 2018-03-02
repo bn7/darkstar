@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Mount Zhayolm
 --  MOB: Sarameya
+--  ZNM: Sarameya
 -- !pos 322 -14 -581 61
 -- Spawned with Buffalo Corpse: @additem 2583
 -- Wiki: http://ffxiclopedia.wikia.com/wiki/Sarameya
@@ -12,8 +13,24 @@ require("scripts/globals/msg");
 -----------------------------------
 
 function onMobInitialize(mob)
+    -- setMobMod
+    mob:setMobMod(MOBMOD_2HOUR_MULTI, 1);
+    mob:setMobMod(MOBMOD_DRAW_IN, 1);
     mob:setMobMod(MOBMOD_GA_CHANCE, 50);
     mob:setMobMod(MOBMOD_ADD_EFFECT, mob:getShortID());
+
+    -- setMod
+    mob:setMod(MOD_REGAIN,15);
+    mob:setMod(MOD_UFASTCAST, 45);
+
+    -- addMod
+    mob:addMod(MOD_ACC,150);
+    mob:addMod(MOD_DOUBLE_ATTACK,10)
+    mob:setMod(MOD_MACC,950);
+    mob:setMod(MOD_MATT,80);
+    mob:addMod(MOD_MDEF, 50);
+    mob:addMod(MOD_DEF, 50);
+    mob:addMod(MOD_ATT, 50);
 end;
 
 function onMobSpawn(mob)
@@ -22,10 +39,17 @@ function onMobSpawn(mob)
     mob:addMod(MOD_SILENCERES, 20);
     mob:addMod(MOD_GRAVITYRES, 20);
     mob:addMod(MOD_LULLABYRES, 30);
+    --[[
     mob:setMobMod(MOBMOD_RAGE, 3600); -- 60 minute rage timer
+    ]]
 end;
 
 function onMobRoam(mob)
+end;
+
+function onMobDisEngage(mob, target)
+    mob:setLocalVar("RAGED", 0);
+    mob:delStatusEffect(EFFECT_RAGE);
 end;
 
 function onMobFight(mob, target)
@@ -68,9 +92,18 @@ function onMobFight(mob, target)
     if (mob:hasStatusEffect(EFFECT_BLAZE_SPIKES) == true) then
         mob:setMod(MOD_REGEN, math.floor(mob:getMaxHP()/100));
     else
+        --[[
         if (mob:getMod(MOD_REGEN) > 0) then
             mob:setMod(MOD_REGEN, 0);
+        ]]
+        if (mob:getMod(MOD_REGEN) > 10) then
+            mob:setMod(MOD_REGEN, 10);
         end
+    end
+
+    if (mob:getBattleTime() > 3600 and mob:getLocalVar("RAGED") == 0) then
+        mob:addStatusEffectEx(EFFECT_RAGE,0,1,0,0);
+        mob:setLocalVar("RAGED", 1);
     end
 end;
 
@@ -94,4 +127,5 @@ function onAdditionalEffect(mob, player)
 end;
 
 function onMobDeath(mob, player, isKiller)
+    mob:setLocalVar("RAGED", 0);
 end;

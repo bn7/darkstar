@@ -7,9 +7,28 @@
 package.loaded["scripts/zones/Mhaura/TextIDs"] = nil;
 -----------------------------------
 require("scripts/zones/Mhaura/TextIDs");
+require("scripts/globals/teleports");
+require("scripts/globals/keyitems");
+require("scripts/globals/settings");
+require("scripts/globals/msg");
 -----------------------------------
 
 function onTrade(player,npc,trade)
+    if (TRAVEL_SKIP >= 1) then
+        if (trade:getGil() >= TRAVEL_SKIP and trade:getItemCount() == 1) then
+            player:PrintToPlayer(string.format("eye's the %d gil.. ", TRAVEL_SKIP), chatType.EMOTION, npc:getName());
+            player:PrintToPlayer("Well..I guess I can let you aboard the express freight Vessel.. ", chatType.SAY, npc:getName());
+            if (player:hasKeyItem(BOARDING_PERMIT) and (1152 - ((os.time() - 1009810802)%1152) >= 576)) then
+                player:delGil(TRAVEL_SKIP);
+                -- player:setPos(-11,2,-142,192,50);
+                player:addStatusEffectEx(EFFECT_COMMUTE,0,COMMUTE.SHIP_TO_WHITEGATE_M,0,2);
+            else
+                player:delGil(TRAVEL_SKIP);
+                -- player:setPos(22,-2,-47,194,248);
+                player:addStatusEffectEx(EFFECT_COMMUTE,0,COMMUTE.SHIP_TO_SELBINA,0,2);
+            end
+        end
+    end
 end;
 
 function onTrigger(player,npc)

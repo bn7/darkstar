@@ -150,7 +150,7 @@ namespace luautils
 
         lua_register(LuaHandle, "getAbility", luautils::getAbility);
         lua_register(LuaHandle, "getSpell", luautils::getSpell);
-
+        lua_register(LuaHandle, "underscore2space", luautils::underscore2space);
         Lunar<CLuaAbility>::Register(LuaHandle);
         Lunar<CLuaAction>::Register(LuaHandle);
         Lunar<CLuaBaseEntity>::Register(LuaHandle);
@@ -1573,7 +1573,7 @@ namespace luautils
 
         if (!loadResult)
         {
-            ShowError("luautils::onEventFinish: undefined procedure onEventFinish\n");
+            ShowError("luautils::onEventFinish (%s): undefined procedure onEventFinish\n", PChar->m_event.Script.c_str());
             return -1;
         }
 
@@ -2919,7 +2919,7 @@ namespace luautils
 
             if (lua_pcall(LuaHandle, 4, 0, 0))
             {
-                ShowError("luautils::onMobWeaponSkill: %s\n", lua_tostring(LuaHandle, -1));
+                ShowError("luautils::onMobWeaponSkill[Skill ID: %u]: %s\n", PMobSkill->getID(), lua_tostring(LuaHandle, -1));
                 lua_pop(LuaHandle, 1);
             }
         }
@@ -2939,7 +2939,7 @@ namespace luautils
 
         if (lua_pcall(LuaHandle, 3, 1, 0))
         {
-            ShowError("luautils::onMobWeaponSkill: %s\n", lua_tostring(LuaHandle, -1));
+            ShowError("luautils::onMobWeaponSkill[Skill ID: %u]: %s\n", PMobSkill->getID(), lua_tostring(LuaHandle, -1));
             lua_pop(LuaHandle, 1);
             return 0;
         }
@@ -4152,6 +4152,27 @@ namespace luautils
         return searchLuaFileForFunction(PChar->m_event.Script) ||
             (PChar->PInstance && searchLuaFileForFunction(std::string("scripts/zones/") + (const char*)PChar->loc.zone->GetName() + "/instances/" + (const char*)PChar->PInstance->GetName())) ||
             (searchLuaFileForFunction(std::string("scripts/zones/") + (const char*)PChar->loc.zone->GetName() + "/Zone.lua"));
+    }
+
+    inline int32 underscore2space(lua_State* L)
+    {
+        if (lua_isnil(L, 1) || !lua_isstring(L, 1))
+        {
+            return 0;
+        }
+
+        string_t thisString = lua_tostring(L, 1);
+
+        // Strip out the _ in strings, replace with spaces
+        size_t string_pos = thisString.find("_");
+        while (string_pos < thisString.size())
+        {
+            thisString.replace(string_pos, 1, " ");
+            string_pos = thisString.find("_");
+        }
+
+        lua_pushstring(L, thisString.c_str());
+        return 1;
     }
 
 }; // namespace luautils

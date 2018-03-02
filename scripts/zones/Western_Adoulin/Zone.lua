@@ -2,7 +2,7 @@
 --
 -- Zone: Western Adoulin
 -- @zone 256
---
+-- 
 -----------------------------------
 require("scripts/globals/settings");
 package.loaded["scripts/zones/Western_Adoulin/TextIDs"] = nil;
@@ -16,7 +16,16 @@ end;
 function onZoneIn(player,prevZone)
     local cs = -1;
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    player:setVar("HpTeleportMask1a", 0);
+    player:setVar("HpTeleportMask1b", 0);
+    player:setVar("HpTeleportMask2a", 0);
+    player:setVar("HpTeleportMask2b", 0);
+    player:setVar("HpTeleportMask3a", 0);
+    player:setVar("HpTeleportMask3b", 0);
+    player:setVar("HpTeleportMask4a", 0);
+    player:setVar("HpTeleportMask4b", 0);
+
+    if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
         player:setPos(-142, 4, -18, 4);
     end
 

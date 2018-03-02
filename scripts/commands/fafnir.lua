@@ -7,6 +7,7 @@ cmdprops =
     permission = 0,
     parameters = "iiii"
 };
+
 function onTrigger(player, x, y, z, zone)
-		player:setPos('63', '6', '24', '221', '154');
-end
+    player:setPos('63', '6', '24', '221', '154');
+end;

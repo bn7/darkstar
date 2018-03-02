@@ -11,6 +11,9 @@ require("scripts/globals/conquest");
 
 function onInitialize(zone)
     UpdateTreasureSpawnPoint(UGGALEPIH_TREASURE_COFFER);
+
+    -- Colkhab
+    GetMobByID(17429492):setRespawnTime(math.random(900,10800));
 end;
 
 function onConquestUpdate(zone, updatetype)

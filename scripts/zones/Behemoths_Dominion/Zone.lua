@@ -12,9 +12,31 @@ require("scripts/globals/zone");
 -----------------------------------
 
 function onInitialize(zone)
+    --[[
     if (LandKingSystem_NQ ~= 1) then
         UpdateNMSpawnPoint(BEHEMOTH);
         GetMobByID(BEHEMOTH):setRespawnTime(math.random(900, 10800));
+    end
+    ]]
+    -- 0 = timed spawn, 1 = force pop only, 2 = BOTH
+    if (LandKingSystem_HQ ~= 1
+    and GetServerVariable("[POP]King_Behemoth") <= os.time(t)
+    and GetServerVariable("[PH]King_Behemoth") > 6) then
+        DisallowRespawn(17297441, false);
+        UpdateNMSpawnPoint(17297441);
+        GetMobByID(17297441):setRespawnTime(900, 10800); -- King Behemoth
+        if (LandKingSystem_NQ == 0) then
+            DisallowRespawn(17297440, true);
+        end
+    else
+        if (LandKingSystem_NQ ~= 1) then
+            DisallowRespawn(17297440, false);
+            UpdateNMSpawnPoint(17297440);
+            GetMobByID(17297440):setRespawnTime(900, 10800); -- Behemoth
+            if (LandKingSystem_HQ == 0) then
+                DisallowRespawn(17297441, true);
+            end
+        end
     end
 end;
 

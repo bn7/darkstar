@@ -3,8 +3,20 @@
 --  MOB: Kf'ghrah BLM
 -----------------------------------
 require("scripts/globals/status");
-require("scripts/globals/magic"); -- no spells are currently set due to lack of info
+require("scripts/globals/magic");
+
 -----------------------------------
+
+function onMobInitialize(mob)
+    -- addMod
+    mob:addMod(MOD_REFRESH, 250);
+    mob:addMod(MOD_UFASTCAST, 66);
+    mob:addMod(MOD_MACC,120);
+    mob:addMod(MOD_MATT,120);
+    mob:addMod(MOD_MDEF,50);
+    mob:addMod(MOD_DEF,50);
+    mob:addMod(MOD_ATT,75);
+end;
 
 function onMobSpawn(mob)
     -- Set core Skin and mob elemental bonus

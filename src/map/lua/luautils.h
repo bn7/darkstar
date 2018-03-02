@@ -274,6 +274,10 @@ namespace luautils
 
     bool OnChocoboDig(CCharEntity* PChar, bool pre);                           // chocobo digging, pre = check
     bool LoadEventScript(CCharEntity* PChar, const char* functionName);    // Utility method: checks for and loads a lua function for events
+
+    // Custom
+    int32 underscore2space(lua_State* L); // Replaces underscores in given string with spaces
+
 };
 
 #endif //- _LUAUTILS_H -

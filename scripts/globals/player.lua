@@ -22,16 +22,73 @@ function onGameIn(player, firstlogin, zoning)
         if (firstlogin) then
             CharCreate(player);
         end
-	player:PrintToServer(string.format("The character %s has logged in...", player:getName()), 0x1C);
+
+        --------------------
+        -- Begin Custom
+
+		player:PrintToServer(string.format("The character %s has logged in...", player:getName()), 0x1C);
 		    player:addStatusEffect(EFFECT_REFRESH,25,0,0);
             player:addStatusEffect(EFFECT_HASTE,60,1,0);
             player:capAllSkills();
         if (player:getMainLvl() <= 98) or (player:getGMLevel() >= 1) then
             player:addStatusEffect(EFFECT_REGEN,28,0,0);
             player:addStatusEffect(EFFECT_REGAIN,15,1,0);
-        end
-    end
 
+
+        -- Check if import char
+        if (player:getVar("FreshlyImported") == 1) then
+            -- Make sure LS exists and player has at least 1 free space
+            if (player:getFreeSlotsCount() > 0) then
+                player:addLSpearl("BNETcc"); -- Give an LS pearl to all new players
+                player:setVar("FreshlyImported", 0);
+            end
+        end
+
+        -- Update free maps
+        if (ALL_MAPS == 1) then
+            for mapKIs = 385,447 do
+                if (player:hasKeyItem(mapKIs) == false) then
+                    player:addKeyItem(mapKIs);
+                end
+            end
+            for mapKIs = 1856,1917 do
+                if (player:hasKeyItem(mapKIs) == false) then
+                    player:addKeyItem(mapKIs);
+                end
+            end
+            for mapKIs = 2302,2305 do
+                if (player:hasKeyItem(mapKIs) == false) then
+                    player:addKeyItem(mapKIs);
+                end
+            end
+            for mapKIs = 2307,2309 do
+                if (player:hasKeyItem(mapKIs) == false) then
+                    player:addKeyItem(mapKIs);
+                end
+            end
+        end
+
+        -- Dailies check..
+        local TodaysDate = os.date("*t");
+        local month = TodaysDate.month;
+        if (month < 10) then month = tostring("0"..month); end
+        local day = TodaysDate.day;
+        if (day < 10) then day = tostring("0"..day); end
+        if (GIVE_DAILY_TALLY > 0) then
+            if (player:getVar("DailyTallyDate") < (TodaysDate.year .. month .. day)) then
+                player:setVar("DailyTallyDate", TodaysDate.year .. month .. day);
+                player:setVar("DailyTallyTotal", player:getVar("DailyTallyTotal")+GIVE_DAILY_TALLY);
+            end
+        end
+        if (GIVE_DAILY_POINTS > 0) then
+            if (player:getVar("DailyPointsDate") < (TodaysDate.year .. month .. day)) then
+                player:setVar("DailyPointsDate", TodaysDate.year .. month .. day);
+                player:setVar("DailyPointsTotal", player:getVar("DailyPointsTotal")+GIVE_DAILY_TALLY);
+            end
+        end
+        -- End Custom
+        --------------------
+    end
 
     if (zoning) then -- Things checked ONLY during zone in go here.
         -- Nothing here yet :P
@@ -41,6 +98,15 @@ function onGameIn(player, firstlogin, zoning)
         if (player:getMainLvl() <= 98) or (player:getGMLevel() >= 1) then
             player:addStatusEffect(EFFECT_REGEN,28,0,0);
             player:addStatusEffect(EFFECT_REGAIN,15,1,0);
+        -- Torture SoftBanned player
+        if (player:getVar("SoftBan") > 0) then
+            local magnitude = 1+player:getVar("SoftBan");
+            player:setMod(MOD_STEALTH, -20 *magnitude);
+            player:setMod(MOD_SPELLINTERRUPT, -20 *magnitude);
+            player:setMod(MOD_ENEMYCRITRATE, 20 *magnitude);
+            player:setMod(MOD_CRITHITRATE, -20 *magnitude);
+            player:setMod(MOD_MOVE, -magnitude *2);
+            player:setMod(MOD_TREASURE_HUNTER, -magnitude);
         end
     end
 
@@ -61,6 +127,7 @@ function onGameIn(player, firstlogin, zoning)
         player:addStatusEffect(EFFECT_REGAIN,300,0,0);
         player:addStatusEffect(EFFECT_REFRESH,99,0,0);
         player:addStatusEffect(EFFECT_REGEN,99,0,0);
+        -- player:addStatusEffectEx(EFFECT_SJCAP_BOOST,EFFECT_TRANSCENDENCY,1,0,0)
 
         -- Add bonus mods to the player..
         player:addMod(MOD_RACC,2500);
@@ -278,7 +345,7 @@ function CharCreate(player)
         default = function (x) end,
     }
 
-   ----- settings.lua Perks -----  -- SET JOB To 6,20 instead of 6,22 to avoid GEO AND RUN --
+   ----- settings.lua Perks -----
     if (ADVANCED_JOB_LEVEL == 0) then
        for i = 6,20 do
           player:unlockJob(i);
@@ -342,8 +409,13 @@ function CharCreate(player)
     player:addTitle(NEW_ADVENTURER);
 
     -- Needs Moghouse Intro
-    player:setVar("MoghouseExplication",0);
+    player:setVar("MoghouseExplication",1);
 
+    -- Start of custom stuffs for new players
+    if (player:getFreeSlotsCount() > 0) then -- Make sure LS exists and player has at least 1 free space
+        player:addLSpearl("BNETcc"); -- Give an LS pearl to all new players
+    end
+    -- End of custom stuffs for new players
 end;
 
 function onPlayerLevelUp(player)

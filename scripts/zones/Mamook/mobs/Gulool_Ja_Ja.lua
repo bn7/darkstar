@@ -1,15 +1,31 @@
 -----------------------------------
 -- Area: Mamook
---  MOB: Gulool Ja Ja
+--  NM:  Gulool Ja Ja
 -----------------------------------
 require("scripts/globals/titles");
 require("scripts/globals/status");
 require("scripts/zones/Mamook/MobIDs");
 mixins = {require("scripts/mixins/job_special")};
+require("scripts/globals/custom_trials");
 
 -----------------------------------
 
+function onMobInitialize(mob)
+    -- addMod
+    mob:addMod(MOD_MATT,75);
+    mob:addMod(MOD_MACC,500);
+    mob:addMod(MOD_ACC,250);
+    mob:addMod(MOD_ATT,50);
+    mob:addMod(MOD_DEF,50);
+end;
+
+-----------------------------------
+-- onMobSpawn Action
+-----------------------------------
+
 function onMobSpawn(mob)
+    -- setMod
+    mob:setMod(MOD_REGAIN,33);
     mob:setMod(MOD_DOUBLE_ATTACK, 20);
     mob:setMobMod(MOBMOD_DRAW_IN, 2);
 end;
@@ -52,8 +68,33 @@ end;
 function onMobDeath(mob, player, isKiller)
     player:addTitle(SHINING_SCALE_RIFLER);
     for i = 1,4 do DespawnMob(GULOOL_JA_JA + i) end
+
+    ------------------------------------
+    -- Begin Custom Legion Code
+    ------------------------------------
+
+    if (isKiller == true) then
+        local RND = math.random(1,1000);
+        if (RND <= 100) then -- 10%
+            player:addTreasure(10955, mob); -- Cuilinarian's Torque
+        elseif (RND <= 300) then -- 20%
+            player:addTreasure(20861, mob); -- Qalgwer
+        else
+            player:addTreasure(4023, mob); -- Snowsteel Ore
+            player:addTreasure(4023, mob); -- Snowsteel Ore
+        end
+    end
+
+
+    -- Custom Trial Check
+    cTrialProgress(player, 3, "mythic");
+
+    ------------------------------------
+    -- End Custom Legion Code
+    ------------------------------------
 end;
 
 function onMobDespawn(mob)
     for i = 1,4 do DespawnMob(GULOOL_JA_JA + i) end
+    mob:setRespawnTime(math.random(75600,86400));   -- 21 to 24 hours
 end;

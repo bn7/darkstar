@@ -30,7 +30,7 @@ JOBS =
     ["SMN"] = 15,
     ["BLU"] = 16,
     ["COR"] = 17,
-    ["XXX"] = 18, -- PUP
+    ["PUP"] = 18,
     ["DNC"] = 19,
     ["SCH"] = 20,
     ["GEO"] = 21,
@@ -770,6 +770,22 @@ EFFECT_DYNAMIS                  = 800
 EFFECT_MEDITATE                 = 801 -- Dummy effect for SAM Meditate JA
 -- EFFECT_PLACEHOLDER              = 802 -- Description
 -- 802-1022
+EFFECT_ATMA_2                   = 802 -- Dummy for 2nd ATMA effect
+EFFECT_ATMA_3                   = 803 -- Dummy for 3rd ATMA effect
+-- 804-1013
+------------------------------------------------
+-- Start of BNETcc custom section
+EFFECT_COMMUTE                  = 1014 -- Transports player after a slight delay
+EFFECT_CURSE_SPIKES             = 1015 -- Curse Spikes
+EFFECT_CUSTOM_ENSPELL           = 1016 -- Used by mobs with dispellable custom Enspells
+-- EFFECT_PLACEHOLDER              = 1017
+-- EFFECT_PLACEHOLDER              = 1018
+EFFECT_DARK_SPIKES              = 1019
+EFFECT_SJCAP_BOOST              = 1020
+EFFECT_RAGE                     = 1021 -- NM CRUSH PUNY PLAYER WHO TAKE TOO LONG!
+EFFECT_LEGION                   = 1022 -- @regen
+-- End of LegionXI Custom Section
+------------------------------------------------
 -- EFFECT_PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 
 ----------------------------------
@@ -1394,6 +1410,19 @@ MOD_CURE2MP_PERCENT         = 860 -- Converts % of "Cure" amount to MP
 -- SPARE = 869 -- stuff
 -- SPARE = 870 -- stuff
 -- SPARE = 870 -- stuff
+
+
+-- Start of BNETcc Custom MOD
+MOD_ACCP              = 3964 -- DSP removed these, I am
+MOD_EVAP              = 3965 -- placing them here in case BNETcc
+MOD_RACCP             = 3967 -- used them for custom things.. ~Teo
+-- MOD_PLACEHOLDER       = 4000 -- placeholder
+-- 4001-4091 available to use
+MOD_TERRORRES                 = 4092 -- Resist Terror
+MOD_DOOMRES                   = 4093 -- Resist Doom
+MOD_ITEM_LEVEL                = 4094 -- Apply to item (via augment), not player: Set ItemLevel of item to this Mod Value
+MOD_REQUIRED_LV               = 4095 -- Apply to item (via augment), not player: Increase the items LV requirement by this much
+-- End of BNETcc Custom MOD
 
 ------------------------------------
 -- Merit Definitions

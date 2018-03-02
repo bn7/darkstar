@@ -48,6 +48,13 @@ function onTrigger(player,npc)
         player:startEvent(8004);
     elseif (player:getVar("LegionStatus") == 1) then
         player:startEvent(8005, 0, TITLE, MAXIMUS, LP, MINIMUS);
+    -- Begin LegionDS custom content
+    -- elseif (player:getVar("LegionStatus") == 1 and TITLE == 31) then
+        -- spoof message here
+        -- player:setVar("LegionStatus",2)
+    -- elseif (player:getVar("LegionStatus") == 2) then
+        -- player:startEvent(8005, 0, TITLE, MAXIMUS, LP, MINIMUS);
+    -- End LegionDS custom content
     end
 end;
 
@@ -69,9 +76,10 @@ function onEventFinish(player,csid,option)
     elseif (csid == 8005) then
         if (option == 0x0001000A) then
             if (GIL >= 360000) then
-                player:addKeyItem(LEGION_TOME_PAGE_MAXIMUS);
-                player:delGil(360000);
-                player:messageSpecial(KEYITEM_OBTAINED, LEGION_TOME_PAGE_MAXIMUS)
+                player:PrintToPlayer("36 member alliance battle currently not implemented.");
+                -- player:addKeyItem(LEGION_TOME_PAGE_MAXIMUS);
+                -- player:delGil(360000);
+                -- player:messageSpecial(KEYITEM_OBTAINED, LEGION_TOME_PAGE_MAXIMUS)
             else
                 player:messageSpecial(NOT_ENOUGH_GIL);
             end

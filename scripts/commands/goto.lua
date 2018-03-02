@@ -22,8 +22,7 @@ function onTrigger(player, target, forceZone)
         return;
     end
     local targ = GetPlayerByName( target );
-	local gmlvl = player:getGMLevel();
-    if (targ == nil or gmlvl < 1) then
+    if (targ == nil) then
         if not player:gotoPlayer( target ) then
             error(player, string.format( "Player named '%s' not found!", target ) );
         end

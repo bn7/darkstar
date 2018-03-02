@@ -715,12 +715,27 @@ enum EFFECT
     EFFECT_SKILLCHAIN               = 799,
     EFFECT_DYNAMIS                  = 800,
     EFFECT_MEDITATE                 = 801, // Dummy effect for SAM Meditate JA
-    // EFFECT_PLACEHOLDER              = 802 // Description
-    // 802-1022
+    EFFECT_ATMA_2                   = 802, // Dummy for 2nd ATMA effect
+    EFFECT_ATMA_3                   = 803, // Dummy for 3rd ATMA effect
+    // EFFECT_PLACEHOLDER              = 804, // Description
+    // 804-1013
+//==========================================================//
+    // Start of LegionXI custom section
+    EFFECT_COMMUTE                  = 1014, // Transports player after a slight delay
+    EFFECT_CURSE_SPIKES             = 1015, // Curse Spikes
+    EFFECT_CUSTOM_ENSPELL           = 1016, // Description
+    // EFFECT_PLACEHOLDER              = 1017,
+    // EFFECT_PLACEHOLDER              = 1018,
+    EFFECT_DARK_SPIKES              = 1019,
+    EFFECT_SJCAP_BOOST              = 1020,
+    EFFECT_RAGE                     = 1021, // NM CRUSH PUNY PLAYER WHO TAKE TOO LONG!
+    EFFECT_LEGION                   = 1022, // @regen
+    // End of LegionXI Custom Section
+//==========================================================//
     // EFFECT_PLACEHOLDER             = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };
 
-#define MAX_EFFECTID    802  // 768 real + 32 custom
+#define MAX_EFFECTID    1024  // 768 real + 32 custom
 
 /************************************************************************
 *                                                                       *

@@ -13,9 +13,31 @@ require("scripts/globals/zone");
 -----------------------------------
 
 function onInitialize(zone)
+    --[[
     if (LandKingSystem_NQ ~= 1) then
         UpdateNMSpawnPoint(ADAMANTOISE);
         GetMobByID(ADAMANTOISE):setRespawnTime(math.random(900, 10800));
+    end
+    ]]
+    -- 0 = timed spawn, 1 = force pop only, 2 = BOTH
+    if (LandKingSystem_HQ ~= 1
+    and GetServerVariable("[POP]Aspidochelone") <= os.time(t)
+    and GetServerVariable("[PH]Aspidochelone") > 6) then
+        DisallowRespawn(17301538, false);
+        UpdateNMSpawnPoint(17301538);
+        GetMobByID(17301538):setRespawnTime(900, 10800); -- Aspidochelone
+        if (LandKingSystem_NQ == 0) then
+            DisallowRespawn(17301537, true);
+        end
+    else
+        if (LandKingSystem_NQ ~= 1) then
+            DisallowRespawn(17301537, false);
+            UpdateNMSpawnPoint(17301537);
+            GetMobByID(17301537):setRespawnTime(900, 10800); -- Adamantoise
+            if (LandKingSystem_HQ == 0) then
+                DisallowRespawn(17301538, true);
+            end
+        end
     end
 end;
 

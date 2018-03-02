@@ -19,6 +19,11 @@ function onMobEngaged(mob,target)
 end;
 
 function onMobDeath(mob, player, isKiller)
+    if (player:hasKeyItem(HYDRA_CORPS_COMMAND_SCEPTER) == false)then
+        player:setVar("DynaSandoria_Win",1);
+        player:addKeyItem(HYDRA_CORPS_COMMAND_SCEPTER);
+        player:messageSpecial(KEYITEM_OBTAINED,HYDRA_CORPS_COMMAND_SCEPTER);
+    end
 
     if (alreadyReceived(player,8) == false) then
         addDynamisList(player,128);
@@ -30,9 +35,9 @@ function onMobDeath(mob, player, isKiller)
     end
 
     for i = 17534978, 17534979 do
-        if (GetMobAction(i) ~= 0) then
-            DespawnMob(i);
-        end
+      if (GetMobAction(i) ~= 0) then
+         DespawnMob(i);
+      end
     end
 
 end;

@@ -65,7 +65,6 @@ TP_MACC_BONUS = 1;
 TP_MAB_BONUS = 2;
 TP_DMG_BONUS = 3;
 TP_RANGED = 4;
-
 BOMB_TOSS_HPP = 1;
 
 function MobRangedMove(mob,target,skill,numberofhits,accmod,dmgmod, tpeffect)
@@ -292,7 +291,7 @@ function MobMagicalMove(mob,target,skill,damage,element,dmgmod,tpeffect,tpvalue)
     -- printf("power: %f, bonus: %f", damage, mab);
     -- resistence is added last
     finaldmg = damage * mab * dmgmod;
-
+    if (dmgmod == nil) then print("nil dmgmod in skillID: " .. skill:getID()); end
     -- get resistence
     local avatarAccBonus = 0;
     if (mob:isPet() and mob:getMaster() ~= nil) then
@@ -686,14 +685,24 @@ end;
 function MobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
 
     if (target:canGainStatusEffect(typeEffect, power)) then
+        -------------------------
+        -- begin custom
+        if (math.random(1,1000) <= customResCheck(target, typeEffect)) then
+            if (typeEffect == EFFECT_DOOM) then
+                return 359; -- "<name> narrowly escapes impending doom."
+            end
+            return 283; -- resist proc msg ID "No effect on <name>."
+        end
+        -- end custom
+        -------------------------
         local statmod = MOD_INT;
         local element = mob:getStatusEffectElement(typeEffect);
 
         local resist = applyPlayerResistance(mob,typeEffect,target,mob:getStat(statmod)-target:getStat(statmod),0,element);
 
         if (resist >= 0.25) then
-
             local totalDuration = utils.clamp(duration * resist, 1);
+            if (typeEffect == EFFECT_DOOM) then totalDuration = duration; end
             target:addStatusEffect(typeEffect, power, tick, totalDuration);
 
             return msgBasic.SKILL_ENFEEB_IS;

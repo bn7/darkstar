@@ -18,10 +18,10 @@ function onTrade(player,npc,trade)
             player:messageSpecial(FLYER_ACCEPTED);
             player:messageSpecial(FLYERS_HANDED,17 - player:getVar("FFR"));
             player:tradeComplete();
-            elseif (player:getVar("tradePrietta") ==1) then
-                player:messageSpecial(FLYER_ALREADY);
-            end
+        elseif (player:getVar("tradePrietta") == 1) then
+            player:messageSpecial(FLYER_ALREADY);
         end
+    end
 end;
 
 function onTrigger(player,npc)

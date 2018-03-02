@@ -65,6 +65,29 @@ function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
+    -- Begin Temp Fix for broken AF quests
+    player:addKeyItem(654); -- FIGHTERS_ARMOR_CLAIM_SLIP
+    player:addKeyItem(655); -- TEMPLE_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(656); -- HEALERS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(657); -- WIZARDS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(658); -- WARLOCKS_ARMOR_CLAIM_SLIP
+    player:addKeyItem(659); -- ROGUES_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(660); -- GALLANT_ARMOR_CLAIM_SLIP
+    player:addKeyItem(661); -- CHAOS_ARMOR_CLAIM_SLIP
+    player:addKeyItem(662); -- BEAST_ARMOR_CLAIM_SLIP
+    player:addKeyItem(663); -- CHORAL_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(664); -- HUNTERS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(665); -- MYOCHIN_ARMOR_CLAIM_SLIP
+    player:addKeyItem(666); -- NINJAS_GARB_CLAIM_SLIP
+    player:addKeyItem(667); -- DRACHEN_ARMOR_CLAIM_SLIP
+    player:addKeyItem(668); -- EVOKERS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(1964); -- MAGUS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(1965); -- CORSAIRS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(1966); -- PUPPETRY_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(1967); -- DANCERS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(1968); -- DANCERS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(1969); -- SCHOLARS_ATTIRE_CLAIM_SLIP
+    -- End Temp Fix
     local CurrGil = player:getGil();
     for KeyItem = 11,ArraySize,11 do
         if player:hasKeyItem(StorageArray[KeyItem]) then

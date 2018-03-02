@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------------
--- @mamool1 -- Spawns 1st wave of Mamool
+-- !mamool1 -- Spawns 1st wave of Mamool
 --
 -- Besieged
 ---------------------------------------------------------------------------------------------------
@@ -10,7 +10,8 @@ cmdprops =
     permission = 3,
     parameters = "iiii"
 };
-function onTrigger(player)                                                   --@pos
+
+function onTrigger(player)                                                   --!pos
    SpawnMob('16973825'); -- Mamool Ja Sapper          GrpId=1546    poolID=2532      12,-6,25,(254) DropID=4510
    SpawnMob('16973826'); -- Mamool Ja Hosplitaler--------GrpId=1543      poolID=2520      12,-6,34,(254)
    SpawnMob('16973827'); -- Mamool Ja Fetial------------                        12,-6,48,(254)

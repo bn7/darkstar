@@ -11,12 +11,15 @@ require("scripts/globals/homepoint");
 -----------------------------------
 
 function onTrade(player,npc,trade)
-end;
+end; 
 
 function onTrigger(player,npc)
-
+    player:PrintToPlayer("SoA is closed - you should not be here.");
+    --[[
     homepointMenu(player, 8701, 109);
-end;
+    ]]
+    player:addStatusEffectEx(EFFECT_TELEPORT,0,TELEPORT_WARP,0,4);
+end; 
 
 function onEventUpdate(player,csid,option)
     -- printf("CSID: %u",csid);

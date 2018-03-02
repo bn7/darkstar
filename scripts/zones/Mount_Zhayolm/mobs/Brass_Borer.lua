@@ -1,9 +1,9 @@
 -----------------------------------
 -- Area: Mount Zhayolm
---  MOB: Brass Borer
+--  ZNM: Brass Borer
 -----------------------------------
 require("scripts/globals/status");
-----------------------------------
+require("scripts/globals/custom_trials");
 -- TODO: Damage resistances in streched and curled stances. Halting movement during stance change.
 
 function onMobSpawn(mob)
@@ -32,5 +32,16 @@ function onMobFight(mob,target)
     end
 end;
 
-function onMobDeath(mob)
+function onMobDeath(mob, player, isKiller)
+
+    ------------------------------------
+    -- Begin Custom Legion Code
+    ------------------------------------
+
+    -- Custom Trial Check
+    cTrialProgress(player, 1, "mythic");
+
+    ------------------------------------
+    -- End Custom Legion Code
+    ------------------------------------
 end;

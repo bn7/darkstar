@@ -55,6 +55,9 @@ end;
 
 function onInitialize(zone)
     SetRegionalConquestOverseers(zone:getRegionID())
+
+    -- Tchakka
+    GetMobByID(17200116):setRespawnTime(math.random(900,10800));
 end;
 
 function onZoneIn( player, prevZone)

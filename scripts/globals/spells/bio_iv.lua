@@ -63,10 +63,9 @@ function onSpellCast(caster,target,spell)
     local dotdmg = 5 + math.floor(caster:getSkillLevel(DARK_MAGIC_SKILL) / 60);
 
     -- Do it!
-    if (target:addStatusEffect(EFFECT_BIO,dotdmg,3,duration,FLAG_ERASABLE, 20,4)) then
-        spell:setMsg(msgBasic.MAGIC_DMG);
-    else
-        spell:setMsg(msgBasic.MAGIC_NO_EFFECT);
+    if (dia == nil or (BIO_OVERWRITE == 0 and dia:getPower() <= 4) or (BIO_OVERWRITE == 1 and dia:getPower() < 4)) then
+        target:delStatusEffect(EFFECT_BIO); -- delete old bio
+        target:addStatusEffect(EFFECT_BIO,dotdmg,3,duration,FLAG_ERASABLE, 20);
     end
 
     --Try to kill same tier Dia (default behavior)

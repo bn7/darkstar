@@ -80,6 +80,7 @@ enum SPIKES
     SPIKE_WIND = 7,
     SPIKE_STONE = 8,
     SPIKE_DELUGE = 9,
+    SPIKE_DEATH = 10,
     RETALIATION = 63
 };
 
@@ -169,7 +170,7 @@ namespace battleutils
     bool                CanUseWeaponskill(CCharEntity* PChar, CWeaponSkill* PSkill);
     int16				CalculateBaseTP(int delay);
     void				GenerateCureEnmity(CCharEntity* PSource, CBattleEntity* PTarget, uint16 amount);
-    void                GenerateInRangeEnmity(CBattleEntity* PSource, int16 CE, int16 VE);
+    void                GenerateInRangeEnmity(CBattleEntity* PSource, int32 CE, int32 VE);
 
     CItemWeapon*		GetEntityWeapon(CBattleEntity* PEntity, SLOTTYPE Slot);
     CItemArmor*			GetEntityArmor(CBattleEntity* PEntity, SLOTTYPE Slot);

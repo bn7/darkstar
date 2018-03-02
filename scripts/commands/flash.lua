@@ -11,5 +11,5 @@ cmdprops =
 
 function onTrigger(player, speed)
     player:speed(255);
-    player:PrintToPlayer("Use @fixspeed to go back to normal <-", 0xF);
-end
+    player:PrintToPlayer("Use !fixspeed to go back to normal <-", 0xF);
+end;

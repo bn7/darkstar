@@ -10,13 +10,14 @@ function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
-
+    player:startEvent(514);
+    --[[
     if (player:hasKeyItem(SICKLEMOON_SALT)) then
         player:startEvent(514);
     else
         player:startEvent(516);
     end
-
+    ]]
 end;
 
 function onEventUpdate(player,csid,option)
@@ -27,9 +28,9 @@ end;
 function onEventFinish(player,csid,option)
     -- printf("CSID: %u",csid);
     -- printf("RESULT: %u",option);
-
+    --[[
     if (csid == 514 and option == 1) then
         player:delKeyItem(SICKLEMOON_SALT);
     end
-
+    ]]
 end;

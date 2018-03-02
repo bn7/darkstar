@@ -14,9 +14,17 @@ require("scripts/globals/msg");
 
 function onMobInitialize(mob)
     mob:setMobMod(MOBMOD_ADD_EFFECT, 1);
+
+    mob:addMod(MOD_MATT,75);
+    mob:addMod(MOD_MACC,500);
+    mob:addMod(MOD_ACC,250);
+    mob:addMod(MOD_ATT,50);
+    mob:addMod(MOD_DEF,50);
 end;
 
 function onMobSpawn(mob)
+    -- setMod
+    mob:setMod(MOD_REGAIN,33);
 end;
 
 function onMobEngaged(mob,target)

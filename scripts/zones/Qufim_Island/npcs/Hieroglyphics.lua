@@ -17,6 +17,9 @@ function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
+    player:setVar("dynaWaitxDay", 0); -- Temp
+    player:PrintToPlayer("Dual Boxing here will crash the server!");
+    player:PrintToPlayer("First log out ALL characters, then log in ONLY ONE for Dynamis!");
 
     if ((player:hasCompletedMission(COP,DARKNESS_NAMED) or FREE_COP_DYNAMIS == 1) and player:hasKeyItem(VIAL_OF_SHROUDED_SAND)) then
         local realDay = os.time();

@@ -4,6 +4,8 @@
 -- ID: 16916817
 -----------------------------------
 require("scripts/globals/status");
+require("scripts/globals/magic");
+require("scripts/globals/utils");
 -----------------------------------
 
 function onMobInitialize(mob)
@@ -13,6 +15,14 @@ end;
 
 function onMobSpawn(mob)
     mob:setMod(MOD_REGEN, 3);
+    mob:setMod(MOD_REFRESH, 250);
+    mob:setMod(MOD_UFASTCAST, 75);
+    mob:setMod(MOD_MACC,925);
+    mob:setMod(MOD_MATT,100);
+    mob:addMod(MOD_MDEF,50);
+    mob:addMod(MOD_DEF,50);
+    mob:addMod(MOD_ATT,75);
+
 end;
 
 function onMobEngaged(mob,target)

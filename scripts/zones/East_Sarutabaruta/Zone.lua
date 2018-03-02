@@ -53,6 +53,35 @@ function onInitialize(zone)
     GetMobByID(DUKE_DECAPOD):setRespawnTime(math.random(3600, 4200));
 end;
 
+-----------------------------------
+-- onGameHour
+-----------------------------------
+
+function onGameHour()
+    local TwinkleTreantID = 17253364;
+    local month = tonumber(os.date("%m"));
+    local day = tonumber(os.date("%d"));
+    -- Dec 5th through Jan 5th.
+    if ((month == 12 and day >= 5) or (month == 1 and day <= 5)) then
+        DisallowRespawn(TwinkleTreantID, false);
+    else
+        DisallowRespawn(TwinkleTreantID, true);
+        if (GetMobAction(TwinkleTreantID) == ACTION_ROAMING) then
+            DespawnMob(TwinkleTreantID);
+        end
+
+        for boxes = (TwinkleTreantID -9), (TwinkleTreantID -1) do
+            if (GetMobAction(boxes) == ACTION_ROAMING) then
+                DespawnMob(boxes);
+            end
+        end
+    end
+end;
+
+-----------------------------------
+-- onZoneIn
+-----------------------------------
+
 function onZoneIn( player, prevZone)
     local cs = -1;
 

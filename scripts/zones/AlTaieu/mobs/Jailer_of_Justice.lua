@@ -4,12 +4,27 @@
 -----------------------------------
 require("scripts/globals/status");
 require("scripts/globals/magic");
+require("scripts/globals/utils");
+require("scripts/globals/msg");
 -----------------------------------
 
 function onMobInitialize(mob)
+    -- setMobMod
+    mob:setMobMod(MOBMOD_ADD_EFFECT,mob:getShortID());
+    mob:setMobMod(MOBMOD_MAIN_2HOUR, 1);
+
+    -- addMod
+    mob:addMod(MOD_MDEF,30);
+    mob:addMod(MOD_DEF,130);
 end;
 
 function onMobSpawn(mob)
+    -- setMod
+    mob:setMod(MOD_REGEN, 100);
+    mob:setMod(MOD_REGAIN, 20);
+    mob:setMod(MOD_HASTE_ABILITY, 20);
+    mob:setMod(MOD_MACC,925);
+    mob:setMod(MOD_DOUBLE_ATTACK, 20);
 end;
 
 function onMobFight(mob, target)
@@ -30,6 +45,20 @@ function onMobFight(mob, target)
             end
         end
     end
+end
+
+function onAdditionalEffect(mob,target,damage)
+    if (target:hasStatusEffect(EFFECT_POISON)) then
+        target:delStatusEffect(EFFECT_POISON);
+    end
+
+    duration = 10 * applyResistanceAddEffect(mob, target, ELE_WATER, EFFECT_POISON)
+    utils.clamp(duration,1,30);
+
+    target:addStatusEffect(EFFECT_POISON, 50, 3, duration);
+    -- mob:resetEnmity(target);
+
+    return SUBEFFECT_POISON, chatType.ADD_EFFECT_STATUS, EFFECT_POISON;
 end;
 
 function onMobDeath(mob, player, isKiller)

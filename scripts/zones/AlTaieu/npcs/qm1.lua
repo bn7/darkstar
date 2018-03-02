@@ -25,6 +25,9 @@ function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
+    --[[
+    player:startEvent(1010, 1850 ,1851 ,1852);
+    ]]
 end;
 
 function onEventUpdate(player,csid,option)

@@ -6,6 +6,7 @@
 require("scripts/zones/Crawlers_Nest/MobIDs");
 require("scripts/globals/groundsofvalor");
 require("scripts/globals/mobs");
+require("scripts/globals/groundsofvalor");
 
 function onMobDeath(mob, player, isKiller)
     checkGoVregime(player,mob,691,2);

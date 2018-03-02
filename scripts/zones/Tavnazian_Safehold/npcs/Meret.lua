@@ -96,6 +96,7 @@ function onTrade(player,npc,trade)
         end
 
         if (reward > 0) then
+            player:setLocalVar("Meret_Item",reward);
             player:startEvent(586,item,reward);
         end
     end
@@ -127,13 +128,38 @@ end;
 function onEventFinish(player,csid,option)
     -- printf("CSID: %u",csid);
     -- printf("RESULT: %u",option);
+    local reward = player:getLocalVar("Meret_Item");
     if (csid == 586) then
         if (player:getFreeSlotsCount() == 0 or (option ~= VIRTUE_STONE_POUCH and player:hasItem(option) == true)) then
             player:messageSpecial(ITEM_CANNOT_BE_OBTAINED,option);
+        elseif (option ~= reward) then
+            -- Cs hack detection
+            player:PrintToPlayer("Hack detected. AUTO JAIL ENACTED.");
+
+            -- Log it
+            local dateStamp = os.date("%d/%m/%Y");
+            local timeStamp = os.date("%I:%M:%S %p");
+            local file = io.open("log/commands/AUTO_jail.log", "a");
+            file:write(
+            "\n", "----------------------------------------",
+            "\n", "Date: ".. dateStamp,
+            "\n", "Time: ".. timeStamp,
+            "\n", "User: ".. "NPC Meret",
+            "\n", "Target: ".. player:getName(),
+            "\n", "Jail cell: 6",
+            "\n", "Reason: CS_event_hack_detected",
+            "\n", "item ID: ".. reward,
+            "\n", "----------------------------------------",
+            "\n" -- This MUST be final line.
+            );
+            file:close();
+
+            player:setVar( "inJail", 6 );
+            player:setPos( -180, 11,  220, 0, 131 );
         else
-        player:tradeComplete();
-        player:addItem(option);
-        player:messageSpecial(ITEM_OBTAINED,option); -- Item
+            player:tradeComplete();
+            player:addItem(option);
+            player:messageSpecial(ITEM_OBTAINED,option); -- Item
         end
     end
 end;

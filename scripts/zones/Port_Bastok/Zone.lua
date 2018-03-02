@@ -13,6 +13,8 @@ require("scripts/zones/Port_Bastok/TextIDs");
 
 function onInitialize(zone)
     zone:registerRegion(1,-112,-3,-17,-96,3,-3);--event COP
+    zone:registerRegion(2, 60, 5, -169, 0,0,0); -- bridge workaround, South side
+    zone:registerRegion(3, 60, 5, -70, 0,0,0); -- bridge workaround, North Side
 end;
 
 function onConquestUpdate(zone, updatetype)
@@ -60,6 +62,10 @@ function onRegionEnter(player,region)
     -- printf("regionID: %u",regionID);
     if (regionID == 1 and player:getCurrentMission(COP) == THE_CALL_OF_THE_WYRMKING and player:getVar("PromathiaStatus") == 0) then
         player:startEvent(305);
+    elseif (regionID == 2) then
+        player:setPos(60,6.2,-62,192);
+    elseif (regionID == 3) then
+        player:setPos(60,7.5,-177,64);
     end
 end;
 

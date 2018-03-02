@@ -8,9 +8,17 @@ require("scripts/globals/titles");
 
 function onMobDeath(mob, player, isKiller)
     player:addTitle(BYEBYE_TAISAI);
+    if (isKiller == true) then
+        if (math.random(1,100) <= 85) then
+            player:addTreasure(4717, mob); -- Refresh
+        else
+            player:addTreasure(4850, mob); -- Refresh II
+        end
+    end
 end;
 
 function onMobDespawn(mob)
+    --[[
     local phIndex = mob:getLocalVar("phIndex");
     local ph = GetMobByID(TAISAIJIN_PH[phIndex]);
 
@@ -24,4 +32,11 @@ function onMobDespawn(mob)
     ph = GetMobByID(TAISAIJIN_PH[phIndex]);
     ph:setLocalVar("timeToGrow", os.time() + math.random(86400,259200)); -- 1 to 3 days
     ph:setLocalVar("phIndex",phIndex);
+    ]]
+
+    local Taisaijin_PH = GetServerVariable("Taisaijin[PH]");
+    SetServerVariable("Taisaijin[POP]", os.time() + math.random(900, 2700));
+    SetServerVariable("Taisaijin[PH]", 0);
+    DisallowRespawn(mob:getID(), true);
+    DisallowRespawn(Taisaijin_PH, false);
 end;

@@ -7,9 +7,21 @@
 package.loaded["scripts/zones/Selbina/TextIDs"] = nil;
 -----------------------------------
 require("scripts/zones/Selbina/TextIDs");
+require("scripts/globals/teleports");
+require("scripts/globals/settings");
+require("scripts/globals/msg");
 -----------------------------------
 
 function onTrade(player,npc,trade)
+    if (TRAVEL_SKIP >= 1) then
+        if (trade:getGil() >= TRAVEL_SKIP and trade:getItemCount() == 1) then
+            player:PrintToPlayer(string.format("eye's the %d gil.. ", TRAVEL_SKIP), chatType.EMOTION, npc:getName());
+            player:PrintToPlayer("Well..I guess I can let you aboard the express freight Vessel.. ", chatType.SAY, npc:getName());
+            player:delGil(TRAVEL_SKIP);
+            -- player:setPos(13,-2,18,,194249);
+            player:addStatusEffectEx(EFFECT_COMMUTE,0,COMMUTE.SHIP_TO_MHAURA,0,2);
+        end
+    end
 end;
 
 function onTrigger(player,npc)

@@ -11,6 +11,17 @@ function onMobInitialize(mob)
     mob:setMobMod(MOBMOD_AUTO_SPIKES,mob:getShortID());
     mob:addStatusEffect(EFFECT_SHOCK_SPIKES,50,0,0);
     mob:getStatusEffect(EFFECT_SHOCK_SPIKES):setFlag(32);
+    mob:setMobMod(MOBMOD_MAIN_2HOUR, 1);
+end;
+
+function onMobSpawn(mob)
+    -- setMod
+    mob:setMod(MOD_REGEN, 40);
+    mob:setMod(MOD_REGAIN, 20);
+
+    -- addMod
+    mob:addMod(MOD_DOUBLE_ATTACK, 30)
+
 end;
 
 function onAdditionalEffect(mob,target,damage)
@@ -22,7 +33,6 @@ function onAdditionalEffect(mob,target,damage)
         target:addStatusEffect(EFFECT_STUN,5,0,duration);
         return SUBEFFECT_STUN,0,EFFECT_STUN;
     end
-
 end;
 
 function onSpikesDamage(mob,target,damage)
@@ -53,5 +63,7 @@ end;
 
 function onMobDespawn(mob)
     -- UpdateNMSpawnPoint(mob:getID());
+    --[[
     mob:setRespawnTime(math.random((7200),(10800))); -- 2 to 3 hrs
+    ]]
 end;

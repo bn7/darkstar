@@ -26,11 +26,18 @@ end;
 function onEventUpdate(player,csid,option)
     -- printf("CSID: %u",csid);
     -- printf("RESULT: %u",option);
+    -- player:PrintToPlayer(string.format("DEBUG onEventUpdate: cs %u option %u",csid, option));
+    if (player:getCurrency("cruor") < 200) then
+        player:PrintToPlayer("NO CRUOR = NO TELEPORTS!");
+        -- player:updateEvent(0,0,0,0,0,0,0,0);
+        player:release();
+    end
 end;
 
 function onEventFinish(player,csid,option)
     -- printf("CSID: %u",csid);
     -- printf("RESULT: %u",option);
+    -- player:PrintToPlayer(string.format("DEBUG onEventFinsih: cs %u option %u",csid, option));
     local CRUOR = player:getCurrency("cruor");
     if (csid == 339) then
         if (option == 260) then

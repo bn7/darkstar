@@ -16,6 +16,10 @@ function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
+    player:setVar("dynaWaitxDay", 0); -- Temp
+    player:PrintToPlayer("Dual Boxing here will crash the server!");
+    player:PrintToPlayer("First log out ALL characters, then log in ONLY ONE for Dynamis!");
+
     if (player:getVar("DynaBeaucedine_Win") == 1) then
         player:startEvent(134,HYDRA_CORPS_INSIGNIA); -- Win CS
     elseif (player:hasKeyItem(VIAL_OF_SHROUDED_SAND) and player:hasKeyItem(HYDRA_CORPS_COMMAND_SCEPTER) and

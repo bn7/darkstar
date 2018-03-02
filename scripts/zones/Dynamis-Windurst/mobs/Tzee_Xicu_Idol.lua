@@ -21,6 +21,11 @@ function onMobEngaged(mob,target)
 end;
 
 function onMobDeath(mob, player, isKiller)
+    if (player:hasKeyItem(HYDRA_CORPS_LANTERN) == false)then
+        player:setVar("DynaWindurst_Win",1);
+        player:addKeyItem(HYDRA_CORPS_LANTERN);
+        player:messageSpecial(KEYITEM_OBTAINED,HYDRA_CORPS_LANTERN);
+    end
 
     if (alreadyReceived(player,8) == false) then
         addDynamisList(player,128);

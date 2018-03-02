@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------------
--- @mamool2 -- Spawns 2nd wave of Mamool
+-- !mamool2 -- Spawns 2nd wave of Mamool
 --
 -- Besieged
 ---------------------------------------------------------------------------------------------------
@@ -9,6 +9,7 @@ cmdprops =
     permission = 3,
     parameters = "iiii"
 };
+
 function onTrigger(player)
    SpawnMob('16973862'); -- Attack_Ziz----------GrpId=1490      -99,2,74,4      poolID=280   PoolID=4513
    SpawnMob('16973863'); -- Attack_Ziz                     -97,2,68,255

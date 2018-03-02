@@ -79,4 +79,10 @@ public:
 	CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE MessageType, const std::string& message, const std::string& sender = std::string());
 };
 
+class CSpoofMessagePacket : public CBasicPacket
+{
+public:
+    CSpoofMessagePacket(CCharEntity* PEntity, CHAT_MESSAGE_TYPE MessageType, const std::string& message);
+};
+
 #endif

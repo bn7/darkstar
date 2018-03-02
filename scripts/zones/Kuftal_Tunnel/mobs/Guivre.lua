@@ -2,6 +2,7 @@
 -- Area: Gustav Tunnel
 --   NM: Guivre
 -----------------------------------
+require("scripts/globals/status");
 
 local path =
 {
@@ -372,8 +373,21 @@ local path =
     107.542999, 0.261044, 3.065771
 };
 
+function onMobInitialize(mob)
+    -- addMod
+    mob:addMod(MOD_STR,7);
+    mob:addMod(MOD_DEX,7);
+    mob:addMod(MOD_ATT,112);
+    mob:addMod(MOD_ACC,200);
+    mob:addMod(MOD_EVA,132);
+    mob:addMod(MOD_DOUBLE_ATTACK,15);
+end;
+
 function onMobSpawn(mob)
     onMobRoam(mob);
+
+    -- setMod
+    mob:setMod(MOD_REGAIN,33);
 end;
 
 function onPath(mob)

@@ -14,8 +14,11 @@ function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
-
+    player:PrintToPlayer("SoA is closed - you should not be here.");
+    --[[
     homepointMenu(player, 8700, 112);
+    ]]
+    player:addStatusEffectEx(EFFECT_TELEPORT,0,TELEPORT_WARP,0,4);
 end;
 
 function onEventUpdate(player,csid,option)

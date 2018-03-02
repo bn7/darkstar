@@ -163,3 +163,6 @@ log/DSP.leaks
 /*.ipdb
 /scripts/commands/jinx.lua
 /scripts/commands/keyfix623.lua
+/batch
+/sql/custom
+/scripts/commands/zapall.lua

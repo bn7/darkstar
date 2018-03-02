@@ -13,9 +13,31 @@ require("scripts/globals/zone");
 -----------------------------------
 
 function onInitialize(zone)
+    --[[
     if (LandKingSystem_NQ ~= 1) then
         UpdateNMSpawnPoint(FAFNIR);
         GetMobByID(FAFNIR):setRespawnTime(math.random(900, 10800));
+    end
+    ]]
+    -- 0 = timed spawn, 1 = force pop only, 2 = BOTH
+    if (LandKingSystem_HQ ~= 1
+    and GetServerVariable("[POP]Nidhogg") <= os.time(t)
+    and GetServerVariable("[PH]Nidhogg") > 6) then
+        DisallowRespawn(17408019, false);
+        UpdateNMSpawnPoint(17408019);
+        GetMobByID(17408019):setRespawnTime(900, 10800); -- Nidhogg
+        if (LandKingSystem_NQ == 0) then
+            DisallowRespawn(17408018, true);
+        end
+    else
+        if (LandKingSystem_NQ ~= 1) then
+            DisallowRespawn(17408018, false);
+            UpdateNMSpawnPoint(17408018);
+            GetMobByID(17408018):setRespawnTime(900, 10800); -- Fafnir
+            if (LandKingSystem_HQ == 0) then
+                DisallowRespawn(17408019, true);
+            end
+        end
     end
 end;
 

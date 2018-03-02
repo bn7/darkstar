@@ -10,11 +10,11 @@ cmdprops =
 function onTrigger(player)
 	
 stock = {
--- itemid,price, -- description
--- itemid,price, -- description
--- itemid,price, -- description
--- itemid,price, -- description
--- itemid,price, -- description
+    -- itemid,price, -- description
+    -- itemid,price, -- description
+    -- itemid,price, -- description
+    -- itemid,price, -- description
+    -- itemid,price, -- description
 	}
  
 showShop(player, STATIC, stock);

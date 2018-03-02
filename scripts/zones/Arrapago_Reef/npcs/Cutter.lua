@@ -27,6 +27,8 @@ function onEventUpdate(player,csid,option,target)
     -- printf("RESULT: %u",option);
 
     if(csid == 221) then
+        player:PrintToPlayer("Disabled till DSP fixes their broken instance code..");
+    --[[
         local party = player:getParty();
         if (party ~= nil) then
             for i,v in ipairs(party) do
@@ -43,6 +45,7 @@ function onEventUpdate(player,csid,option,target)
         end
 
         player:createInstance(53,60);
+    ]]
     end
 end;
 

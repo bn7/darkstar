@@ -27,8 +27,6 @@ function onTrigger(player, target)
         printf( message );
 
         targ:setVar( 'inJail', 0 );
-        targ:delStatusEffect(EFFECT_TERROR);
-        targ:delStatusEffect(EFFECT_MUTE);
         targ:warp();
     end
 end

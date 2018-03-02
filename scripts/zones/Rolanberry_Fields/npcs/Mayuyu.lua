@@ -10,6 +10,8 @@ require("scripts/globals/settings");
 require("scripts/globals/keyitems");
 require("scripts/globals/titles");
 require("scripts/zones/Rolanberry_Fields/TextIDs");
+-- require("scripts/globals/custom_legion");
+require("scripts/globals/msg");
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -30,7 +32,8 @@ function onTrigger(player,npc)
         CAPACITY = CAPACITY+1; -- Enable 18 combatant option
     end
 
-    player:startEvent(8008, 0, LEGENDARY, CAPACITY);
+    -- player:startEvent(8008, 0, LEGENDARY, CAPACITY);
+    player:PrintToPlayer("I'm disabled because Teo punted me for not doing my job!\nThe landing broke my non existent knees! ", chatType.SAY, npc:getName());
 end;
 
 function onEventUpdate(player,csid,option)

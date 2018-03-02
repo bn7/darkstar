@@ -1,6 +1,5 @@
 ---------------------------------------------------------------------------------------------------
 -- func: special
--- auth: Tagban/Ninji
 -- desc: Individual shops for players
 ---------------------------------------------------------------------------------------------------
 
@@ -9,6 +8,7 @@ cmdprops =
     permission = 0,
     parameters = ""
 };
+
 function onTrigger(player)
     player:PrintToPlayer("Special Shop for helpful people..", 0xF);
     if(player:getName() == "Charmaine") then -- Xu qinggui
@@ -47,10 +47,10 @@ function onTrigger(player)
            20646, 1, -- Excalibur
         }
     	showShop(player, STATIC, stock);
-    elseif(player:getName() == "Lilcrazys") then -- Lilcrazy
+    elseif(player:getName() == "Azik") then -- Azik
         local stock =
         {
-           1553, 1, -- Themis Orb
+           20688, 1, -- Tizona
         }
     	showShop(player, STATIC, stock);
     else

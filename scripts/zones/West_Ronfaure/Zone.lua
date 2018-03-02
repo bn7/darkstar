@@ -49,6 +49,28 @@ function onInitialize(zone)
     SetRegionalConquestOverseers(zone:getRegionID())
 end;
 
+
+function onGameHour()
+    local TwinkleTreantID = 17187828;
+    local month = tonumber(os.date("%m"));
+    local day = tonumber(os.date("%d"));
+    -- Dec 5th through Jan 5th.
+    if ((month == 12 and day >= 5) or (month == 1 and day <= 5)) then
+        DisallowRespawn(TwinkleTreantID, false);
+    else
+        DisallowRespawn(TwinkleTreantID, true);
+        if (GetMobAction(TwinkleTreantID) == ACTION_ROAMING) then
+            DespawnMob(TwinkleTreantID);
+        end
+
+        for boxes = (TwinkleTreantID -9), (TwinkleTreantID -1) do
+            if (GetMobAction(boxes) == ACTION_ROAMING) then
+                DespawnMob(boxes);
+            end
+        end
+    end
+end;
+
 function onZoneIn(player,prevZone)
     local cs = -1;
 

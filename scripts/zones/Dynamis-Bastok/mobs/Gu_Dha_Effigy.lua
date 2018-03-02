@@ -15,6 +15,11 @@ function onMobEngaged(mob,target)
 end;
 
 function onMobDeath(mob, player, isKiller)
+    if (player:hasKeyItem(HYDRA_CORPS_EYEGLASS) == false) then
+        player:setVar("DynaBastok_Win",1);
+        player:addKeyItem(HYDRA_CORPS_EYEGLASS);
+        player:messageSpecial(KEYITEM_OBTAINED,HYDRA_CORPS_EYEGLASS);
+    end
 
     if (mob:isInBattlefieldList() == false) then
         mob:addInBattlefieldList();

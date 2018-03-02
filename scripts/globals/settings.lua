@@ -23,10 +23,10 @@ ENABLE_ACP     = 0;
 ENABLE_AMK     = 0;
 ENABLE_ASA     = 0;
 ENABLE_ABYSSEA = 1;
-ENABLE_SOA     = 1;
-ENABLE_ROV     = 1;
+ENABLE_SOA     = 0;
+ENABLE_ROV     = 0;
 
-ENABLE_VOIDWATCH = 0; -- Not an expansion, but has its own storyline.
+ENABLE_VOIDWATCH = 1; -- Not an expansion, but has its own storyline.
 
 -- FIELDS OF VALOR/Grounds of Valor settings
 ENABLE_FIELD_MANUALS  = 1; -- Enables Fields of Valor
@@ -40,9 +40,17 @@ LOW_LEVEL_REGIME = 1; -- Allow people to kill regime targets even if they give n
 -- This feature correlates to the content_tag column in the SQL files
 RESTRICT_CONTENT = 0;
 
+-- Dailies
+GIVE_DAILY_TALLY      = 0; -- (Retail:  10) Give players this much tally per day to spend at Goblin Mystery Box.
+GIVE_DAILY_POINTS     = 0; -- (Retail: 100) Give players this many "logon points" per day to spend at greeter moogle.
+GIVE_MOG_PELL_RED     = nil; --
+GIVE_MOG_PELL_GREEN   = nil; --
+GIVE_MOG_PELL_SILVER  = nil; --
+GIVE_MOG_PELL_GOLD    = nil; -- There are also rainbow, ochre, and marble..but those aren't auto-given at logon
+
 -- CHARACTER CONFIG
 INITIAL_LEVEL_CAP = 99; -- The initial level cap for new players.  There seems to be a hardcap of 255.
-MAX_LEVEL = 99; -- Level max of the server, lowers the attainable cap by disabling Limit Break quests.
+MAX_LEVEL = 99; -- Level max of the server, works by disabling Maat quests.
 NORMAL_MOB_MAX_LEVEL_RANGE_MIN = 0; -- Lower Bound of Max Level Range for Normal Mobs (0 = Uncapped)
 NORMAL_MOB_MAX_LEVEL_RANGE_MAX = 0; -- Upper Bound of Max Level Range for Normal Mobs (0 = Uncapped)
 START_GIL = 50000; -- Amount of gil given to newly created characters.
@@ -78,14 +86,14 @@ EXCAVATION_RATE         = 0.50; -- % chance to recieve an item from excavation. 
 LOGGING_RATE            = 0.50; -- % chance to recieve an item from logging.  Set between 0 and 1.
 MINING_RATE             = 50; -- % chance to recieve an item from mining.  Set between 0 and 100.
 
-HEALING_TP_CHANGE       = -100; -- Change in TP for each healing tick. Default is -100
+HEALING_TP_CHANGE       = -75; -- Change in TP for each healing tick. Default is -100
 
 -- SE implemented coffer/chest illusion time in order to prevent coffer farming. No-one in the same area can open a chest or coffer for loot (gil, gems & items)
 -- till a random time between MIN_ILLSION_TIME and MAX_ILLUSION_TIME. During this time players can loot keyitem and item related to quests (AF, maps... etc.)
-COFFER_MAX_ILLUSION_TIME = 360;  -- 1 hour
-COFFER_MIN_ILLUSION_TIME = 180;  -- 30 minutes
-CHEST_MAX_ILLUSION_TIME  = 360;  -- 1 hour
-CHEST_MIN_ILLUSION_TIME  = 180;  -- 30 minutes
+COFFER_MAX_ILLUSION_TIME = 3600;  -- 1 hour
+COFFER_MIN_ILLUSION_TIME = 1800;  -- 30 minutes
+CHEST_MAX_ILLUSION_TIME  = 3600;  -- 1 hour
+CHEST_MIN_ILLUSION_TIME  = 1800;  -- 30 minutes
 
 -- Sets spawn type for: Behemoth, Fafnir, Adamantoise, King Behemoth, Nidhog, Aspidochelone.
 -- Use 0 for timed spawns, 1 for force pop only, 2 for both
@@ -93,22 +101,22 @@ LandKingSystem_NQ = 2;
 LandKingSystem_HQ = 2;
 
 -- DYNAMIS SETTINGS
-    BETWEEN_2DYNA_WAIT_TIME = 0;        -- wait time between 2 Dynamis (in real day) min: 1 day
+    BETWEEN_2DYNA_WAIT_TIME = 1;        -- wait time between 2 Dynamis (in real day) min: 1 day
         DYNA_MIDNIGHT_RESET = true;     -- if true, makes the wait time count by number of server midnights instead of full 24 hour intervals
              DYNA_LEVEL_MIN = 65;       -- level min for entering in Dynamis
-    TIMELESS_HOURGLASS_COST = 50000;   -- refund for the timeless hourglass for Dynamis.
-   PRISMATIC_HOURGLASS_COST = 5000;    -- cost of the prismatic hourglass for Dynamis.
+    TIMELESS_HOURGLASS_COST = 500000;   -- refund for the timeless hourglass for Dynamis.
+   PRISMATIC_HOURGLASS_COST = 50000;    -- cost of the prismatic hourglass for Dynamis.
      CURRENCY_EXCHANGE_RATE = 100;      -- X Tier 1 ancient currency -> 1 Tier 2, and so on.  Certain values may conflict with shop items.  Not designed to exceed 198.
-RELIC_2ND_UPGRADE_WAIT_TIME = 0;      -- wait time for 2nd relic upgrade (stage 2 -> stage 3) in seconds. 604800s = 1 RL week.
-RELIC_3RD_UPGRADE_WAIT_TIME = 0;      -- wait time for 3rd relic upgrade (stage 3 -> stage 4) in seconds. 295200s = 82 hours.
-FREE_COP_DYNAMIS = 1 ; -- Authorize player to entering inside COP Dynamis without completing COP mission ( 1 = enable 0= disable)
+RELIC_2ND_UPGRADE_WAIT_TIME = 86400;      -- wait time for 2nd relic upgrade (stage 2 -> stage 3) in seconds. 604800s = 1 RL week.
+RELIC_3RD_UPGRADE_WAIT_TIME = 86400;      -- wait time for 3rd relic upgrade (stage 3 -> stage 4) in seconds. 295200s = 82 hours.
+FREE_COP_DYNAMIS = 0 ; -- Authorize player to entering inside COP Dynamis without completing COP mission ( 1 = enable 0= disable)
 
 -- QUEST/MISSION SPECIFIC SETTINGS
 WSNM_LEVEL = 70; -- Min Level to get WSNM Quests
 WSNM_SKILL_LEVEL = 240;
-AF1_QUEST_LEVEL = 35; -- Minimum level to start AF1 quest
-AF2_QUEST_LEVEL = 45; -- Minimum level to start AF2 quest
-AF3_QUEST_LEVEL = 55; -- Minimum level to start AF3 quest
+AF1_QUEST_LEVEL = 40; -- Minimum level to start AF1 quest
+AF2_QUEST_LEVEL = 50; -- Minimum level to start AF2 quest
+AF3_QUEST_LEVEL = 50; -- Minimum level to start AF3 quest
 AF1_FAME = 20; -- base fame for completing an AF1 quest
 AF2_FAME = 40; -- base fame for completing an AF2 quest
 AF3_FAME = 60; -- base fame for completing an AF3 quest
@@ -116,7 +124,7 @@ DEBUG_MODE = 0; -- Set to 1 to activate auto-warping to the next location (only 
 QM_RESET_TIME = 300; -- Default time (in seconds) you have from killing ???-pop mission NMs to click again and get key item, until ??? resets.
 OldSchoolG1 = false; -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
 OldSchoolG2 = false; -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
-FrigiciteDuration = 30; -- When OldSChoolG2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
+FrigiciteDuration = 60; -- When OldSChoolG2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
 
 -- JOB ABILITY/TRAIT SPECIFIC SETTINGS
 CIRCLE_KILLER_EFFECT = 20; -- Intimidation percentage granted by circle effects. (made up number)
@@ -127,20 +135,20 @@ DIA_OVERWRITE = 1; --Set to 1 to allow Bio to overwrite same tier Dia.  Default 
 BIO_OVERWRITE = 0; --Set to 1 to allow Dia to overwrite same tier Bio.  Default is 0.
 BARELEMENT_OVERWRITE = 1; --Set to 1 to allow Barelement spells to overwrite each other (prevent stacking).  Default is 1.
 BARSTATUS_OVERWRITE = 1; --Set to 1 to allow Barstatus spells to overwrite each other (prevent stacking).  Default is 1.
-STONESKIN_CAP = 550; -- soft cap for hp absorbed by stoneskin
-BLINK_SHADOWS = 3;   -- number of shadows supplied by Blink spell
-ENSPELL_DURATION = 280; -- duration of RDM en-spells
-SPIKE_EFFECT_DURATION = 280; -- the duration of RDM, BLM spikes effects (not Reprisal)
-ELEMENTAL_DEBUFF_DURATION = 220; -- base duration of elemental debuffs
+STONESKIN_CAP = 500; -- soft cap for hp absorbed by stoneskin
+BLINK_SHADOWS = 5;   -- number of shadows supplied by Blink spell
+ENSPELL_DURATION = 180; -- duration of RDM en-spells
+SPIKE_EFFECT_DURATION = 180; -- the duration of RDM, BLM spikes effects (not Reprisal)
+ELEMENTAL_DEBUFF_DURATION = 120; -- base duration of elemental debuffs
 AQUAVEIL_COUNTER = 1;  -- Base amount of hits Aquaveil absorbs to prevent spell interrupts. Retail is 1.
 ABSORB_SPELL_AMOUNT = 8; -- how much of a stat gets absorbed by DRK absorb spells - expected to be a multiple of 8.
 ABSORB_SPELL_TICK = 9; -- duration of 1 absorb spell tick
-SNEAK_INVIS_DURATION_MULTIPLIER = 8; -- multiplies duration of sneak,invis,deodorize to reduce player torture. 1 = retail behavior.
+SNEAK_INVIS_DURATION_MULTIPLIER = 3; -- multiplies duration of sneak,invis,deodorize to reduce player torture. 1 = retail behavior.
 USE_OLD_CURE_FORMULA = false; -- true/false. if true, uses older cure formula (3*MND + VIT + 3*(healing skill/5)) // cure 6 will use the newer formula
 
 -- CELEBRATIONS
 EXPLORER_MOOGLE = 1; -- Enables Explorer Moogle teleports
-EXPLORER_MOOGLE_LEVELCAP = 5;
+EXPLORER_MOOGLE_LEVELCAP = 1;
 JINX_MODE_2005 = 0; -- Set to 1 to give starting characters swimsuits from 2005.  Ex: Hume Top
 JINX_MODE_2008 = 0; -- Set to 1 to give starting characters swimsuits from 2008.  Ex: Custom Top
 JINX_MODE_2012 = 0; -- Set to 1 to give starting characters swimsuits from 2012.  Ex: Marine Top
@@ -153,15 +161,16 @@ HALLOWEEN_2005 = 0; -- Set to 1 to Enable the 2005 version of Harvest Festival, 
 HALLOWEEN_YEAR_ROUND = 0; -- Set to 1 to have Harvest Festival initialize outside of normal times.
 
 -- MISC
+TRAVEL_SKIP = 5000; -- Zero to disable. Otherwise, players can skip airship/boat rides by trading this much gil to the NPC that tracks arrival/departure.
 HOMEPOINT_HEAL = 1; --Set to 1 if you want Home Points to heal you like in single-player Final Fantasy games.
-RIVERNE_PORTERS = 320; -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
-LANTERNS_STAY_LIT = 2200; -- time in seconds that lanterns in the Den of Rancor stay lit.
+RIVERNE_PORTERS = 120; -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
+LANTERNS_STAY_LIT = 1200; -- time in seconds that lanterns in the Den of Rancor stay lit.
 ENABLE_COP_ZONE_CAP = 0; -- enable or disable lvl cap
 TIMEZONE_OFFSET = 0; -- Offset from UTC used to determine when "JP Midnight" is for the server.  Default is JST (+9.0).
 ALLOW_MULTIPLE_EXP_RINGS = 1; -- Set to 1 to remove ownership restrictions on the Chariot/Empress/Emperor Band trio.
 BYPASS_EXP_RING_ONE_PER_WEEK = 1; -- -- Set to 1 to bypass the limit of one ring per Conquest Tally Week.
-NUMBER_OF_DM_EARRINGS = 2; -- Number of earrings players can simultaneously own from Divine Might before scripts start blocking them (Default: 1)
-HOMEPOINT_TELEPORT = 0; -- Enables the homepoint teleport system
+NUMBER_OF_DM_EARRINGS = 3; -- Number of earrings players can simultaneously own from Divine Might before scripts start blocking them (Default: 1)
+HOMEPOINT_TELEPORT = 1; -- Enables the homepoint teleport system
 DIG_ABUNDANCE_BONUS = 0; -- Increase chance of digging up an item (450  = item digup chance +45)
 DIG_FATIGUE = 1; -- Set to 0 to disable Dig Fatigue
 DIG_GRANT_BURROW = 0; -- Set to 1 to grant burrow ability
@@ -170,8 +179,11 @@ ENM_COOLDOWN = 120;  -- Number of hours before a player can obtain same KI for E
 FORCE_SPAWN_QM_RESET_TIME = 300; -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
 
 -- LIMBUS
-BETWEEN_2COSMOCLEANSE_WAIT_TIME = 0; -- day between 2 limbus keyitem  (default 3 days)
+BETWEEN_2COSMOCLEANSE_WAIT_TIME = 1; -- day between 2 limbus keyitem  (default 3 days)
 DIMENSIONAL_PORTAL_UNLOCK = false; -- Set true to bypass requirements for using dimensional portals to reach sea for Limbus
 
 -- ABYSSEA
-VISITANT_BONUS = 5.00; -- Default: 1.00 - (retail) - Multiplies the base time value of each Traverser Stone.
+FREE_CONFLUX = true; -- Set to true if you want Veridical Conflux activation/teleportation to cost 0 cruor (Default: false)
+ALL_CONFLUX = true; -- Set to true if you want all new players to start with all Veridical Conflux warps (Default: false)
+MAW_UNLOCK = true; -- Set to true to unlock all Maw teleports.
+VISITANT_BONUS = 2.00; -- Default: 1.00 - (retail) - Multiplies the base time value of each Traverser Stone.

@@ -33,7 +33,7 @@ function onMobDespawn(mob)
                 nm:setRespawnTime(GetMobRespawnTime(mobID))
                 nm:addListener("DESPAWN", "CHARYBDIS_PH", function(mob)
                     -- Set Charybdis's ToD
-                    mob:setLocalVar("ToD", os.time() + math.random(28800,43200))
+                    mob:setLocalVar("ToD", os.time() + math.random(3600,5800)) -- 1-2 hours
                     DisallowRespawn(mob:getID(), true)
 
                     -- Set PH back to normal, then set to respawn spawn

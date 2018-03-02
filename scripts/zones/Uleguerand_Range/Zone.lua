@@ -15,8 +15,15 @@ require("scripts/globals/zone");
 -----------------------------------
 
 function onInitialize(zone)
+    -- Jormungand
     UpdateNMSpawnPoint(JORMUNGAND);
+    --[[
     GetMobByID(JORMUNGAND):setRespawnTime(math.random(86400, 259200));
+    ]]
+    GetMobByID(JORMUNGAND):setRespawnTime(math.random(900, 10800));
+
+    -- Kumhau
+    GetMobByID(16798718):setRespawnTime(math.random(900,10800));
 end;
 
 function onConquestUpdate(zone, updatetype)

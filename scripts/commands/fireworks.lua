@@ -1,6 +1,5 @@
 ---------------------------------------------------------------------------------------------------
 -- func: Fireworks!
--- auth: Tagban
 -- desc: FREAKING FIREWORKS!
 ---------------------------------------------------------------------------------------------------
 
@@ -9,6 +8,7 @@ cmdprops =
     permission = 0,
     parameters = "iiii"
 };
+
 function onTrigger(player)
 	
 stock = {
@@ -39,4 +39,4 @@ stock = {
 	}
  
 showShop(player, STATIC, stock);
-end
+end;

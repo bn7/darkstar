@@ -677,6 +677,12 @@ namespace battleutils
                 // drain same as damage taken
                 damage = damageTaken;
                 break;
+            case SPIKE_REPRISAL:
+                if (PDefender->objtype == TYPE_MOB)
+                {
+                    damage += (uint16)(damageTaken*0.3f);
+                }
+                break;
             default:
                 break;
         }
@@ -785,7 +791,7 @@ namespace battleutils
                     break;
 
                 case SPIKE_REPRISAL:
-                    if (Action->reaction == REACTION_BLOCK)
+                    if (Action->reaction == REACTION_BLOCK && PDefender->objtype != TYPE_MOB) // Don't trigger this on mobs!
                     {
                         PAttacker->addHP(-Action->spikesParam);
                         auto PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
@@ -803,11 +809,29 @@ namespace battleutils
                             }
                         }
                     }
+                    else if (PDefender->objtype == TYPE_MOB) // Mobs don't need a shield or the subpower.
+                    {
+                        PAttacker->addHP(-Action->spikesParam);
+                    }
                     else
                     {
                         // only works on shield blocks
                         Action->spikesEffect = (SUBEFFECT)0;
                         return false;
+                    }
+                    break;
+
+                case SPIKE_DEATH:
+                    if (PAttacker->objtype == TYPE_MOB && ((CMobEntity*)PAttacker)->m_Type & MOBTYPE_NOTORIOUS)
+                    {
+                        // Doesn't work on NM
+                        Action->spikesEffect = (SUBEFFECT)0;
+                        return false;
+                    }
+                    else if (dsprand::GetRandomNumber(100) <= 3)
+                    {
+                        Action->addEffectMessage = 164; // KO message.
+                        PAttacker->addHP(-PAttacker->health.hp);
                     }
                     break;
 
@@ -890,6 +914,15 @@ namespace battleutils
             HandleSpikesStatusEffect(PAttacker, PDefender, Action);
 
             return true;
+        }
+        else if ((dsprand::GetRandomNumber(100) <= (chance + lvlDiff)) && (!(((CMobEntity*)PAttacker)->m_Type & MOBTYPE_NOTORIOUS)))
+        {
+            if (spikesType == SUBEFFECT_DEATH_SPIKES)
+            {
+                Action->spikesMessage = 164; // KO message.
+                Action->spikesParam = 0;
+                PAttacker->addHP(-PAttacker->health.hp);
+            }
         }
 
         return false;
@@ -3472,7 +3505,7 @@ namespace battleutils
 
     //Generate enmity for all targets in range
 
-    void GenerateInRangeEnmity(CBattleEntity* PSource, int16 CE, int16 VE)
+    void GenerateInRangeEnmity(CBattleEntity* PSource, int32 CE, int32 VE)
     {
         DSP_DEBUG_BREAK_IF(PSource == nullptr);
 

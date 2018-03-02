@@ -29,7 +29,7 @@ function onMobFight(mob,target)
             SpawnMob(YingID):updateEnmity(target); -- Respawn the dragons after 90sec
             SpawnMob(YangID):updateEnmity(target);
         end
-    end
+        end
 
     if (GetMobAction(YingID) == ACTION_ROAMING) then -- ensure that it's always going after someone, can't kite it away!
         GetMobByID(YingID):updateEnmity(target);
@@ -40,7 +40,14 @@ function onMobFight(mob,target)
 end;
 
 function onMobDeath(mob, player, isKiller)
-    local npc = GetNPCByID(17330781); -- ID of the '???' target.
+    player:addTitle(DYNAMISXARCABARD_INTERLOPER);
+    if (player:hasKeyItem(HYDRA_CORPS_BATTLE_STANDARD) == false)then
+        player:setVar("DynaXarcabard_Win",1);
+        player:addKeyItem(HYDRA_CORPS_BATTLE_STANDARD);
+        player:messageSpecial(KEYITEM_OBTAINED,HYDRA_CORPS_BATTLE_STANDARD);
+    end
+
+    local npc = GetNPCByID(17330778); -- ID of the '???' target.
     player:addTitle(LIFTER_OF_SHADOWS);
     npc:setPos(mob:getXPos(),mob:getYPos(),mob:getZPos());
     npc:setStatus(0); -- Spawn the '???'

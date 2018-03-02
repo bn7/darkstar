@@ -6,7 +6,8 @@ cmdprops =
 {
     permission = 0,
     parameters = ""
-}; 
+};
+
 function onTrigger(player, x, y, z, zone)
-		player:setPos('-560', '-11', '-33', '23', '7');
+    player:setPos('-560', '-11', '-33', '23', '7');
 end

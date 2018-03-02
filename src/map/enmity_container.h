@@ -34,8 +34,8 @@ class CCharEntity;
 struct EnmityObject_t
 {
     CBattleEntity* PEnmityOwner;
-	int16 CE;						// Cumulative Enmity
-	int16 VE;						// Volatile Enmity
+	int32 CE;						// Cumulative Enmity
+	int32 VE;						// Volatile Enmity
     bool active;
 	uint8 maxTH;                    // Maximum Treasure Hunter level of this Enmity Owner
 };
@@ -56,7 +56,7 @@ public:
     void    LogoutReset(uint32 EntityID);		// Sets entry to inactive
     void    AddBaseEnmity(CBattleEntity* PEntity);
     void    UpdateEnmity(CBattleEntity* PEntity, int16 CE, int16 VE, bool withMaster = true, bool tameable = false);
-    void    UpdateEnmityFromDamage(CBattleEntity* PEntity, uint16 Damage);
+    void    UpdateEnmityFromDamage(CBattleEntity* PEntity, int32 Damage);
     void    UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level, uint16 CureAmount, bool isCureV);
     void    UpdateEnmityFromAttack(CBattleEntity* PEntity,uint16 Damage);
     bool    HasID(uint32 ID); //true if ID is in the container with non-zero enmity level

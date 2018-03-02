@@ -15,7 +15,10 @@ function onInitialize(zone)
     zone:registerRegion(1,-84.302,6.5,-120.997,-77,7.5,-114);  -- Used for stairs teleport -85.1,7,-119.9
 
     UpdateNMSpawnPoint(VRTRA);
+    --[[
     GetMobByID(VRTRA):setRespawnTime(math.random(86400, 259200));
+    ]]
+    GetMobByID(VRTRA):setRespawnTime(math.random(900, 10800));
 
     UpdateNMSpawnPoint(BARBASTELLE);
     GetMobByID(BARBASTELLE):setRespawnTime(math.random(1800,5400));

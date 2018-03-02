@@ -1356,7 +1356,7 @@ namespace charutils
             PChar->pushPacket(new CInventoryItemPacket(nullptr, LocationID, slotID));
             return 0;
         }
-        if ((int32)(PItem->getQuantity() - PItem->getReserve() + quantity) < 0)
+        if ((int32)PItem->getQuantity() + quantity < 0)
         {
             ShowDebug("UpdateItem: Trying to move too much quantity\n");
             return 0;
@@ -1488,9 +1488,10 @@ namespace charutils
                     AddItem(PTarget, LOC_INVENTORY, PItem->getID(), PItem->getReserve());
                 }
                 ShowDebug(CL_CYAN"Removing %s from %s's inventory\n" CL_RESET, PItem->getName(), PChar->GetName());
-                auto amount = PItem->getReserve();
-                PItem->setReserve(0);
-                UpdateItem(PChar, LOC_INVENTORY, PItem->getSlotID(), (int32)(0 - amount));
+                int32 qty = (PItem->getQuantity() - PItem->getReserve());
+                UpdateItem(PChar, LOC_INVENTORY, PItem->getSlotID(), (int32)(0 - PItem->getReserve()));
+                if (qty > 0)
+                    PItem->setReserve(0);
                 PChar->UContainer->ClearSlot(slotid);
             }
         }
@@ -3088,17 +3089,17 @@ namespace charutils
     ************************************************************************/
 
     // TODO: REALISATION MUST BE IN TREASUREPOOL
-
     void DistributeGil(CCharEntity* PChar, CMobEntity* PMob)
     {
         //work out the amount of gil to give (guessed; replace with testing)
         uint32 gil = PMob->GetRandomGil();
         uint32 gBonus = 0;
-
         if (map_config.all_mobs_gil_bonus > 0)
         {
+            /*
             gBonus = map_config.all_mobs_gil_bonus*PMob->GetMLevel();
             gil += std::clamp<uint32>(gBonus, 1, map_config.max_gil_bonus);
+            */  gil += calcGilBonus(PChar, PMob);
         }
 
         // Distribute gil to player/party/alliance
@@ -3196,7 +3197,7 @@ namespace charutils
                 if (PMember->getZone() == PMob->getZone())
                 {
                     if (map_config.exp_party_gap_penalties == 1)
-                    {
+                    {   if ((PMob->m_HiPCLvl - PMember->GetMLevel()) > 10) {baseexp=1;}
                         if (maxlevel > 50 || maxlevel > (PMember->GetMLevel() + 7))
                         {
                             exp = (float)baseexp*(float)((float)(PMember->GetMLevel()) / (float)(maxlevel));
@@ -3607,13 +3608,21 @@ namespace charutils
                 PChar->pushPacket(new CConquestPacket(PChar));
             }
 
+            // Custom Allied Notes Drops
+            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) &&
+                (region >= 33 && region <= 40))
+            {
+                charutils::AddPoints(PChar, "allied_notes", (int32)(exp * 0.1f));
+                PChar->pushPacket(new CConquestPacket(PChar));
+            }
+
             // Cruor Drops in Abyssea zones.
             uint16 Pzone = PChar->getZone();
             if (zoneutils::GetCurrentRegion(Pzone) == REGION_ABYSSEA)
             {
                 uint16 TextID = luautils::GetTextIDVariable(Pzone, "CRUOR_OBTAINED");
                 uint32 Total = charutils::GetPoints(PChar, "cruor");
-                uint32 Cruor = 0; // Need to work out how to do cruor chains, until then no cruor will drop unless this line is customized for non retail play.
+                uint32 Cruor = (int32)(exp * 0.2f); // Need to work out how to do cruor chains, until then no cruor will drop unless this line is customized for non retail play.
 
                 if (TextID == 0)
                 {
@@ -4903,6 +4912,37 @@ namespace charutils
             return Sql_GetIntData(SqlHandle, 0);
         }
         return 0;
+    }
+
+    /*******************************************/
+    // Custom
+    uint32 calcGilBonus(CCharEntity* PChar, CMobEntity* PMob)
+    {
+        uint32 gilTotal = PMob->GetRandomGil();
+        uint32 gilBonus = 0;
+
+        if (map_config.all_mobs_gil_bonus > 0)
+        {
+            uint32 gaveXP = GetRealExp(PChar->GetMLevel(), PMob->GetMLevel());
+            gilBonus = map_config.all_mobs_gil_bonus*PMob->GetMLevel();
+
+            if (gaveXP > 0)
+            {
+                if (PMob->GetMLevel() < 70)
+                {
+                    gilTotal += std::clamp<uint32>(gilBonus, 1, map_config.max_gil_bonus);
+                }
+                else
+                {
+                    gilTotal += std::clamp<uint32>(gilBonus, 1, map_config.max_gil_bonus*2); // LV 70+  and gave XP so double the cap.
+                }
+            }
+            else
+            {
+                gilTotal += dsprand::GetRandomNumber(9,20);
+            }
+        }
+        return gilTotal;
     }
 
 }; // namespace charutils

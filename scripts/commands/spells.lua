@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------------
--- func: @spells
+-- func: !spells
 -- auth: Tagban
 -- desc: Adds spells to player that are normally unobtainable currently on the server.
 ---------------------------------------------------------------------------------------------------

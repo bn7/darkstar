@@ -5,9 +5,14 @@
 require("scripts/globals/settings");
 require("scripts/globals/titles");
 require("scripts/globals/status");
+require("scripts/globals/custom_trials");
+
 -----------------------------------
 
 function onMobInitialize(mob)
+    -- addMod
+    mob:addMod(MOD_STUNRES, 50);
+    mob:addMod(MOD_TERRORRES, 80);
 end;
 
 function onMobSpawn(mob)
@@ -18,6 +23,22 @@ end;
 
 function onMobDeath(mob, player, isKiller)
     player:addTitle(BEHEMOTHS_BANE);
+
+    ------------------------------------
+    -- Begin Custom Legion Code
+    ------------------------------------
+
+    -- Set server var for custom @command to check ToD
+    SetServerVariable("Our_Behemoth_ToD", os.time());
+
+
+    -- Custom Trial Check
+    cTrialProgress(player, 2, "relic");
+
+    ------------------------------------
+    -- End Custom Legion Code
+    ------------------------------------
+
 end;
 
 function onMobDespawn(mob)
@@ -35,11 +56,11 @@ function onMobDespawn(mob)
 
         DisallowRespawn(King_Behemoth, false);
         UpdateNMSpawnPoint(King_Behemoth);
-        GetMobByID(King_Behemoth):setRespawnTime(math.random(75600,86400));
+        GetMobByID(King_Behemoth):setRespawnTime(math.random(21600,32400));
     else
         if (LandKingSystem_NQ ~= 1) then
             UpdateNMSpawnPoint(Behemoth);
-            mob:setRespawnTime(math.random(75600,86400));
+            mob:setRespawnTime(math.random(21600,32400));
             SetServerVariable("[PH]King_Behemoth", kills + 1);
         end
     end

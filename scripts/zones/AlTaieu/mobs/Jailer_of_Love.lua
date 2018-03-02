@@ -6,13 +6,39 @@ require("scripts/globals/status");
 require("scripts/globals/magic");
 -----------------------------------
 
+function onMobInitialize(mob)
+    mob:addMod(MOD_MDEF,100);
+    mob:addMod(MOD_DEF,130);
+    mob:addMod(MOD_ATT,100);
+    mob:addMod(MOD_ACC,100);
+end;
+
 function onMobSpawn(mob)
+    mob:setMod(MOD_REGEN, 250);
+    mob:setMod(MOD_REFRESH, 250);
+    mob:setMod(MOD_REGAIN, 10);
+    mob:setMod(MOD_HASTE_ABILITY, 20);
+    mob:setMod(MOD_UFASTCAST, 65);
+    mob:setMod(MOD_MACC,925);
+    mob:setMod(MOD_MATT,100);
+
+    -- mob:hideName(true);
+    -- mob:untargetable(true);
+    mob:AnimationSub(5);
+    mob:wait(2000);
 end;
 
 function onMobEngaged(mob, target)
     mob:hideName(false);
     mob:untargetable(false);
-    mob:AnimationSub(2);
+    mob:AnimationSub(6);
+    mob:wait(2000);
+end;
+
+function onMobDisengage(mob)
+    -- mob:hideName(true);
+    -- mob:untargetable(true);
+    mob:AnimationSub(5);
 end;
 
 function onMobFight(mob, target)
@@ -105,11 +131,22 @@ function onMobFight(mob, target)
 end;
 
 function onMobDespawn(mob)
+    --[[
     local AV_CHANCE = 25;
     if (AV_CHANCE > math.random(0,99)) then
         SpawnMob(16912876);
     end
+    ]]
 end;
 
 function onMobDeath(mob, player, isKiller)
+    if (isKiller == true) then -- This check is to force this to only run once.
+        --SpawnMob(16912876):updateClaim(player); -- Claim AV, begin death fest
+
+        -- Get rid of JoL's adds.
+        for helperId = mob:getID()+1, mob:getID()+27, 1 do
+            GetMobByID(helperId):setHP(0); -- Just die already!
+            -- DespawnMob(helperId);
+        end
+    end
 end;

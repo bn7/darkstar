@@ -54,6 +54,9 @@ function onChocoboDig(player, precheck)
 end;
 
 function onInitialize(zone)
+
+    -- Hurkan
+    GetMobByID(17257460):setRespawnTime(math.random(900,10800));
 end;
 
 function onZoneIn( player, prevZone)

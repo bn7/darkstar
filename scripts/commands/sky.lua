@@ -1,7 +1,6 @@
 ---------------------------------------------------------------------------------------------------
--- func: Fafnir
--- auth: <Unknown> :: Modded by Tagban
--- desc: Sets the players position to specific location (Fafnir).
+-- func: Sky
+-- desc: Sets the players position to specific location (Sky).
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
@@ -9,6 +8,7 @@ cmdprops =
     permission = 0,
     parameters = "iiii"
 };
+
 function onTrigger(player, x, y, z, zone)
-player:setPos('290', '-42', '-401', '245', '130');
+    player:setPos('0', '-54', '-600', '192', '130');
 end

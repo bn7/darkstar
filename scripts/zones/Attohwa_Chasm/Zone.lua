@@ -44,8 +44,15 @@ function onInitialize(zone)
     zone:registerRegion(29, -238, 5, -118, 0,0,0);
     zone:registerRegion(30, -385.349, 5, -173.973, 0,0,0);
 
+    -- Tiamat
     UpdateNMSpawnPoint(TIAMAT);
+    GetMobByID(TIAMAT):setRespawnTime(math.random(900, 10800));
+    --[[ block comment out DSP stock repop
     GetMobByID(TIAMAT):setRespawnTime(math.random(86400, 259200));
+    ]]
+
+    -- Achuka
+    GetMobByID(16806910):setRespawnTime(math.random(900,10800));
 end;
 
 function onZoneIn(player,prevZone)

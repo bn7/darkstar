@@ -4,8 +4,15 @@
 -----------------------------------
 require("scripts/globals/status");
 -----------------------------------
+function onMobInitialize(mob)
+    -- addMod
+    mob:addMod(MOD_MDEF,50);
+    mob:addMod(MOD_DEF,100);
+    mob:addMod(MOD_ATT,75);
+end;
 
 function onMobSpawn(mob)
+    --[[
     if (math.random(0,99) < 78) then
         SetDropRate(4396,1870,1000); -- Deed Of Sensib.
         SetDropRate(4396,1903,0);
@@ -13,6 +20,14 @@ function onMobSpawn(mob)
         SetDropRate(4396,1870,0);
         SetDropRate(4396,1903,1000); -- Vice Of Aspersion
     end
+    ]]
+    -- setMod
+    mob:setMod(MOD_REGEN, 150);
+    mob:setMod(MOD_REGAIN, 20);
+    mob:setMod(MOD_HASTE_ABILITY, 25);
+    mob:setMod(MOD_DOUBLE_ATTACK, 25);
+    mob:setMod(MOD_MACC,925);
+    mob:setMod(MOD_MATT,100);
 end;
 
 function onMobFight(mob,target)

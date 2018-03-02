@@ -7,6 +7,18 @@ require("scripts/globals/status");
 
 function onMobInitialize(mob)
     mob:setMobMod(MOBMOD_ADD_EFFECT, 1);
+
+    -- addMod
+    mob:addMod(MOD_STR,27);
+    mob:addMod(MOD_DEX,5);
+    mob:addMod(MOD_ACC,100);
+    mob:addMod(MOD_MACC,400);
+end;
+
+
+function onMobSpawn(mob)
+    -- setMod
+    mob:setMod(MOD_REGAIN,33);
 end;
 
 function onMobDeath(mob, player, isKiller)

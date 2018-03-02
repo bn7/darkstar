@@ -12,7 +12,6 @@ require("scripts/zones/AlTaieu/MobIDs");
 -----------------------------------
 
 function onTrade(player,npc,trade)
-    --[[
     -- JAILER OF LOVE
     if (
         not GetMobByID(JAILER_OF_LOVE):isSpawned() and
@@ -25,10 +24,10 @@ function onTrade(player,npc,trade)
         player:tradeComplete();
         SpawnMob(JAILER_OF_LOVE):updateClaim(player);
     end
-    --]]
 end;
 
 function onTrigger(player,npc)
+    -- player:startEvent(1010, 1848 ,1847 ,1849);
 end;
 
 function onEventUpdate(player,csid,option)

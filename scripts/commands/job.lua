@@ -1,7 +1,6 @@
 ---------------------------------------------------------------------------------------------------
--- func: special.lua
--- auth: Tagban/Ninji
--- desc: Individual shops for players
+-- func: af and relic gear
+-- desc: armor shops for players
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
@@ -9,6 +8,7 @@ cmdprops =
     permission = 0,
     parameters = ""
 };
+
 function onTrigger(player)
     player:PrintToPlayer("Job Shop for BNET.cc Players.", 0xF);
     if(player:getMainJob() == 1) then -- WAR

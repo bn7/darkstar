@@ -2531,7 +2531,7 @@ inline int32 CLuaBaseEntity::setPos(lua_State *L)
     DSP_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
     if (m_PBaseEntity->objtype == TYPE_PC)
-    {
+    {   if (jailutils::InPrison((CCharEntity*)m_PBaseEntity) && charutils::GetVar((CCharEntity*)m_PBaseEntity, "inJail")) { return 0; }
         if (!lua_isnil(L, 5) && lua_isnumber(L, 5) && ((CCharEntity*)m_PBaseEntity)->status == STATUS_DISAPPEAR)
         {
             // do not modify zone/position if the character is already zoning
@@ -2608,6 +2608,7 @@ inline int32 CLuaBaseEntity::warp(lua_State *L)
     DSP_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
     DSP_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
+    if (jailutils::InPrison((CCharEntity*)m_PBaseEntity) && charutils::GetVar((CCharEntity*)m_PBaseEntity, "inJail")) { return 0; }
     ((CCharEntity*)m_PBaseEntity)->loc.boundary = 0;
     ((CCharEntity*)m_PBaseEntity)->m_moghouseID = 0;
     ((CCharEntity*)m_PBaseEntity)->loc.p = ((CCharEntity*)m_PBaseEntity)->profile.home_point.p;
@@ -2746,14 +2747,14 @@ int32 CLuaBaseEntity::goToEntity(lua_State* L)
         memset(&buf[0], 0, sizeof(buf));
 
         ref<bool>  (&buf,  0) = true; // Toggle for message routing; goes to entity server first
-        ref<bool>  (&buf,  1) = spawnedOnly; // Specification for Spawned Only or Any 
+        ref<bool>  (&buf,  1) = spawnedOnly; // Specification for Spawned Only or Any
         ref<uint16>(&buf,  2) = targetZone;
         ref<uint16>(&buf,  4) = playerZone;
         ref<uint32>(&buf,  6) = targetID;
         ref<uint16>(&buf, 10) = playerID;
 
         message::send(MSG_SEND_TO_ENTITY, &buf[0], sizeof(buf), nullptr);
-	}	
+	}
     return 0;
 }
 
@@ -13571,6 +13572,212 @@ inline int32 CLuaBaseEntity::itemStolen(lua_State *L)
     return 1;
 }
 
+//= begin custom =//
+
+// Checks Monster's current Treasure Hunter Tier
+inline int32 CLuaBaseEntity::getTHlevel(lua_State* L)
+{
+    DSP_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    DSP_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    CMobEntity* PMob = (CMobEntity*)m_PBaseEntity;
+    lua_pushinteger(L, PMob->m_THLvl);
+    return 1;
+}
+
+// Jail an offline character
+inline int32 CLuaBaseEntity::offlineJail(lua_State *L)
+{
+    DSP_DEBUG_BREAK_IF(m_PBaseEntity == NULL);
+    DSP_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (lua_isnil(L, 1))
+    {
+        lua_pushboolean(L, false);
+        return 1;
+    }
+
+    const char* charName = lua_tostring(L, 1);
+    auto jailCell = (!lua_isnil(L, 3) ? (int32)lua_tointeger(L, 2) : 1);
+    auto xPos = (!lua_isnil(L, 3) ? (float)lua_tointeger(L, 3) : 0);
+    auto yPos = (!lua_isnil(L, 3) ? (float)lua_tointeger(L, 4) : 0);
+    auto zPos = (!lua_isnil(L, 3) ? (float)lua_tointeger(L, 5) : 0);
+    uint32 charId = 0;
+
+    // char will not be logged in so get the id manually
+    const char* Query = "SELECT charid FROM chars WHERE charname = '%s';";
+    int32 ret = Sql_Query(SqlHandle, Query, charName);
+
+    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    {
+        charId = (int32)Sql_GetIntData(SqlHandle, 0);
+    }
+
+    // could not get player from database
+    if (charId == 0)
+    {
+        ((CCharEntity*)m_PBaseEntity)->pushPacket(new CChatMessagePacket((CCharEntity*)m_PBaseEntity, MESSAGE_SYSTEM_1, "Could not get the character from database.\n"));
+        lua_pushboolean(L, false);
+        return 1;
+    }
+
+    // Set the var to match holding cell..
+    const char* varname = "inJail";
+    Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;";
+    Sql_Query(SqlHandle, Query, charId, varname, jailCell, jailCell);
+
+    // Send the player to JAIL
+    Query =
+        "UPDATE chars "
+        "SET "
+        "pos_zone = %u,"
+        "pos_prevzone = %u,"
+        "pos_rot = %u,"
+        "pos_x = %.3f,"
+        "pos_y = %.3f,"
+        "pos_z = %.3f,"
+        "boundary = %u,"
+        "moghouse = %u "
+        "WHERE charid = %u;";
+
+    Sql_Query(SqlHandle, Query,
+        131,   // ZONE: Mordion Gaol
+        131,   // prev zone: ALSO Mordion Gaol
+        0,     // Rotation
+        xPos,  // X
+        yPos,  // Y
+        zPos,  // Z
+        0,     // boundary,
+        0,     // moghouse,
+        charId);
+
+    lua_pushboolean(L, true);
+    return 1;
+}
+
+// Enhances a player's max subjob level temporarily
+inline int32 CLuaBaseEntity::sjBoost(lua_State *L)
+{
+    DSP_DEBUG_BREAK_IF(m_PBaseEntity == NULL);
+    DSP_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+
+    charutils::RemoveAllEquipMods(PChar);
+    PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
+    charutils::ApplyAllEquipMods(PChar);
+
+    if (PChar->status != STATUS_DISAPPEAR)
+    {
+        blueutils::ValidateBlueSpells(PChar);
+        charutils::CalculateStats(PChar);
+        charutils::CheckValidEquipment(PChar);
+        charutils::BuildingCharSkillsTable(PChar);
+        charutils::BuildingCharAbilityTable(PChar);
+        charutils::BuildingCharTraitsTable(PChar);
+        charutils::BuildingCharWeaponSkills(PChar);
+
+        PChar->UpdateHealth();
+        PChar->health.hp = PChar->GetMaxHP();
+        PChar->health.mp = PChar->GetMaxMP();
+
+        PChar->pushPacket(new CCharJobsPacket(PChar));
+        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharSkillsPacket(PChar));
+        PChar->pushPacket(new CCharAbilitiesPacket(PChar));
+        PChar->pushPacket(new CCharUpdatePacket(PChar));
+        PChar->pushPacket(new CMenuMeritPacket(PChar));
+        PChar->pushPacket(new CCharSyncPacket(PChar));
+    }
+
+    return 0;
+}
+
+// Used with GM command to add LS to player inventory
+inline int32 CLuaBaseEntity::addLSpearl(lua_State* L)
+{
+    DSP_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    const char* linkshellName = lua_tostring(L, 1);
+    const char* Query = "SELECT name FROM linkshells WHERE name='%s'";
+    int32 ret = Sql_Query(SqlHandle, Query, linkshellName);
+
+    if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+    {
+        CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
+
+        std::string qStr = ("UPDATE char_inventory SET signature='");
+        qStr += linkshellName;
+        qStr += "' WHERE charid = " + std::to_string(PChar->id);
+        qStr += " AND itemId = 515 AND signature = ''";
+        Sql_Query(SqlHandle, qStr.c_str());
+
+        Query = "SELECT linkshellid,color FROM linkshells WHERE name='%s'";
+        ret = Sql_Query(SqlHandle, Query, linkshellName);
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        {
+            CItem* PItem = itemutils::GetItem(515);
+
+            // Update item with name & color //
+            int8 EncodedString[16];
+            EncodeStringLinkshell((int8*)linkshellName, EncodedString);
+            PItem->setSignature(EncodedString);
+            ((CItemLinkshell*)PItem)->SetLSID(Sql_GetUIntData(SqlHandle, 0));
+            ((CItemLinkshell*)PItem)->SetLSColor(Sql_GetIntData(SqlHandle, 1));
+            uint8 invSlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, 1);
+
+            lua_pushboolean(L, true);
+            return 1;
+        }
+    }
+    lua_pushboolean(L, false);
+    return 1;
+}
+
+/**
+ * Knockback Implementation (c) 2016 atom0s
+ * Used for player based knockbacks.
+ * Needs some tweaks to work with all entities but nothing major.
+ */
+int32 CLuaBaseEntity::knockback(lua_State* L)
+{
+    DSP_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    DSP_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    auto PChar = (CCharEntity*)m_PBaseEntity;
+    auto id = (uint32)lua_tointeger(L, 1);
+    auto animation = (uint16)lua_tointeger(L, 2);
+    auto knockback = (uint8)lua_tointeger(L, 3);
+    auto messageID = (uint16)lua_tointeger(L, 4);
+    auto paramID = (uint16)lua_tointeger(L, 5);
+
+    if (PChar == nullptr)
+        return 0;
+
+    action_t Action;
+    Action.id = id;
+    Action.actionid = 1;
+    Action.actiontype = ACTION_MOBABILITY_FINISH;
+    Action.recast = 0;
+    Action.spellgroup = SPELLGROUP_NONE;
+
+    auto& list = Action.getNewActionList();
+    list.ActionTargetID = PChar->id;
+
+    auto& target = list.getNewActionTarget();
+    target.animation = animation;
+    target.messageID = messageID;
+    target.param = paramID;
+    target.reaction = REACTION_HIT;
+    target.speceffect = SPECEFFECT_RECOIL;
+    target.knockback = knockback;
+
+    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CActionPacket(Action));
+    return 0;
+}
+
+//= end custom =//
+
 //=======================================================//
 
 const char CLuaBaseEntity::className[] = "CBaseEntity";
@@ -13695,7 +13902,7 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,resetPlayer),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,goToEntity),
-    LUNAR_DECLARE_METHOD(CLuaBaseEntity,gotoPlayer),	
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,gotoPlayer),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,bringPlayer),
 
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getNationTeleport),
@@ -14218,6 +14425,15 @@ Lunar<CLuaBaseEntity>::Register_t CLuaBaseEntity::methods[] =
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,addTreasure),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,getStealItem),
     LUNAR_DECLARE_METHOD(CLuaBaseEntity,itemStolen),
+
+    // Custom
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,getTHlevel),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,offlineJail), // Temp till DSP gets its shit together
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,sjBoost),
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity,addLSpearl),
+
+    // Knockback Implementation (c) 2016 atom0s
+    LUNAR_DECLARE_METHOD(CLuaBaseEntity, knockback),
 
     {nullptr,nullptr}
 };

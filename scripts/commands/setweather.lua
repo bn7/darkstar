@@ -7,7 +7,7 @@ require("scripts/globals/weather");
 
 cmdprops =
 {
-    permission = 2,
+    permission = 1,
     parameters = "s"
 };
 

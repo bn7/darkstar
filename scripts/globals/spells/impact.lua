@@ -20,6 +20,19 @@ end;
 -----------------------------------------
 
 function onSpellCast(caster,target,spell)
+    --[[
+    local spellParams = {}; -- Guesstimated
+    spellParams.hasMultipleTargetReduction = false;
+    spellParams.resistBonus = 1.0;
+    spellParams.V0 = 960;
+    spellParams.V50 = 1120;
+    spellParams.V100 = 1233;
+    spellParams.V200 = 1666;
+    spellParams.M0 = 4;
+    spellParams.M50 = 3.75;
+    spellParams.M100 = 3.5;
+    spellParams.M200 = 3;
+    ]]
     local dINT = caster:getStat(MOD_INT) - target:getStat(MOD_INT);
     local params = {};
     params.diff = nil;

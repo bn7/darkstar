@@ -322,7 +322,7 @@ function applyResistanceEffect(caster, target, spell, params)
     local skill = params.skillType;
     local bonus = params.bonus;
     local effect = params.effect;
-
+    if (math.random(1,1000) <= customResCheck(target, effect)) then return 0; end
     -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
     if (effect ~= nil) then -- Dispel's script doesn't have an "effect" to send here, nor should it.
         if (skill == ENFEEBLING_MAGIC_SKILL and caster:hasStatusEffect(EFFECT_STYMIE) and target:canGainStatusEffect(effect)) then
@@ -377,8 +377,15 @@ end;
 
 function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc)
     -- resist everything if magic shield is active
+    --[[
     if (target:hasStatusEffect(EFFECT_MAGIC_SHIELD, 0)) then
         return 0;
+    end
+    ]]
+    if (target:hasStatusEffect(EFFECT_MAGIC_SHIELD)) then
+        if (target:getStatusEffect(EFFECT_MAGIC_SHIELD):getPower() ~= 100) then
+            return 0;
+        end
     end
 
     local magiceva = 0;
@@ -503,6 +510,9 @@ function getEffectResistance(target, effect)
         effectres = MOD_CHARMRES;
     elseif (effect == EFFECT_AMNESIA) then
         effectres = MOD_AMNESIARES;
+    elseif (effect == EFFECT_TERROR) then
+        effectres = MOD_TERRORRES;
+    -- Don't put MOD_DOOMRES here.
     end
 
     if (effectres ~= 0) then
@@ -647,13 +657,13 @@ end;
     else
         target:delHP(dmg);
         target:handleAfflatusMiseryDamage(dmg);
-        target:updateEnmityFromDamage(caster,dmg);
+        target:updateEnmityFromDamage(caster,dmg*customEnmityAdjust(caster,spell));
         -- Only add TP if the target is a mob
         if (target:getObjType() ~= TYPE_PC) then
             target:addTP(100);
         end
     end
-
+    -- debugSpellDamageEnmity(caster,target,dmg,customEnmityAdjust(caster,spell),spell);
     return dmg;
  end;
 
@@ -1287,3 +1297,155 @@ function outputMagicHitRateInfo()
 end;
 
 -- outputMagicHitRateInfo();
+
+
+-- Had to create this because DSP treats status resist traits like additional magic evasion..
+function customResCheck(target, effect)
+    local effectRes = 0;
+
+    if (effect == EFFECT_SLEEP_I or effect == EFFECT_SLEEP_II) then
+        effectRes = target:getMod(MOD_SLEEPRES);
+    elseif(effect == EFFECT_LULLABY) then
+        effectRes = target:getMod(MOD_LULLABYRES);
+    elseif (effect == EFFECT_POISON) then
+        if (target:hasStatusEffect(EFFECT_NEGATE_POISON)) then
+            return 1000;
+        end
+        effectRes = target:getMod(MOD_POISONRES);
+    elseif (effect == EFFECT_PARALYZE) then
+        effectRes = target:getMod(MOD_PARALYZERES);
+    elseif (effect == EFFECT_BLINDNESS) then
+        effectRes = target:getMod(MOD_BLINDRES)
+    elseif (effect == EFFECT_SILENCE) then
+        effectRes = target:getMod(MOD_SILENCERES);
+    elseif (effect == EFFECT_PLAGUE or effect == EFFECT_DISEASE) then
+        if (target:hasStatusEffect(EFFECT_NEGATE_VIRUS)) then
+            return 1000;
+        end
+        effectRes = target:getMod(MOD_VIRUSRES);
+    elseif (effect == EFFECT_PETRIFICATION) then
+        if (target:hasStatusEffect(EFFECT_NEGATE_PETRIFY)) then
+            return 1000;
+        end
+        effectRes = target:getMod(MOD_PETRIFYRES);
+    elseif (effect == EFFECT_BIND) then
+        effectRes = target:getMod(MOD_BINDRES);
+    elseif (effect == EFFECT_CURSE_I or effect == EFFECT_CURSE_II or effect == EFFECT_BANE) then
+        if (target:hasStatusEffect(EFFECT_NEGATE_CURSE)) then
+            return 1000;
+        end
+        effectRes = target:getMod(MOD_CURSERES);
+    elseif (effect == EFFECT_WEIGHT) then
+        effectRes = target:getMod(MOD_GRAVITYRES);
+    elseif (effect == EFFECT_SLOW or effect == EFFECT_ELEGY) then
+        effectRes = target:getMod(MOD_SLOWRES);
+    elseif (effect == EFFECT_STUN) then
+        effectRes = target:getMod(MOD_STUNRES);
+    elseif (effect == EFFECT_CHARM) then
+        if (target:hasStatusEffect(EFFECT_NEGATE_CHARM)) then
+            return 1000;
+        end
+        effectRes = target:getMod(MOD_CHARMRES);
+    elseif (effect == EFFECT_AMNESIA) then
+        if (target:hasStatusEffect(EFFECT_NEGATE_AMNESIA)) then
+            return 1000;
+        end
+        effectRes = target:getMod(MOD_AMNESIARES);
+    elseif (effect == EFFECT_TERROR) then
+        if (target:hasStatusEffect(EFFECT_NEGATE_TERROR)) then
+            return 1000;
+        end
+        effectRes = target:getMod(MOD_TERRORRES);
+    elseif (effect == EFFECT_DOOM) then
+        if (target:hasStatusEffect(EFFECT_NEGATE_DOOM)) then
+            return 1000;
+        end
+        effectRes = target:getMod(MOD_DOOMRES);
+    end
+
+    -- Temp! DSP seems to be using x/100 where data suggests x/1000ths or possibly x/1024ths
+    effectRes = effectRes*10;
+    -- just going to fudge it for now because actually raising the modifier total
+    -- would effect DSP's garbage magic evasion calculations.
+
+    if (effectRes > 400) then
+        -- I pulled this threshold number outa my ass, because there
+        -- is zero data for very high values of status resist trait.
+        effectRes = (400+((effectRes -400)*0.5));
+        -- modifier amount above 400 worth half as much, because I say so..
+    end
+
+    if (effectRes > 950) then
+        effectRes = 950; -- 95% cap!
+        -- I don't think it would even be possible to reach this on retail..
+        -- In theory LegionDS might stack augments later though.
+    end
+
+    return effectRes;
+end;
+
+-- This is used to modify enmity for damage type spells ONLY!
+function customEnmityAdjust(caster,spell,params)
+    local multiplier = 1;
+    -- Don't even check all this if not a player..
+    if (caster:getObjType() == TYPE_PC) then
+        -- Spell specific adjustments..
+        if (spell:getID() == 21) then     -- Holy
+            multiplier = multiplier*1.2;
+        elseif (spell:getID() == 22) then -- Holy 2
+            multiplier = multiplier*1.2;
+        end
+
+        -- Main Job specific adjustments..
+        local mJob = caster:getMainJob();
+        if (mJob == JOBS.PLD) then
+            multiplier = multiplier*1.11;
+        end
+
+        -- Sub Job specific adjustments..
+        local sJob = caster:getSubJob();
+        if (sJob == JOBS.DRK) then
+            multiplier = multiplier*1.11;
+        end
+
+        -- Skill specific adjustments..
+        local skill = spell:getSkillType();
+        if (skill == ELEMENTAL_MAGIC_SKILL) then
+            multiplier = multiplier*0.9;
+        elseif (skill == NINJUTSU_SKILL) then
+            multiplier = multiplier*1.11;
+        --[[ Rethinking blue magic enmity.. People are tanking intentionally with blue spells.
+        elseif (skill == BLUE_SKILL and params ~= nil) then
+            if (params.dmgtype == nil) then -- This will be nil unless physical type
+                multiplier = multiplier*1.25;
+            elseif (params.dmgtype == DMGTYPE_BLUNT or params.dmgtype == DMGTYPE_PIERCE
+            or params.dmgtype == DMGTYPE_SLASH or params.dmgtype == DMGTYPE_H2H) then
+                multiplier = multiplier*1.11;
+            end
+        ]]
+        end
+    end
+
+    -- Remember multiple conditions can be tripped and stacked,
+    -- but if it doesn't do damage it doesn't get adjusted!
+    -- Other spells are handled in the database table instead.
+
+    -- print(multiplier)
+    return multiplier;
+end;
+
+-- Big huge pile of debug code, replicating a lot of core shit to be less spammy than a core print..
+function debugSpellDamageEnmity(caster,target,dmg,multiplier,spell)
+    local levelMod;
+    if (target == nil) then
+        levelMod = utils.clamp(caster:getMainLvl(), 0, 99); -- same as "default fallback" in core
+    else
+        levelMod = utils.clamp(target:getMainLvl(), 0, 99); -- core says "correct mod value"
+    end
+    levelMod = ((31*levelMod)/50)+6; -- And this is the math core does to it..
+
+    local CE = (80 / levelMod * dmg);
+    local VE = (240 / levelMod * dmg);
+
+    print("[EnmityFromDamage-Spell]\n Caster: "..caster:getName().."\t Target: "..target:getName().."\n CE: "..CE.."\t VE: "..VE.."\n Spell ID: "..spell:getID().."\t\t Dmg: "..dmg.."\n levelMod: "..levelMod.."\t\t multiplier: "..multiplier);
+end;

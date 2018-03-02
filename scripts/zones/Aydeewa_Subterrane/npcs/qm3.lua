@@ -11,7 +11,7 @@ require("scripts/globals/status");
 
 function onTrade(player,npc,trade)
     local mobID = 17056186;
-    if (trade:hasItemQty(1127,20) and trade:getItemCount() == 20) then -- Trade Spoilt Blood
+    if (trade:hasItemQty(2602,1) and trade:getItemCount() == 1) then -- Trade Spoilt Blood
         player:tradeComplete();
         SpawnMob(mobID):updateClaim(player);
     end

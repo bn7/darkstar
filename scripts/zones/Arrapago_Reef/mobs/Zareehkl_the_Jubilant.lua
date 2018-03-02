@@ -1,14 +1,20 @@
 -----------------------------------
 -- Area: Arrapago Reef
---  NPC: Zareehkl the Jubilant
+--  ZNM: Zareehkl the Jubilant
 -----------------------------------
 require("scripts/globals/status");
+require("scripts/globals/custom_trials");
 -----------------------------------
 
 function onMobInitialize(mob)
 end;
 
 function onMobSpawn(mob)
+    -- setMod
+    mob:setMod(MOD_UDMGPHYS,100); -- 2x normal dmg
+    mob:setMod(MOD_UDMGBREATH,50);
+    mob:setMod(MOD_UDMGMAGIC,100);
+    mob:setMod(MOD_UDMGRANGE,50);
 end;
 
 function onMobFight(mob, target)
@@ -38,4 +44,16 @@ function onCriticalHit(mob)
 end;
 
 function onMobDeath(mob, player, isKiller)
+
+    ------------------------------------
+    -- Begin Custom Legion Code
+    ------------------------------------
+
+    -- Custom Trial Check
+    cTrialProgress(player, 1, "mythic");
+
+    ------------------------------------
+    -- End Custom Legion Code
+    ------------------------------------
+
 end;

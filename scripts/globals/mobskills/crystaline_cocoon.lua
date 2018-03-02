@@ -13,7 +13,7 @@ require("scripts/globals/status");
 ---------------------------------------------
 
 function onMobSkillCheck(target,mob,skill)
-    return 0;
+    return 1;
 end;
 
 function onMobWeaponSkill(target, mob, skill)

@@ -17,4 +17,4 @@ function onTrigger(player, target)
 
     local targ = GetPlayerByName( target );
         player:setPos( targ:getXPos(), targ:getYPos(), targ:getZPos(), 0, targ:getZoneID() );    
-    end
+end

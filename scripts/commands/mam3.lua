@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------------------------
--- @mamool3 -- Spawns 3rd wave of Mamool
+-- !mamool3 -- Spawns 3rd wave of Mamool
 --
 -- Besieged
 ---------------------------------------------------------------------------------------------------
@@ -9,6 +9,7 @@ cmdprops =
     permission = 3,
     parameters = "iiii"
 };
+
 function onTrigger(player)
    SpawnMob('16973892'); -- Fleetfingered_Mobel_Ja---GrpId=1507      -62,-7,40,254   poolID=1365
    SpawnMob('16973893'); -- Mamool_Ja_Ravager                  -63,-6,27,68

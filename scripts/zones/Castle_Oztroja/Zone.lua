@@ -8,10 +8,16 @@ package.loaded["scripts/zones/Castle_Oztroja/TextIDs"] = nil;
 require("scripts/zones/Castle_Oztroja/TextIDs");
 require("scripts/zones/Castle_Oztroja/MobIDs");
 require("scripts/globals/conquest");
+require("scripts/globals/quests");
 require("scripts/globals/zone");
+require("scripts/zones/Castle_Oztroja/TextIDs");
+require("scripts/globals/msg");
 -----------------------------------
 
 function onInitialize(zone)
+    zone:registerRegion(1,-78,10,-39,0,0,0); -- PLD AF2 "A boy's dream"(Spawns Odontotyrannus if the player has the item "giant shell bug".
+
+    -- Yagudo Avatar
     UpdateNMSpawnPoint(YAGUDO_AVATAR);
     GetMobByID(YAGUDO_AVATAR):setRespawnTime(math.random(900, 10800));
 
@@ -39,6 +45,17 @@ function onConquestUpdate(zone, updatetype)
 end;
 
 function onRegionEnter(player,region)
+    switch (region:GetRegionID()): caseof
+    {
+        [1] = function (x)  -- PLD AF2 "A boy's dream".
+        if (player:getQuestStatus(SANDORIA, A_BOY_S_DREAM) == QUEST_ACCEPTED) then
+            if (player:hasItem(17001) == true and player:hasItem(4562) == false) then
+                player:PrintToPlayer("The Giant Shell Bug you posses brings a fiend out of the water!. ", chatType.SYSTEM_3);
+                SpawnMob(17396141):updateEnmity(player);
+            end
+        end
+    end,
+    }
 end;
 
 function onGameHour(zone)

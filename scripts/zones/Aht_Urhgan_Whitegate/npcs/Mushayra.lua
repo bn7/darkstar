@@ -7,13 +7,21 @@
 package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
 -----------------------------------
 require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
+require("scripts/globals/quests");
+
 -----------------------------------
 
 function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
-    player:startEvent(519);
+    local artsAndCrafts = player:getQuestStatus(AHT_URHGAN,ARTS_AND_CRAFTS);
+
+    if (artsAndCrafts == QUEST_ACCEPTED) then
+        player:showText(npc,HADAHDA_DIALOG + 16);
+    else
+        player:startEvent(519);
+    end
 end;
 
 function onEventUpdate(player,csid,option)

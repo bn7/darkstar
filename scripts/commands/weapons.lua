@@ -7,6 +7,7 @@ cmdprops =
     permission = 1,
     parameters = ""
 };
+
 function onTrigger(player)
     player:PrintToPlayer("Welcome to BNET.cc's Ultimate Weapon Shop...", 0xF);
     if(player:getMainJob() == 1) then -- WAR

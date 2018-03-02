@@ -313,7 +313,7 @@ void CSpell::setElement(uint16 element)
     m_element = element;
 }
 
-void CSpell::setCE(uint16 ce)
+void CSpell::setCE(uint32 ce)
 {
     m_CE = ce;
 }
@@ -328,7 +328,7 @@ void CSpell::setRadius(float radius)
     m_radius = radius;
 }
 
-void CSpell::setVE(uint16 ve)
+void CSpell::setVE(uint32 ve)
 {
     m_VE = ve;
 }

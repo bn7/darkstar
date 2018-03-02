@@ -1,13 +1,28 @@
 -----------------------------------
 -- Area: Bhaflau Thickets
---  MOB: Harvestman
+--  NM:  Harvestman
 -- !pos 398.130 -10.675 179.169 52
 -----------------------------------
+require("scripts/globals/status");
+require("scripts/globals/magic");
 require("scripts/globals/msg");
 -----------------------------------
 
 function onMobInitialize(mob)
     mob:setMobMod(MOBMOD_ADD_EFFECT, 1);
+    mob:setMobMod(MOBMOD_MAIN_2HOUR, 1);
+
+    -- addMod
+    mob:addMod(MOD_DOUBLE_ATTACK, 15)
+    mob:addMod(MOD_MATT, 100);
+end;
+
+function onMobSpawn(mob)
+    -- setMod
+    mob:setMod(MOD_REGEN, 40);
+    mob:setMod(MOD_REGAIN, 10);
+    mob:setMod(MOD_UFASTCAST, 55);
+    mob:setMod(MOD_MACC, 950);
 end;
 
 function onAdditionalEffect(mob,target,damage)
@@ -25,7 +40,9 @@ function onMobDeath(mob, player, isKiller)
 end;
 
 function onMobDespawn(mob)
+    --[[
     -- Set Harvesman's spawnpoint and respawn time (21-24 hours)
     UpdateNMSpawnPoint(mob:getID());
     mob:setRespawnTime(math.random(75600,86400));
+    ]]
 end;

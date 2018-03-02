@@ -5,7 +5,24 @@
 require("scripts/globals/settings");
 require("scripts/globals/titles");
 require("scripts/globals/status");
+require("scripts/globals/custom_trials");
 -----------------------------------
+
+function onMobInitialize(mob)
+    -- setMod
+    mob:setMod(MOD_REGEN, 50);
+    mob:setMod(MOD_REGAIN, 10);
+    mob:setMod(MOD_COUNTER, 15);
+
+    -- addMod
+    mob:addMod(MOD_DOUBLE_ATTACK, 10)
+    mob:addMod(MOD_STUNRES, 50);
+    mob:addMod(MOD_TERRORRES, 100);
+
+    -- setMobMod
+    mob:setMobMod(MOBMOD_DRAW_IN, 2);
+    mob:setMobMod(MOBMOD_MAGIC_COOL, 60);
+end;
 
 function onMobSpawn(mob)
     -- Todo: move this to SQL after drop slots are a thing
@@ -22,9 +39,9 @@ function onMobSpawn(mob)
     end
 end;
 
-function onMobInitialize(mob)
-    mob:setMobMod(MOBMOD_MAGIC_COOL, 60);
-end;
+-----------------------------------
+-- onSpellPrecast
+-----------------------------------
 
 function onSpellPrecast(mob, spell)
     if (spell:getID() == 218) then
@@ -38,12 +55,36 @@ end;
 
 function onMobDeath(mob, player, isKiller)
     player:addTitle(BEHEMOTH_DETHRONER);
+
+    ------------------------------------
+    -- Begin Custom Legion Code
+    ------------------------------------
+
+    if (isKiller == true) then
+        local RND = math.random(1,1000);
+        if (RND <= 200) then -- 20%
+            player:addTreasure(20963, mob); -- Falubeza
+            SetServerVariable("Falubeza_dropped",GetServerVariable("Falubeza_dropped")+1);
+        else
+            player:addTreasure(860, mob); -- Behemoth Hide
+            player:addTreasure(860, mob); -- Behemoth Hide
+            player:addTreasure(883, mob); -- Behemoth Horn
+        end
+    end
+
+    -- Custom Trial Check
+    cTrialProgress(player, 3, "relic");
+
+    ------------------------------------
+    -- End Custom Legion Code
+    ------------------------------------
+
 end;
 
 function onMobDespawn(mob)
     -- Set King_Behemoth's Window Open Time
     if (LandKingSystem_HQ ~= 1) then
-        local wait = 72 * 3600;
+        local wait = 72 * 360;
         SetServerVariable("[POP]King_Behemoth", os.time() + wait); -- 3 days
         if (LandKingSystem_HQ == 0) then -- Is time spawn only
             DisallowRespawn(mob:getID(), true);
@@ -56,7 +97,7 @@ function onMobDespawn(mob)
         local Behemoth = mob:getID()-1;
         DisallowRespawn(Behemoth, false);
         UpdateNMSpawnPoint(Behemoth);
-        GetMobByID(Behemoth):setRespawnTime(math.random(75600,86400));
+        GetMobByID(Behemoth):setRespawnTime(math.random(21600,32400));
     end
 
     if (LandKingSystem_NQ > 0 or LandKingSystem_HQ > 0) then

@@ -1,9 +1,20 @@
 -----------------------------------
 -- Area: Halvung
---  MOB: Gurfurlur the Menacing
+--  NM:  Gurfurlur the Menacing
 -----------------------------------
 require("scripts/globals/titles");
+require("scripts/globals/custom_trials");
 -----------------------------------
+
+function onMobInitialize(mob)
+    -- addMod
+    mob:addMod(MOD_REGAIN,33);
+    mob:addMod(MOD_MATT,75);
+    mob:addMod(MOD_MACC,500);
+    mob:addMod(MOD_ACC,250);
+    mob:addMod(MOD_ATT,50);
+    mob:addMod(MOD_DEF,50);
+end;
 
 function onMobSpawn(mob)
 end;
@@ -43,4 +54,36 @@ end;
 
 function onMobDeath(mob, player, isKiller)
     player:addTitle(TROLL_SUBJUGATOR);
+
+    ------------------------------------
+    -- Begin Custom Legion Code
+    ------------------------------------
+
+    if (isKiller == true) then
+        local RND = math.random(1,1000);
+        if (RND <= 100) then -- 10%
+            player:addTreasure(10950, mob); -- Goldsmith's Torque
+        elseif (RND <= 300) then -- 20%
+            player:addTreasure(21256, mob); -- Illapa
+        else
+            player:addTreasure(4023, mob); -- Snowsteel Ore
+            player:addTreasure(4023, mob); -- Snowsteel Ore
+        end
+    end
+
+    -- Custom Trial Check
+    cTrialProgress(player, 3, "mythic");
+
+    ------------------------------------
+    -- End Custom Legion Code
+    ------------------------------------
+
+end;
+
+-----------------------------------
+-- onMobDespawn
+-----------------------------------
+
+function onMobDespawn(mob)
+    mob:setRespawnTime(math.random(75600,86400));   -- 21 to 24 hours
 end;

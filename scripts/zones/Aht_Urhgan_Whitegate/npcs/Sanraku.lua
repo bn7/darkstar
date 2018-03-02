@@ -13,6 +13,7 @@ require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
 
 function onTrade(player,npc,trade)
     --[[
+    ]]
     local trophies =
     {
         2616, 2617, 2618, 2613, 2614, 2615, 2610, 2611, 2612,
@@ -36,6 +37,7 @@ function onTrade(player,npc,trade)
         FALLOW_COLORED_SEAL,TAUPE_COLORED_SEAL,SIENNA_COLORED_SEAL,
         LAVENDER_COLORED_SEAL
     }
+    --[[
 
     if (trade:getItemCount() == 1) then
         if (trade:hasItemQty(2477,1)) then -- Trade Soul Plate
@@ -44,8 +46,9 @@ function onTrade(player,npc,trade)
             player:addCurrency("zeni_point", zeni);
             player:startEvent(910,zeni);
         else
-            znm = -1;
-            found = false;
+    ]]
+            local znm = -1;
+            local found = false;
 
             while (znm <= 30) and not(found) do
                 znm = znm + 1;
@@ -63,6 +66,7 @@ function onTrade(player,npc,trade)
                     player:messageSpecial(SANCTION + 8,seals[znm]); -- You already possess .. (not sure this is authentic)
                 end
             end
+    --[[
         end
     end
     ]]
@@ -73,6 +77,7 @@ function onTrigger(player,npc)
     if (player:getVar("ZeniStatus") == 0) then
         player:startEvent(908);
     else
+    ]]
         local param = 2140136440; -- Defaut bitmask, Tier 1 ZNM Menu + don't ask option
 
         -- Tinnin Path
@@ -113,6 +118,7 @@ function onTrigger(player,npc)
         end;
 
         player:startEvent(909,param);
+    --[[
     end
     ]]
 end;
@@ -120,7 +126,6 @@ end;
 function onEventUpdate(player,csid,option)
     -- printf("CSID: %u",csid);
     -- printf("updateRESULT: %u",option);
-    --[[
     local lures =
     {
         2580, 2581, 2582, 2577, 2578, 2579, 2574, 2575, 2576,
@@ -147,6 +152,7 @@ function onEventUpdate(player,csid,option)
 
     if (csid == 909) then
         local zeni = player:getCurrency("zeni_point");
+        local salt = nil;
 
         if (option >= 300 and option <= 302) then
             if (option == 300) then
@@ -166,7 +172,7 @@ function onEventUpdate(player,csid,option)
                 player:delCurrency("zeni_point", 500);
             end
         else -- player is interested in buying a pop item.
-            n = option % 10;
+            local n = option % 10;
 
             if (n <= 2) then
                 if (option == 130 or option == 440) then
@@ -230,16 +236,13 @@ function onEventUpdate(player,csid,option)
             end
         end
     end
-    ]]
 end;
 
 function onEventFinish(player,csid,option)
     -- printf("CSID: %u",csid);
     -- printf("finishRESULT: %u",option);
-    --[[
     if (csid == 908) then
         player:setVar("ZeniStatus",1);
         player:addCurrency("zeni_point", 2000);
     end
-    ]]
 end;

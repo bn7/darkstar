@@ -165,6 +165,7 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <WholeProgramOptimization>false</WholeProgramOptimization>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libmariadb.lib;lua51.lib;libzmq.lib;WS2_32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -186,6 +187,9 @@
       <Command>
       </Command>
     </CustomBuildStep>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -347,6 +351,7 @@
     <ClInclude Include="..\..\src\map\packets\bazaar_close.h" />
     <ClInclude Include="..\..\src\map\packets\bazaar_item.h" />
     <ClInclude Include="..\..\src\map\packets\bazaar_message.h" />
+    <ClInclude Include="..\..\src\map\packets\bazaar_sale.h" />
     <ClInclude Include="..\..\src\map\packets\blacklist.h" />
     <ClInclude Include="..\..\src\map\packets\campaing_map.h" />
     <ClInclude Include="..\..\src\map\packets\caught_fish.h" />
@@ -588,6 +593,7 @@
     <ClCompile Include="..\..\src\map\packets\bazaar_close.cpp" />
     <ClCompile Include="..\..\src\map\packets\bazaar_item.cpp" />
     <ClCompile Include="..\..\src\map\packets\bazaar_message.cpp" />
+    <ClCompile Include="..\..\src\map\packets\bazaar_sale.cpp" />
     <ClCompile Include="..\..\src\map\packets\blacklist.cpp" />
     <ClCompile Include="..\..\src\map\packets\campaing_map.cpp" />
     <ClCompile Include="..\..\src\map\packets\caught_fish.cpp" />

@@ -960,6 +960,8 @@ int32 map_config_default()
     map_config.level_sync_enable = 0;
     map_config.disable_gear_scaling = 0;
     map_config.all_jobs_widescan = 1;
+    map_config.widescan_bonus = 0;
+    map_config.engage_delay_mod = 1.0f;
     map_config.speed_mod = 0;
     map_config.mob_speed_mod = 0;
     map_config.skillup_chance_multiplier = 2.5f;
@@ -1199,6 +1201,14 @@ int32 map_config_read(const int8* cfgName)
         else if (strcmp(w1, "all_jobs_widescan") == 0)
         {
             map_config.all_jobs_widescan = atoi(w2);
+        }
+        else if (strcmp(w1,"widescan_bonus") == 0)
+        {
+            map_config.widescan_bonus = atoi(w2);
+        }
+        else if (strcmp(w1,"engage_delay_mod") == 0)
+        {
+            map_config.engage_delay_mod = (float)atof(w2);
         }
         else if (strcmp(w1, "speed_mod") == 0)
         {

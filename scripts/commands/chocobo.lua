@@ -1,15 +1,22 @@
 ---------------------------------------------------------------------------------------------------
--- func: Give's player Chocobo Effect.
+-- func: !chocobo
+-- desc: Spawns a chocobo.
 ---------------------------------------------------------------------------------------------------
 
 cmdprops =
 {
     permission = 0,
-    parameters = "s"
+    parameters = ""
 };
 
-
 function onTrigger(player)
-	 player:setAnimation("5");
-	 player:messagePublic(280, player, EFFECT_CHOCOBO, EFFECT_CHOCOBO);
+    player:setAnimation(5);
+
+    --entityVisualPacket(lua_State* L)
+    -- player race chocobo
+    -- 20 yellow
+    -- 21 black
+    -- 22 blue
+    -- 23 red
+    -- 24 green
 end;

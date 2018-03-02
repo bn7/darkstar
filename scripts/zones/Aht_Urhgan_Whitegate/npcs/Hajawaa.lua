@@ -54,24 +54,47 @@ function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
-    local CurrGil = player:getGil();
-    for KeyItem = 11,ArraySize,11 do
-        if player:hasKeyItem(StorageArray[KeyItem]) then
-            if StorageArray[KeyItem - 9] == 1 then
-                G1 = G1 + StorageArray[KeyItem - 8];
-            elseif StorageArray[KeyItem - 9] == 2 then
-                G2 = G2 + StorageArray[KeyItem - 8];
-            elseif StorageArray[KeyItem - 9] == 3 then
-                G3 = G3 + StorageArray[KeyItem - 8];
-            elseif StorageArray[KeyItem - 9] == 4 then
-                G4 = G4 + StorageArray[KeyItem - 8];
-            elseif StorageArray[KeyItem - 9] == 6 then
-                G5 = G5 + StorageArray[KeyItem - 8];
-            end;
-        end;
-    end;
-    player:startEvent(Withdrawl,G1,G2,G3,G4,CurrGil,G5);
-end;
+    -- Begin Temp Fix for broken AF quests
+    player:addKeyItem(654); -- FIGHTERS_ARMOR_CLAIM_SLIP
+    player:addKeyItem(655); -- TEMPLE_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(656); -- HEALERS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(657); -- WIZARDS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(658); -- WARLOCKS_ARMOR_CLAIM_SLIP
+    player:addKeyItem(659); -- ROGUES_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(660); -- GALLANT_ARMOR_CLAIM_SLIP
+    player:addKeyItem(661); -- CHAOS_ARMOR_CLAIM_SLIP
+    player:addKeyItem(662); -- BEAST_ARMOR_CLAIM_SLIP
+    player:addKeyItem(663); -- CHORAL_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(664); -- HUNTERS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(665); -- MYOCHIN_ARMOR_CLAIM_SLIP
+    player:addKeyItem(666); -- NINJAS_GARB_CLAIM_SLIP
+    player:addKeyItem(667); -- DRACHEN_ARMOR_CLAIM_SLIP
+    player:addKeyItem(668); -- EVOKERS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(1964); -- MAGUS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(1965); -- CORSAIRS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(1966); -- PUPPETRY_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(1967); -- DANCERS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(1968); -- DANCERS_ATTIRE_CLAIM_SLIP
+    player:addKeyItem(1969); -- SCHOLARS_ATTIRE_CLAIM_SLIP
+    -- End Temp Fix
+   CurrGil = player:getGil();
+   for KeyItem = 11,ArraySize,11 do
+      if player:hasKeyItem(StorageArray[KeyItem]) then
+         if StorageArray[KeyItem - 9] == 1 then
+            G1 = G1 + StorageArray[KeyItem - 8];
+         elseif StorageArray[KeyItem - 9] == 2 then
+            G2 = G2 + StorageArray[KeyItem - 8];
+         elseif StorageArray[KeyItem - 9] == 3 then
+            G3 = G3 + StorageArray[KeyItem - 8];
+         elseif StorageArray[KeyItem - 9] == 4 then
+            G4 = G4 + StorageArray[KeyItem - 8];
+         elseif StorageArray[KeyItem - 9] == 6 then
+            G5 = G5 + StorageArray[KeyItem - 8];
+         end;
+      end;
+   end;
+   player:startEvent(Withdrawl,G1,G2,G3,G4,CurrGil,G5);
+end; 
 
 function onEventUpdate(player,csid,option)
     if (csid == Withdrawl) then

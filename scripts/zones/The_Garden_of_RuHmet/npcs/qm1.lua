@@ -13,10 +13,13 @@ package.loaded["scripts/zones/The_Garden_of_RuHmet/TextIDs"] = nil;
 -----------------------------------
 require("scripts/zones/The_Garden_of_RuHmet/TextIDs");
 require("scripts/zones/The_Garden_of_RuHmet/MobIDs");
+require("scripts/globals/status");
+
 -----------------------------------
 
 function onTrade(player,npc,trade)
     -- Trade 12 Ghrah M Chips
+    --[[
     if (GetMobAction(Jailer_of_Fortitude) == 0 and trade:hasItemQty(1872,12) and trade:getItemCount() == 12) then
         local qm1 = GetNPCByID(Jailer_of_Fortitude_QM);
         -- Complete the trade
@@ -32,11 +35,24 @@ function onTrade(player,npc,trade)
         SpawnMob(Jailer_of_Fortitude):updateClaim(player);
         SpawnMob(Kf_Ghrah_WHM):updateClaim(player);
         SpawnMob(Kf_Ghrah_BLM):updateClaim(player);
+    ]]
+
+    if (GetMobAction(16921015) == ACTION_NONE) then
+        if (trade:hasItemQty(1872,12) and trade:getItemCount() == 12) then
+            GetMobByID(16921015):setSpawn(npc:getXPos(),npc:getYPos(),npc:getZPos());
+            GetMobByID(16921016):setSpawn(npc:getXPos(),npc:getYPos(),npc:getZPos());
+            GetMobByID(16921017):setSpawn(npc:getXPos(),npc:getYPos(),npc:getZPos());
+            SpawnMob(16921015):updateClaim(player);
+            SpawnMob(16921016):updateEnmity(player);
+            SpawnMob(16921017):updateEnmity(player);
+            player:tradeComplete();
+        end
     end
 end;
 
 function onTrigger(player,npc)
 
+    player:PrintToPlayer("Debug: Jailer of Fortitude (qm1.lua)");
 end;
 
 function onEventUpdate(player,csid,option)

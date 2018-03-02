@@ -11,6 +11,7 @@ require("scripts/globals/settings");
 require("scripts/globals/titles");
 require("scripts/globals/missions");
 require("scripts/zones/RuLude_Gardens/TextIDs");
+require("scripts/globals/quests");
 -----------------------------------
 
 function onTrade(player,npc,trade)
@@ -29,6 +30,42 @@ function onTrigger(player,npc)
         else
             player:startEvent(60);
         end
+--------------------------------------
+    -- Begin VW stuff
+    elseif (player:hasKeyItem(VOIDWATCH_ALARUM)) then
+        if (player:getQuestStatus(CRYSTAL_WAR, DRAFTED_BY_THE_DUCHY) == QUEST_ACCEPTED) then
+            if (player:getRank() > 5) then
+                player:startEvent(10188,0,0,0,0,0,0,0,1);
+            else -- The diff is which NPC you see in CS..Rank 6 starts Zilart, so shouldn't see the Duke.
+                player:startEvent(10188);
+            end
+        elseif (player:getQuestStatus(CRYSTAL_WAR, BATTLE_ON_A_NEW_FRONT) == QUEST_ACCEPTED) then
+            if (player:getRank() > 5) then
+                player:startEvent(10189,0,0,0,0,0,0,0,1);
+            else
+                player:startEvent(10189);
+            end
+        elseif (player:getQuestStatus(CRYSTAL_WAR, VOIDWALKER_OP_126) == QUEST_ACCEPTED) then
+            if (player:getRank() > 5) then
+                player:startEvent(10190,0,0,0,0,0,0,0,1);
+            else
+                player:startEvent(10190);
+            end
+        elseif (player:getQuestStatus(CRYSTAL_WAR, REDRAFTED_BY_THE_DUCHY) == QUEST_ACCEPTED) then
+            if (player:getRank() > 5) then
+                player:startEvent(10199,0,0,0,0,0,0,0,1);
+            else
+                player:startEvent(10199);
+            end
+        elseif (player:getQuestStatus(CRYSTAL_WAR, A_NEW_MENACE) == QUEST_ACCEPTED) then
+            if (player:getRank() > 5) then
+                player:startEvent(10200,0,0,0,0,0,0,0,1);
+            else
+                player:startEvent(10200);
+            end
+        end
+    -- End VW stuff
+--------------------------------------
     elseif (player:hasKeyItem(ARCHDUCAL_AUDIENCE_PERMIT)) then
         player:messageSpecial(SOVEREIGN_WITHOUT_AN_APPOINTMENT);
     else
@@ -67,6 +104,52 @@ function onEventFinish(player,csid,option)
         player:setVar("MissionStatus",6); -- all that's left is to go back to the embassy
     elseif (csid == 10050) then
         player:setVar("PromathiaStatus",2);
+--------------------------------------
+    -- Begin VW stuff
+    elseif (csid == 10188) then
+        player:addKeyItem(WHITE_STRATUM_ABYSSITE);
+        player:addKeyItem(VOIDWATCHERS_EMBLEM_JEUNO);
+        player:completeQuest(CRYSTAL_WAR, DRAFTED_BY_THE_DUCHY);
+        player:addQuest(CRYSTAL_WAR, BATTLE_ON_A_NEW_FRONT);
+        player:delKeyItem(VOIDWATCH_ALARUM);
+        player:messageSpecial(KEYITEM_OBTAINED, WHITE_STRATUM_ABYSSITE);
+        player:messageSpecial(KEYITEM_OBTAINED, VOIDWATCHERS_EMBLEM_JEUNO);
+    elseif (csid == 10189) then
+        player:addKeyItem(WHITE_STRATUM_ABYSSITE_III);
+        player:addKeyItem(VOIDWATCHERS_EMBLEM_QUFIM);
+        player:delKeyItem(WHITE_STRATUM_ABYSSITE_II);
+        player:completeQuest(CRYSTAL_WAR, BATTLE_ON_A_NEW_FRONT);
+        player:addQuest(CRYSTAL_WAR, VOIDWALKER_OP_126);
+        player:delKeyItem(VOIDWATCH_ALARUM);
+        player:setVar("WHITE_STRATUM_II", 0);
+        player:messageSpecial(KEYITEM_OBTAINED, WHITE_STRATUM_ABYSSITE_III);
+        player:messageSpecial(KEYITEM_OBTAINED, VOIDWATCHERS_EMBLEM_QUFIM);
+    elseif (csid == 10190) then
+        player:completeQuest(CRYSTAL_WAR, VOIDWALKER_OP_126);
+        player:addQuest(CRYSTAL_WAR, A_CAIT_CALLS);
+        player:delKeyItem(VOIDWATCH_ALARUM);
+        player:addGil(50000 * GIL_RATE);
+        player:messageSpecial(GIL_OBTAINED, 50000 * GIL_RATE);
+    elseif (csid == 10199) then
+        player:addKeyItem(WHITE_STRATUM_ABYSSITE_IV);
+        player:addKeyItem(TRICOLOR_VOIDWATCHERS_EMBLEM);
+        player:delKeyItem(WHITE_STRATUM_ABYSSITE_III);
+        player:completeQuest(CRYSTAL_WAR, REDRAFTED_BY_THE_DUCHY);
+        player:addQuest(CRYSTAL_WAR, A_NEW_MENACE);
+        player:delKeyItem(VOIDWATCH_ALARUM);
+        player:setVar("WHITE_STRATUM_III", 0);
+        player:messageSpecial(KEYITEM_OBTAINED, WHITE_STRATUM_ABYSSITE_IV);
+        player:messageSpecial(KEYITEM_OBTAINED, TRICOLOR_VOIDWATCHERS_EMBLEM);
+    elseif (csid == 10200) then
+        player:completeQuest(CRYSTAL_WAR, A_NEW_MENACE);
+        player:addQuest(JEUNO, VW_OP_115_VALKURM_DUSTER);
+        player:addQuest(JEUNO, VW_OP_118_BUBURIMU_SQUALL);
+        player:addQuest(CRYSTAL_WAR, NO_REST_FOR_THE_WEARY);
+        player:delKeyItem(VOIDWATCH_ALARUM);
+        player:addGil(50000 * GIL_RATE);
+        player:messageSpecial(GIL_OBTAINED, 50000 * GIL_RATE);
+    -- End VW stuff
+--------------------------------------
     end
 
 end;

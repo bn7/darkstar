@@ -30,6 +30,7 @@ function onTrigger(player,npc)
     if (medal_rank == 0) then
         player:startEvent(111);
     else
+        player:PrintToPlayer("DEV NOTE: food duration and exp loss reducton enhancements are not yet implimented.");
         player:startEvent(110, 0, notes, freelances, unknown, medalRank, bonusEffects, timeStamp, 0);
     end
 

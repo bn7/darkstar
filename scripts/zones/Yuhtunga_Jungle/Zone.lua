@@ -55,6 +55,9 @@ function onInitialize(zone)
     GetMobByID(ROSE_GARDEN):setLocalVar("1",os.time() + math.random((36000), (37800)));
 
     SetRegionalConquestOverseers(zone:getRegionID())
+
+    -- Darrcuiln
+    GetMobByID(17282036):setRespawnTime(math.random(900,10800));
 end;
 
 function onConquestUpdate(zone, updatetype)

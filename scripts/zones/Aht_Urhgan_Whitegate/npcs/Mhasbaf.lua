@@ -7,13 +7,22 @@
 package.loaded["scripts/zones/Aht_Urhgan_Whitegate/TextIDs"] = nil;
 -----------------------------------
 require("scripts/zones/Aht_Urhgan_Whitegate/TextIDs");
+require("scripts/globals/quests");
+
 -----------------------------------
 
 function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
-    player:startEvent(542);
+    local artsAndCrafts = player:getQuestStatus(AHT_URHGAN,ARTS_AND_CRAFTS);
+    local artsAndCrafts_Mhasbaf = player:getVar("QUEST_ARTSANDCRAFTS_MHASBAF");
+
+    if (artsAndCrafts == 1 and artsAndCrafts_Mhasbaf ~= 1) then
+        player:startEvent(0x01FE);
+    else
+        player:startEvent(542);
+    end
 end;
 
 function onEventUpdate(player,csid,option)
@@ -24,5 +33,8 @@ end;
 function onEventFinish(player,csid,option)
     -- printf("CSID: %u",csid);
     -- printf("RESULT: %u",option);
+    if (csid == 0x01FE) then
+        player:setVar("QUEST_ARTSANDCRAFTS_MHASBAF",1);
+    end
 end;
 

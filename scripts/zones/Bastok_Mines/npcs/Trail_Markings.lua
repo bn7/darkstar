@@ -16,6 +16,9 @@ function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
+    player:setVar("dynaWaitxDay", 0); -- Temp
+    player:PrintToPlayer("Dual Boxing here will crash the server!");
+    player:PrintToPlayer("First log out ALL characters, then log in ONLY ONE for Dynamis!");
 
     if bit.band(player:getVar("Dynamis_Status"),1) == 1 then
         player:startEvent(203); -- cs with Cornelia

@@ -8,9 +8,12 @@ package.loaded["scripts/zones/The_Garden_of_RuHmet/TextIDs"] = nil;
 -----------------------------------
 require("scripts/zones/The_Garden_of_RuHmet/TextIDs");
 require("scripts/zones/The_Garden_of_RuHmet/MobIDs");
+require("scripts/globals/status");
+
 -----------------------------------
 
 function onTrade(player,npc,trade)
+    --[[
      --Trade 1 High-Quality Euvhi Organ
     if (GetMobAction(Jailer_of_Faith) == 0 and trade:hasItemQty(1899,1) and trade:getItemCount() == 1) then
         local qm3 = GetNPCByID(Jailer_of_Faith_QM);
@@ -22,10 +25,19 @@ function onTrade(player,npc,trade)
         -- Spawn Jailer of Faith
         SpawnMob(Jailer_of_Faith):updateClaim(player);
     end
+    ]]
+
+     --Trade 1 High-Quality Euvhi Organ
+    if (GetMobAction(16921021) == 0 and trade:hasItemQty(1899,1) and trade:getItemCount() == 1) then
+        GetMobByID(16921021):setSpawn(npc:getXPos(),npc:getYPos(),npc:getZPos());
+        SpawnMob(16921021):updateClaim(player); -- Spawn Jailer of Faith
+        player:tradeComplete();
+    end
 end;
 
 function onTrigger(player,npc)
 
+    player:PrintToPlayer("Debug: Jailer of Faith (qm3.lua)");
 end;
 
 function onEventUpdate(player,csid,option)

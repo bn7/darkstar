@@ -10,19 +10,31 @@ require("scripts/globals/status");
 -----------------------------------
 
 function onMobInitialize(mob)
+    -- setMobMod
     mob:setMobMod(MOBMOD_MAIN_2HOUR, 1);
     mob:setMobMod(MOBMOD_GIL_MIN, 12000);
     mob:setMobMod(MOBMOD_GIL_MAX, 30000);
     mob:setMobMod(MOBMOD_MUG_GIL, 8000);
     mob:setMobMod(MOBMOD_DRAW_IN, 1);
     mob:setMod(MOD_UDMGBREATH, 0); -- immune to breath damage
+    mob:setMobMod(MOBMOD_2HOUR_MULTI, 1);
 
+    -- addMod
+    mob:addMod(MOD_MATT,75);
+    mob:addMod(MOD_ACC,100);
+    mob:addMod(MOD_ATT,100);
+    mob:addMod(MOD_MDEF,20);
+    mob:addMod(MOD_DOUBLE_ATTACK, 30)
 end;
 
 function onMobSpawn(mob)
+    -- setMod
     mob:setHP(mob:getMaxHP()/2);
     mob:setUnkillable(true);
     mob:setMod(MOD_REGEN, 50);
+    mob:setMod(MOD_REGAIN, 50);
+    mob:setMod(MOD_MACC,900);
+    mob:AnimationSub(2);
 
     -- Regen Head every 1.5-4 minutes 90-240
     mob:setLocalVar("headTimer", os.time() + math.random(60,190));
@@ -135,4 +147,8 @@ function onMobDrawIn(mob, target)
 end;
 
 function onMobDeath(mob, player, isKiller)
+    local CHANCE = 20;
+    if (math.random(0,99) < CHANCE and player:getMainJob() == JOBS.BLU and player:hasSpell(741) == false) then
+        player:addSpell(SPELL_ID);
+    end
 end;

@@ -28,6 +28,38 @@ function onMobEngaged(mob, target)
 end;
 
 function onMobDeath(mob, player, isKiller)
+    --[[
     player:showText(mob, MEDUSA_DEATH);
+    ]]
+    mob:showText(mob, MEDUSA_DEATH);
     player:addTitle(GORGONSTONE_SUNDERER);
+
+    ------------------------------------
+    -- Begin Custom Legion Code
+    ------------------------------------
+
+    if (isKiller == true) then
+        local RND = math.random(1,1000);
+        if (RND <= 100) then -- 10%
+            player:addTreasure(10951, mob); -- Weaver's Torque
+        elseif (RND <= 300) then -- 20%
+            player:addTreasure(20905, mob); -- Tajabit
+        else
+            player:addTreasure(4023, mob); -- Snowsteel Ore
+            player:addTreasure(4023, mob); -- Snowsteel Ore
+        end
+    end
+
+    -- Custom Trial Check
+    cTrialProgress(player, 3, "mythic");
+
+    ------------------------------------
+    -- End Custom Legion Code
+    ------------------------------------
+
 end;
+
+function onMobDespawn(mob)
+    mob:setRespawnTime(math.random(75600,86400));   -- 21 to 24 hours
+end;
+

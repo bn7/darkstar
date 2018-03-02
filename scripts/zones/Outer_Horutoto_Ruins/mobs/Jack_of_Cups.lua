@@ -2,7 +2,7 @@
 -- Area: Outer Horutoto Ruins
 --  MOB: Jack of Cups
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")};
+require("scripts/globals/titles");
 require("scripts/globals/missions");
 -----------------------------------
 

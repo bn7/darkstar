@@ -9,12 +9,16 @@ require("scripts/zones/Aydeewa_Subterrane/TextIDs");
 require("scripts/zones/Aydeewa_Subterrane/MobIDs");
 
 function onTrade(player,npc,trade)
+    --[[
     if (not GetMobByID(PANDEMONIUM_WARDEN):isSpawned() and trade:hasItemQty(2572,1) and trade:getItemCount() == 1) then -- Pandemonium key
         SpawnMob(PANDEMONIUM_WARDEN):updateClaim(player); -- Pandemonium Warden
         player:tradeComplete();
     end
+    ]]
+    player:PrintToPlayer("Sorry, this is disabled until a crash bug is fixed.");
 end;
 
 function onTrigger(player,npc)
     player:messageSpecial(NOTHING_HAPPENS);
+    player:PrintToPlayer("Sorry, this is disabled until a crash bug is fixed.");
 end;

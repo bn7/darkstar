@@ -28,8 +28,19 @@
 
 enum class Mod
 {
+    // Start of BNETcc Custom MOD
+    ACCP              = 3964, // DSP removed these, I am
+    EVAP              = 3965, // placing them here in case Legion
+    RACCP             = 3967, // used them for custom things.. ~Teo
+    // MOD_PLACEHOLDER       = 4000, // placeholder
+    // 4001-4091 available to use
+    TERRORRES                 = 4092, // Resist Terror
+    DOOMRES                   = 4093, // Resist Doom
+    ITEM_LEVEL                = 4094, // Apply to item (via augment), not player: Set ItemLevel of item to this Mod Value
+    REQUIRED_LV               = 4095, // Apply to item (via augment), not player: Increase the items LV requirement by this much
+    // End of BNETcc Custom MOD
     NONE                      = 0, // Essential, but does nothing :)
-    //  NAME                  = ID, // Comment
+    // NAME                   = ID, // Comment
     DEF                       = 1, // Target's Defense
     HP                        = 2, // Target's HP
     HPP                       = 3, // HP Percentage

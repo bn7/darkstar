@@ -76,6 +76,7 @@ This file is part of DarkStar-server source code.
 #include "packets/bazaar_item.h"
 #include "packets/bazaar_message.h"
 #include "packets/bazaar_purchase.h"
+#include "packets/bazaar_sale.h"
 #include "packets/blacklist.h"
 #include "packets/campaing_map.h"
 #include "packets/char.h"
@@ -3551,7 +3552,6 @@ void SmallPacket0x083(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         if (gil->getQuantity() > (price * quantity))
         {
             uint8 SlotID = charutils::AddItem(PChar, LOC_INVENTORY, itemID, quantity);
-
             if (SlotID != ERROR_SLOTID)
             {
                 charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)(price * quantity));
@@ -3606,7 +3606,6 @@ void SmallPacket0x085(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
     CItem* gil = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
     CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
-
     if ((PItem != nullptr) && ((gil != nullptr) && gil->isType(ITEM_CURRENCY)))
     {
         charutils::UpdateItem(PChar, LOC_INVENTORY, 0, quantity * PItem->getBasePrice());
@@ -4852,10 +4851,10 @@ void SmallPacket0x0EA(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 void SmallPacket0x0F1(map_session_data_t* session, CCharEntity* PChar, CBasicPacket data)
 {
     uint16 IconID = data.ref<uint16>(0x04);
-
-    if (IconID)
+    if (IconID && IconID != 1 && IconID != 2 && IconID != 7 && IconID != 9 && IconID !=12 &&
+        IconID != 14 && IconID != 16 && IconID != 17 && IconID != 19 && IconID != 20 && IconID != 28)
         PChar->StatusEffectContainer->DelStatusEffectsByIcon(IconID);
-
+    else { autoJail(PChar); }
     return;
 }
 
@@ -4891,68 +4890,68 @@ void SmallPacket0x0F4(map_session_data_t* session, CCharEntity* PChar, CBasicPac
         {
             if (PChar->GetMLevel() >= 60)
             {
-                PChar->loc.zone->WideScan(PChar, 300);
+                PChar->loc.zone->WideScan(PChar, 300+map_config.widescan_bonus);
             }
             else if (PChar->GetMLevel() >= 40)
             {
-                PChar->loc.zone->WideScan(PChar, 250);
+                PChar->loc.zone->WideScan(PChar, 250+map_config.widescan_bonus);
             }
             else if (PChar->GetMLevel() >= 20)
             {
-                PChar->loc.zone->WideScan(PChar, 200);
+                PChar->loc.zone->WideScan(PChar, 200+map_config.widescan_bonus);
             }
             else
             {
-                PChar->loc.zone->WideScan(PChar, 150);
+                PChar->loc.zone->WideScan(PChar, 150+map_config.widescan_bonus);
             }
         }
         else if (PChar->GetMJob() == JOB_BST)
         {
             if (PChar->GetMLevel() >= 60)
             {
-                PChar->loc.zone->WideScan(PChar, 250);
+                PChar->loc.zone->WideScan(PChar, 250+map_config.widescan_bonus);
             }
             else if (PChar->GetMLevel() >= 40)
             {
-                PChar->loc.zone->WideScan(PChar, 200);
+                PChar->loc.zone->WideScan(PChar, 200+map_config.widescan_bonus);
             }
             else if (PChar->GetMLevel() >= 20)
             {
-                PChar->loc.zone->WideScan(PChar, 150);
+                PChar->loc.zone->WideScan(PChar, 150+map_config.widescan_bonus);
             }
             else
             {
-                PChar->loc.zone->WideScan(PChar, 50);
+                PChar->loc.zone->WideScan(PChar, 50+map_config.widescan_bonus);
             }
         }
         else if (PChar->GetSJob() == JOB_RNG)
         {
             if (PChar->GetSLevel() >= 40)
             {
-                PChar->loc.zone->WideScan(PChar, 250);
+                PChar->loc.zone->WideScan(PChar, 250+map_config.widescan_bonus);
             }
             else if (PChar->GetSLevel() >= 20)
             {
-                PChar->loc.zone->WideScan(PChar, 200);
+                PChar->loc.zone->WideScan(PChar, 200+map_config.widescan_bonus);
             }
             else
             {
-                PChar->loc.zone->WideScan(PChar, 150);
+                PChar->loc.zone->WideScan(PChar, 150+map_config.widescan_bonus);
             }
         }
         else if (PChar->GetSJob() == JOB_BST)
         {
             if (PChar->GetSLevel() >= 40)
             {
-                PChar->loc.zone->WideScan(PChar, 200);
+                PChar->loc.zone->WideScan(PChar, 200+map_config.widescan_bonus);
             }
             else if (PChar->GetSLevel() >= 20)
             {
-                PChar->loc.zone->WideScan(PChar, 150);
+                PChar->loc.zone->WideScan(PChar, 150+map_config.widescan_bonus);
             }
             else
             {
-                PChar->loc.zone->WideScan(PChar, 50);
+                PChar->loc.zone->WideScan(PChar, 50+map_config.widescan_bonus);
             }
         }
         else
@@ -4970,75 +4969,75 @@ void SmallPacket0x0F4(map_session_data_t* session, CCharEntity* PChar, CBasicPac
             // Need verification
             // if (PChar->GetMLevel() >= 80)
             // {
-            //     PChar->loc.zone->WideScan(PChar,350);
+            //     PChar->loc.zone->WideScan(PChar,350+map_config.widescan_bonus);
             // }
             // else if (PChar->GetMLevel() >= 60)
             if (PChar->GetMLevel() >= 60)
             {
-                PChar->loc.zone->WideScan(PChar, 300);
+                PChar->loc.zone->WideScan(PChar, 300+map_config.widescan_bonus);
             }
             else if (PChar->GetMLevel() >= 40)
             {
-                PChar->loc.zone->WideScan(PChar, 250);
+                PChar->loc.zone->WideScan(PChar, 250+map_config.widescan_bonus);
             }
             else if (PChar->GetMLevel() >= 20)
             {
-                PChar->loc.zone->WideScan(PChar, 200);
+                PChar->loc.zone->WideScan(PChar, 200+map_config.widescan_bonus);
             }
             else
             {
-                PChar->loc.zone->WideScan(PChar, 150);
+                PChar->loc.zone->WideScan(PChar, 150+map_config.widescan_bonus);
             }
         }
         else if (PChar->GetMJob() == JOB_BST)
         {
             if (PChar->GetMLevel() >= 80)
             {
-                PChar->loc.zone->WideScan(PChar, 300);
+                PChar->loc.zone->WideScan(PChar, 300+map_config.widescan_bonus);
             }
             else if (PChar->GetMLevel() >= 60)
             {
-                PChar->loc.zone->WideScan(PChar, 250);
+                PChar->loc.zone->WideScan(PChar, 250+map_config.widescan_bonus);
             }
             else if (PChar->GetMLevel() >= 40)
             {
-                PChar->loc.zone->WideScan(PChar, 200);
+                PChar->loc.zone->WideScan(PChar, 200+map_config.widescan_bonus);
             }
             else
             {
-                PChar->loc.zone->WideScan(PChar, 150);
+                PChar->loc.zone->WideScan(PChar, 150+map_config.widescan_bonus);
             }
         }
         else if (PChar->GetSJob() == JOB_RNG)
         {
             if (PChar->GetSLevel() >= 40)
             {
-                PChar->loc.zone->WideScan(PChar, 250);
+                PChar->loc.zone->WideScan(PChar, 250+map_config.widescan_bonus);
             }
             else if (PChar->GetSLevel() >= 20)
             {
-                PChar->loc.zone->WideScan(PChar, 200);
+                PChar->loc.zone->WideScan(PChar, 200+map_config.widescan_bonus);
             }
             else
             {
-                PChar->loc.zone->WideScan(PChar, 150);
+                PChar->loc.zone->WideScan(PChar, 150+map_config.widescan_bonus);
             }
         }
         else if (PChar->GetSJob() == JOB_BST)
         {
             if (PChar->GetSLevel() >= 40)
             {
-                PChar->loc.zone->WideScan(PChar, 200);
+                PChar->loc.zone->WideScan(PChar, 200+map_config.widescan_bonus);
             }
             else
             {
-                PChar->loc.zone->WideScan(PChar, 150);
+                PChar->loc.zone->WideScan(PChar, 150+map_config.widescan_bonus);
             }
         }
         else
         {
             // Not BST or RNG, get base scan radius only!
-            PChar->loc.zone->WideScan(PChar, 150);
+            PChar->loc.zone->WideScan(PChar, 150+map_config.widescan_bonus);
         }
     }
     return;
@@ -5562,7 +5561,7 @@ void SmallPacket0x106(map_session_data_t* session, CCharEntity* PChar, CBasicPac
 
         PChar->pushPacket(new CBazaarPurchasePacket(PTarget, true));
 
-        PTarget->pushPacket(new CBazaarConfirmationPacket(PChar, PItem));
+        PTarget->pushPacket(new CBazaarSalePacket(PTarget, PChar, PItem->getID(), Quantity));
 
         charutils::UpdateItem(PTarget, LOC_INVENTORY, SlotID, -Quantity);
 
@@ -5866,3 +5865,25 @@ void PacketParserInitialize()
 *                                                                       *
 *                                                                       *
 ************************************************************************/
+
+// may need to move this later..
+void autoJail(CCharEntity* PChar)
+{
+    // Set the inJail var to a custom value used to denote autojail..
+    auto autoJailCell = 666;
+    const char* varname = "inJail"; // Oh DSP, why you hate std::string so much?
+    const char* fmtQuery = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i";
+    Sql_Query(SqlHandle, fmtQuery, PChar->id, varname, autoJailCell);
+
+    // Move player to Mordion Gaol
+    PChar->loc.destination = 131;
+    PChar->status = STATUS_DISAPPEAR;
+    PChar->loc.p.x = 700;
+    PChar->loc.p.y = -400;
+    PChar->loc.p.z = -620;
+    PChar->loc.boundary = 0;
+    PChar->m_moghouseID = 0;
+    PChar->clearPacketList();
+    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+    PChar->updatemask |= UPDATE_POS;
+}

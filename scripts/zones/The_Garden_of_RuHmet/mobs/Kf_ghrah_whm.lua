@@ -3,7 +3,25 @@
 --  MOB: Kf'ghrah WHM
 -----------------------------------
 require("scripts/globals/status");
-require("scripts/globals/magic"); -- no spells are currently set due to lack of info
+require("scripts/globals/magic");
+
+-----------------------------------
+
+function onMobInitialize(mob)
+    -- addMod
+    mob:addMod(MOD_REFRESH, 250);
+    mob:addMod(MOD_UFASTCAST, 66);
+    mob:addMod(MOD_MACC,200);
+    mob:addMod(MOD_MATT,100);
+    mob:addMod(MOD_MDEF,50);
+    mob:addMod(MOD_DEF,50);
+    mob:addMod(MOD_ATT,75);
+end;
+
+
+-----------------------------------
+-- OnMobSpawn Action
+-- Set core Skin and mob elemental bonus
 -----------------------------------
 
 function onMobSpawn(mob)
@@ -11,6 +29,7 @@ function onMobSpawn(mob)
     mob:AnimationSub(0);
     mob:setLocalVar("roamTime", os.time());
     mob:setModelId(1167); -- light
+
 end;
 
 function onMobRoam(mob)

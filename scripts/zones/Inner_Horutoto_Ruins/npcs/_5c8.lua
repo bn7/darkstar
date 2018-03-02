@@ -17,6 +17,11 @@ function onTrade(player,npc,trade)
 end;
 
 function onTrigger(player,npc)
+    if (player:hasKeyItem(PORTAL_CHARM) == false) then
+        player:addKeyItem(PORTAL_CHARM); -- Because DSP's "3 Mage's Gate" implementation breaks easily on client updates.
+        player:messageSpecial(KEYITEM_OBTAINED,PORTAL_CHARM);
+    end
+
     if (player:getZPos() >= -15) then
         player:messageSpecial(PORTAL_NOT_OPEN_THAT_SIDE);
     else

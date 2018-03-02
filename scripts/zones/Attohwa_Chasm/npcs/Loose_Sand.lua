@@ -20,6 +20,7 @@ function onTrigger(player,npc)
         player:setVar("LioumereKilled",0);
         player:addKeyItem(MIMEO_JEWEL);
         player:messageSpecial(KEYITEM_OBTAINED, MIMEO_JEWEL);
+        player:setPos(322,-25,-12,30); -- Custom, screw mountain climb!
     elseif (cop == THE_ROAD_FORKS and (moamStat==7 or moamStat==8) and not player:hasKeyItem(MIMEO_JEWEL)) then
         SpawnMob(LIOUMERE):updateClaim(player);
     else

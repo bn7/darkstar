@@ -14,5 +14,7 @@ function onMobDespawn(mob)
     if (mob:getID() == BLOODSUCKER) then
         UpdateNMSpawnPoint(mob);
         mob:setRespawnTime(3600);
+    else
+        mob:setRespawnTime(280);
     end
 end;

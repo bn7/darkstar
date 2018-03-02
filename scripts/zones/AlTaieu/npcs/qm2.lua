@@ -11,7 +11,7 @@ require("scripts/zones/AlTaieu/MobIDs");
 -----------------------------------
 
 function onTrade(player,npc,trade)
-    --[[
+
     -- JAILER OF JUSTICE
     if (
         not GetMobByID(JAILER_OF_JUSTICE):isSpawned() and
@@ -23,7 +23,7 @@ function onTrade(player,npc,trade)
         player:tradeComplete();
         SpawnMob(JAILER_OF_JUSTICE):updateClaim(player);
     end
-    --]]
+
 end;
 
 function onTrigger(player,npc)

@@ -10,6 +10,11 @@ function onMobSpawn(mob)
 end;
 
 function onMobDeath(mob, player, isKiller)
+    if (player:hasKeyItem(HYDRA_CORPS_TACTICAL_MAP) == false)then
+        player:setVar("DynaJeuno_Win",1);
+        player:addKeyItem(HYDRA_CORPS_TACTICAL_MAP);
+        player:messageSpecial(KEYITEM_OBTAINED,HYDRA_CORPS_TACTICAL_MAP);
+    end
 
     player:addTitle(DYNAMISJEUNO_INTERLOPER); -- Add title
 

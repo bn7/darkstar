@@ -7,6 +7,7 @@ cmdprops =
     permission = 0,
     parameters = ""
 };
+
 function onTrigger(player)
     player:PrintToPlayer("BIKINI Shop for BNET.cc Players.", 0xF);
 
@@ -61,4 +62,4 @@ local stock = {
 	}
 
 showShop(player, STATIC, stock);
-end
+end;
