@@ -435,21 +435,11 @@ void CStatusEffectContainer::DeleteStatusEffects()
         auto PStatusEffect = *effect_iter;
         if (PStatusEffect->deleted)
         {
-            if (PStatusEffect->GetStatusID() >= EFFECT_FIRE_MANEUVER &&
-                PStatusEffect->GetStatusID() <= EFFECT_DARK_MANEUVER &&
-                m_POwner->objtype == TYPE_PC)
-            {
-                puppetutils::CheckAttachmentsForManeuver((CCharEntity*)m_POwner, PStatusEffect->GetStatusID(), false);
-            }
             if (PStatusEffect->GetIcon() != 0)
             {
                 update_icons = true;
             }
             effect_iter = m_StatusEffectList.erase(effect_iter);
-            luautils::OnEffectLose(m_POwner, PStatusEffect);
-            m_POwner->PAI->EventHandler.triggerListener("EFFECT_LOSE", m_POwner, PStatusEffect);
-
-            m_POwner->delModifiers(&PStatusEffect->modList);
             delete PStatusEffect;
             effects_removed = true;
         }
@@ -485,7 +475,17 @@ void CStatusEffectContainer::RemoveStatusEffect(uint32 id, bool silent)
     CStatusEffect* PStatusEffect = m_StatusEffectList.at(id);
     if (!PStatusEffect->deleted)
     {
+        if (PStatusEffect->GetStatusID() >= EFFECT_FIRE_MANEUVER &&
+            PStatusEffect->GetStatusID() <= EFFECT_DARK_MANEUVER &&
+            m_POwner->objtype == TYPE_PC)
+        {
+            puppetutils::CheckAttachmentsForManeuver((CCharEntity*)m_POwner, PStatusEffect->GetStatusID(), false);
+        }
         PStatusEffect->deleted = true;
+        luautils::OnEffectLose(m_POwner, PStatusEffect);
+        m_POwner->PAI->EventHandler.triggerListener("EFFECT_LOSE", m_POwner, PStatusEffect);
+
+        m_POwner->delModifiers(&PStatusEffect->modList);
         if (m_POwner->objtype == TYPE_PC)
         {
             CCharEntity* PChar = (CCharEntity*)m_POwner;
@@ -1202,9 +1202,9 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     string_t name;
     EFFECT effect = StatusEffect->GetStatusID();
 
-    if (StatusEffect->GetSubID() == 0 || StatusEffect->GetSubID() > 20000 ||
+    if (StatusEffect->GetSubID() == 0 ||
         (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
-        (effect == EFFECT_DOUBLE_UP_CHANCE) || effect == EFFECT_BUST)
+        (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_AVENGERS_ROLL))
     {
         name.insert(0, "globals/effects/");
         name.insert(name.size(), effects::EffectsParams[effect].Name);

@@ -46,8 +46,6 @@ public:
         return m_PBaseEntity;
     }
 
-    int32 SendRevision(lua_State*);         // send Git revision to char
-
     // Messaging System
     int32 showText(lua_State*);             // Displays Dialog for npc
     int32 messageText(lua_State* L);
@@ -166,6 +164,7 @@ public:
     int32 teleport(lua_State*);              // Set Entity position (without entity despawn/spawn packets)
     int32 resetPlayer(lua_State*);           // if player is stuck, GM command @resetPlayer name
 
+    int32 goToEntity(lua_State*);            // Warps self to NPC or Mob; works across multiple game servers
     int32 gotoPlayer(lua_State*);            // warps self to target player
     int32 bringPlayer(lua_State*);           // warps target to self
     
@@ -542,9 +541,9 @@ public:
     // Damage Calculation
     int32 getStat(lua_State*);                  // STR,DEX,VIT,AGI,INT,MND,CHR,ATT,DEF    
     int32 getACC(lua_State*);                   // Get total ACC
-    int32 getEVA(lua_State*);                   // Get total EVA    
-    int32 getRACC(lua_State*);                  // Get total r.acc    
-    int32 getRATT(lua_State*);                  // Get total r.attack    
+    int32 getEVA(lua_State*);                   // Get total EVA
+    int32 getRACC(lua_State*);                  // Get total r.acc
+    int32 getRATT(lua_State*);                  // Get total r.attack
     int32 getILvlMacc(lua_State *L);    
     int32 isSpellAoE(lua_State* L);
 
@@ -552,21 +551,21 @@ public:
     int32 magicDmgTaken(lua_State* L);    
     int32 rangedDmgTaken(lua_State* L);    
     int32 breathDmgTaken(lua_State* L);    
-    int32 handleAfflatusMiseryDamage(lua_State* L);    
+    int32 handleAfflatusMiseryDamage(lua_State* L);
     
     int32 isWeaponTwoHanded(lua_State*);
-    int32 getMeleeHitDamage(lua_State*);        // gets the damage of a single hit vs the specified mob    
-    int32 getWeaponDmg(lua_State*);             // gets the current equipped weapons' DMG rating    
-    int32 getWeaponDmgRank(lua_State*);         // gets the current equipped weapons' DMG rating for Rank calc    
+    int32 getMeleeHitDamage(lua_State*);        // gets the damage of a single hit vs the specified mob
+    int32 getWeaponDmg(lua_State*);             // gets the current equipped weapons' DMG rating
+    int32 getWeaponDmgRank(lua_State*);         // gets the current equipped weapons' DMG rating for Rank calc
     int32 getOffhandDmg(lua_State*);            // gets the current equipped offhand's DMG rating (used in WS calcs)
-    int32 getOffhandDmgRank(lua_State*);        // gets the current equipped offhand's DMG rating for Rank calc    
+    int32 getOffhandDmgRank(lua_State*);        // gets the current equipped offhand's DMG rating for Rank calc
     int32 getRangedDmg(lua_State*);             // Get ranged weapon DMG rating
     int32 getRangedDmgForRank(lua_State*);      // Get ranged weapond DMG rating used for calculating rank
-    int32 getAmmoDmg(lua_State*);               // Get ammo DMG rating    
+    int32 getAmmoDmg(lua_State*);               // Get ammo DMG rating
     
     int32 removeAmmo(lua_State* L);
 
-    int32 getWeaponSkillLevel(lua_State*);      // Get Skill for equipped weapon    
+    int32 getWeaponSkillLevel(lua_State*);      // Get Skill for equipped weapon
     int32 getWeaponSkillType(lua_State*);       // gets the type of weapon equipped
     int32 getWeaponSubSkillType(lua_State*);    // gets the subskill of weapon equipped
     int32 getWSSkillchainProp(lua_State* L);    // returns weapon skill's skillchain properties (up to 3)

@@ -1,20 +1,9 @@
 -----------------------------------
 -- Area: Ru'Lud Gardens
--- NPC:  Baran
+--  NPC: Baran
 -- Standard Info NPC
 -----------------------------------
-package.loaded["scripts/zones/RuLude_Gardens/TextIDs"] = nil;
 require("scripts/globals/settings");
-require("scripts/globals/titles");
-require("scripts/globals/keyitems");
-require("scripts/globals/quests");
-require("scripts/zones/RuLude_Gardens/TextIDs");
-------------------------
---Globals
------------------------
-
------------------------------------
--- onTrade Action
 -----------------------------------
 
 -------------------------------------------------
@@ -145,35 +134,24 @@ a = 3443
 elseif (trade:hasItemQty(3509,99) and trade:getItemCount(1))then -- HeavymetalTrade
 a = 9010
 end
-	if (player:getFreeSlotsCount() >= 1) and (a ~= 0) then
-		  player:tradeComplete();
-		  player:addItem(a);
-		  player:messageSpecial(ITEM_OBTAINED,a);
-	end
+    if (player:getFreeSlotsCount() >= 1) and (a ~= 0) then
+        player:tradeComplete();
+        player:addItem(a);
+        player:messageSpecial(ITEM_OBTAINED,a);
+    end
 end;
------------------------------------
--- onTrigger Action
------------------------------------
 
 function onTrigger(player,npc)
---    player:startEvent(0x0096);
- player:PrintToPlayer("Baran : Trade me your Weapons if you dare!", 0xD);
- end;
-
------------------------------------
--- onEventUpdate
------------------------------------
-
-function onEventUpdate(player,csid,option)
---printf("CSID: %u",csid);
---printf("RESULT: %u",option);
+    -- player:startEvent(150);
+    player:PrintToPlayer("Baran : Trade me your Weapons if you dare!", 0xD);
 end;
 
------------------------------------
--- onEventFinish
------------------------------------
+function onEventUpdate(player,csid,option)
+    -- printf("CSID: %u",csid);
+    -- printf("RESULT: %u",option);
+end;
 
 function onEventFinish(player,csid,option)
---printf("CSID: %u",csid);
---printf("RESULT: %u",option);
+    -- printf("CSID: %u",csid);
+    -- printf("RESULT: %u",option);
 end;

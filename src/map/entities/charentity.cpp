@@ -85,9 +85,6 @@ CCharEntity::CCharEntity()
     m_GMlevel = 0;
     m_isGMHidden = false;
 
-    m_mentor = 0;
-    m_isNewPlayer = true;
-
     allegiance = ALLEGIANCE_PLAYER;
 
     TradeContainer = new CTradeContainer();
@@ -117,6 +114,7 @@ CCharEntity::CCharEntity()
     memset(&nationtp, 0, sizeof(nationtp));
     memset(&expChain, 0, sizeof(expChain));
     memset(&nameflags, 0, sizeof(nameflags));
+    memset(&menuConfigFlags, 0, sizeof(menuConfigFlags));
 
     memset(&m_SpellList, 0, sizeof(m_SpellList));
     memset(&m_LearnedAbilities, 0, sizeof(m_LearnedAbilities));
@@ -273,6 +271,11 @@ void CCharEntity::erasePackets(uint8 num)
     {
         delete popPacket();
     }
+}
+
+bool CCharEntity::isNewPlayer()
+{
+    return menuConfigFlags.flags & NFLAG_NEWPLAYER;
 }
 
 void CCharEntity::setPetZoningInfo()
@@ -529,14 +532,7 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     }
     if (isDead())
     {
-        if (targetFlags & TARGET_PLAYER_DEAD)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return (targetFlags & TARGET_PLAYER_DEAD) != 0;
     }
 
     if ((targetFlags & TARGET_PLAYER) && allegiance == PInitiator->allegiance)
@@ -552,7 +548,8 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     if (((targetFlags & TARGET_PLAYER_PARTY) || ((targetFlags & TARGET_PLAYER_PARTY_PIANISSIMO) &&
         PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO))) &&
         ((PParty && PInitiator->PParty == PParty) ||
-        (PInitiator->PMaster && PInitiator->PMaster->PParty == PParty)))
+        (PInitiator->PMaster && PInitiator->PMaster->PParty == PParty)) &&
+        PInitiator != this)
     {
         return true;
     }
@@ -924,7 +921,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         }
 
         // remove invisible if aggresive
-        if (PAbility->getID() != ABILITY_FIGHT)
+        if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT)
         {
             if (PAbility->getValidTarget() & TARGET_ENEMY) {
                 // aggresive action
@@ -1215,11 +1212,11 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 {
                     if (state.IsRapidShot())
                     {
-                        damage = attackutils::CheckForDamageMultiplier(this, PItem, damage, PHYSICAL_ATTACK_TYPE::RAPID_SHOT);
+                        damage = attackutils::CheckForDamageMultiplier(this, PItem, damage, PHYSICAL_ATTACK_TYPE::RAPID_SHOT, SLOT_RANGED);
                     }
                     else
                     {
-                        damage = attackutils::CheckForDamageMultiplier(this, PItem, damage, PHYSICAL_ATTACK_TYPE::RANGED);
+                        damage = attackutils::CheckForDamageMultiplier(this, PItem, damage, PHYSICAL_ATTACK_TYPE::RANGED, SLOT_RANGED);
                     }
 
                     if (PItem != nullptr)

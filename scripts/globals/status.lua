@@ -1288,6 +1288,15 @@ MOD_PREVENT_OVERLOAD    = 855 -- Overloading erases a water maneuver (except on 
 MOD_EXTRA_DMG_CHANCE    = 506 -- Proc rate of MOD_OCC_DO_EXTRA_DMG. 111 would be 11.1%
 MOD_OCC_DO_EXTRA_DMG    = 507 -- Multiplier for "Occasionally do x times normal damage". 250 would be 2.5 times damage.
 
+MOD_REM_OCC_DO_DOUBLE_DMG   = 863 -- Proc rate for REM Aftermaths that apply "Occasionally do double damage"
+MOD_REM_OCC_DO_TRIPLE_DMG   = 864 -- Proc rate for REM Aftermaths that apply "Occasionally do triple damage"
+
+MOD_REM_OCC_DO_DOUBLE_DMG_RANGED = 867 -- Ranged attack specific
+MOD_REM_OCC_DO_TRIPLE_DMG_RANGED = 868 -- Ranged attack specific
+
+MOD_MYTHIC_OCC_ATT_TWICE    = 865 -- Proc rate for "Occasionally attacks twice"
+MOD_MYTHIC_OCC_ATT_THRICE   = 866 -- Proc rate for "Occasionally attacks thrice"
+
 MOD_EAT_RAW_FISH         = 412 --
 MOD_EAT_RAW_MEAT         = 413 --
 
@@ -1382,9 +1391,9 @@ MOD_CURE2MP_PERCENT         = 860 -- Converts % of "Cure" amount to MP
 
 -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
 -- 570 - 825 used by WS DMG mods these are not spares.
--- SPARE = 863 -- stuff
--- SPARE = 864 -- stuff
--- SPARE = 865 -- stuff
+-- SPARE = 869 -- stuff
+-- SPARE = 870 -- stuff
+-- SPARE = 870 -- stuff
 
 ------------------------------------
 -- Merit Definitions
@@ -2306,19 +2315,30 @@ ANIMATION_MOUNT                    = 85;
 ------------------------------------
 MOUNTS =
 {
-    MOUNT_CHOCOBO    = 0,
-    MOUNT_RAPTOR     = 1,
-    MOUNT_TIGER      = 2,
-    MOUNT_CRAB       = 3,
-    MOUNT_RED_CRAB   = 4,
-    MOUNT_BOMB       = 5,
-    MOUNT_RAM        = 6,
-    MOUNT_MORBOL     = 7,
-    MOUNT_CRAWLER    = 8,
-    MOUNT_FENRIR     = 9,
-    MOUNT_BEETLE     = 10,
-    MOUNT_MOOGLE     = 11,
-    MOUNT_MAGIC_POT  = 12,
-    MOUNT_TULFAIRE   = 13,
-    MOUNT_WARMACHINE = 14
+    CHOCOBO        = 0,
+    RAPTOR         = 1,
+    TIGER          = 2,
+    CRAB           = 3,
+    RED_CRAB       = 4,
+    BOMB           = 5,
+    RAM            = 6,
+    MORBOL         = 7,
+    CRAWLER        = 8,
+    FENRIR         = 9,
+    BEETLE         = 10,
+    MOOGLE         = 11,
+    MAGIC_POT      = 12,
+    TULFAIRE       = 13,
+    WARMACHINE     = 14,
+    XZOMIT         = 15,
+    HIPPOGRYPH     = 16,
+    SPECTRAL_CHAIR = 17,
+    SPHEROID       = 18
 }
+
+------------------------------------
+-- Item Check Params
+------------------------------------
+ITEMCHECK_NONE      = 0;
+ITEMCHECK_EQUIP     = 1;
+ITEMCHECK_UNEQUIP   = 2;
