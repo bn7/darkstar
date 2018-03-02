@@ -10,7 +10,6 @@ require("scripts/globals/settings");
 -- Weapon Trials
 -------------------------------------------------
 
-
 function onTrade(player,npc,trade)
 local a = 0;
 -------------------------------------------------
